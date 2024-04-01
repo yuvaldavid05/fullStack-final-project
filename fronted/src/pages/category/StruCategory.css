@@ -1,0 +1,14 @@
+.body-category .container-fluid .title-holder{
+    padding: 10px 0 0 0 ;
+}
+
+.body-category .container-fluid .row{
+    /* padding: 5px; */
+}
+
+
+@media (max-width : 769px) {
+    .holder .card{
+       
+    }
+}

@@ -1,0 +1,18 @@
+/* .basket-page{
+  
+} */
+
+.basket-page .container-fluid .row h3{
+    margin: 25px;
+}
+
+.basket-page .basket-body{
+    width:450px;
+    font-size: 15px;
+    margin: 35px auto;
+    /* justify-content: center; */
+}
+
+.basket-page .basket-body .item-img-basket img{
+    width:100px;
+}

@@ -1,0 +1,25 @@
+/* .navbar-frame{
+    margin: 0;
+    padding: 0;
+} */
+
+nav.navbar-frame{
+    background-color: rgb(255, 255, 255); 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.navbar-frame .dropdown-item a,
+.navbar-frame .navbar-nav a{
+    text-decoration: none;
+    color: rgb(72, 71, 71);
+}
+
+.navbar-frame .dropdown-item a:hover,
+.navbar-frame .navbar-nav a:hover{
+    color: black;
+    transition: 0.5s;
+}
+
+.navbar-frame .dropdown-item:hover{
+    background-color: rgba(178, 173, 173, 0.344);
+}

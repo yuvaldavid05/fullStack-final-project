@@ -1,0 +1,70 @@
+.body-category .holder .card{
+    font-size: 15px;
+    max-width: 250px;
+    max-height: 500px;
+    border: none;
+    position: relative;
+    margin: 10px 0;
+    /* border: 1px solid gray; */
+    border: 1px solid rgba(128, 128, 128, 0.182);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.body-category .holder .card .like{
+    position:absolute;
+    right: 10px;
+    font-size: 27px;
+}
+
+.body-category .holder .card img{
+    /* max-width: 250px; */
+    height:200px;
+    margin: 0;
+    padding:0;
+}
+
+.body-category .holder .card p.itemColors{
+    display: flex;
+    justify-content: center;
+}
+
+.body-category .holder .card p.itemColors .divColor{
+    display: inline-block;
+    padding: 5px;
+    font-weight: bold;
+}
+.body-category .holder .card p.itemColors .divColor .color{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 5px auto;
+}
+
+.body-category .holder .card p.itemColors .divColor .color:hover{
+border: 2px solid gray;
+}
+
+.body-category .holder .card .footerCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+.body-category .holder .card .footerCard a{
+    color:rgb(97, 92, 92) ;
+}
+
+.body-category .holder .card .footerCard button{
+    font-size: 12px;  
+}
+
+.body-category .holder .card .footerCard a, 
+.body-category .holder .card .footerCard button{
+    margin: 12px;
+}
+
+@media (max-width: 760px) {
+    .body-category .holder .card .footerCard button{
+        font-size: 10px;
+    }
+}
