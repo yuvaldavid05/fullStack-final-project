@@ -1,0 +1,1 @@
+exports.JWT_SECRET = "finalProject-HackerU2023";

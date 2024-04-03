@@ -21,6 +21,7 @@ exports.validUser = (_bodyData) => {
         password: Joi.string().min(8).max(32).regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=(.*?[0-9]){4})(?=.*?[#?!@$%^&*-]).{8,}$/).required().messages({
             "string.pattern.base": "הסיסמה חייבת לכלול לפחות אות אחת גדולה ואות אחת קטנה באנגלית, לפחות ארבעה מספרים וסימן מיוחד מבין הסימנים הבאים (!@%$#^&*-_*)",
         }),
+        role: Joi.array().items(Joi.string()).required()
         // regex
     })
 

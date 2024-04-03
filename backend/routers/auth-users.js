@@ -2,28 +2,10 @@ const express = require("express");
 const router = express.Router();
 const { UserModel, validUser } = require("../models/userModel");
 const bcrypt = require('bcrypt');
+const moment = require("moment/moment");
 
-router.get("/", async (req, res) => {
-    res.send(await UserModel.find());
-});
-
-router.get("/:id", async (req, res) => {
-    res.send(await UserModel.findOne({ _id: req.params.id }));
-});
-
-// router.post("/", async (req, res) => {
-//     // לבדוק אם הולידציה חיונית,מתאימה
-//     let validBody = validUser(req.body);
-//     if (validBody.error) {
-//         return res.status(400).json(validBody.error.details);
-//     }
-
-//     // const { firstName, lastName, email, phone, password } = req.body;
-//     // const user = new UserModel({ firstName, lastName, email, phone, password : await bcrypt.hash(password,10) });
-//     const user = new UserModel(req.body);
-//     const newUser = await user.save();
-//     res.send(newUser);
-// });
+// לחבר את הגראד לכל הפונקציות - בדיקה אם הוא מורשה
+// לייבא את מומנט לבדוק אם עובד - זמן שבוא היוזר נוצר
 
 
 // Authorization
@@ -35,9 +17,15 @@ router.get("/", async (req, res) => {
 
 // Login
 router.post("/login", async (req, res) => {
+    // ולידציה - לבדוק אם עובד
+    let validBody = validUser(req.body);
+    if (validBody.error) {
+        return res.status(400).json(validBody.error.details);
+    }
+
     const { email, password } = req.body;
 
-    const user = await UserModel.findOne({ email });
+    const user = await UserAdmin.findOne({ email });
 
     if (!user) {
         return res.status(403).send("username or password is incorrect");
@@ -49,7 +37,11 @@ router.post("/login", async (req, res) => {
         return res.status(403).send("username or password is incorrect");
     }
 
-    res.send(user);
+    const userResult = user.toObject();
+    delete userResult.password;
+    userResult.token = jwt.sign({ user: userResult }, JWT_SECRET, { expiresIn: '1h' });
+
+    res.send(userResult);
 });
 
 // SignUp
@@ -68,6 +60,7 @@ router.post("/signup", async (req, res) => {
         email,
         phone,
         password: await bcrypt.hash(password, 10),
+        createdTime: moment().format('DD/MM/YYYY HH:mm:ss')
     });
 
     const newUser = await user.save();

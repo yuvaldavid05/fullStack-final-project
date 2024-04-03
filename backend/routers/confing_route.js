@@ -1,6 +1,6 @@
 const indexR = require("./index");
 const gradesR = require("./grades");
-const usersR = require("./users");
+const usersR = require("./auth-users");
 
 exports.routeInit = (app) => {
     app.use("/", indexR);
