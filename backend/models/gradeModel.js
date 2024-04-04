@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
+// יכולה למחוק
 const gradeSchema = new mongoose.Schema({
     date: String,
     grade: String,

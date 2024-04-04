@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { GradeModel, validGrade } = require("../models/gradeModel");
 
+// יכולה למחוק
 router.get("/", async (req, res) => {
     res.send(await GradeModel.find({}));
 });

@@ -6,6 +6,7 @@ const moment = require("moment/moment");
 
 // לחבר את הגראד לכל הפונקציות - בדיקה אם הוא מורשה
 // לייבא את מומנט לבדוק אם עובד - זמן שבוא היוזר נוצר
+// לסיים את השיעורים של אלישיב
 
 
 // Authorization
@@ -68,7 +69,7 @@ router.post("/signup", async (req, res) => {
     res.send(newUser);
 });
 
-// Logout
+// Logout - אלישיב סיים דרך הצד לקוח
 router.get("/signup", async (req, res) => {
 
 });
