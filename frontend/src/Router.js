@@ -16,7 +16,7 @@ export default function Router() {
             <Route path="/about" element={<About />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/category" element={<StruCategory />} />
-            <Route path="/item-page" element={<ItemPage />} />
+            <Route path="/products/:id" element={<ItemPage />} />
             <Route path="/wish-list" element={<WishList />} />
             <Route path="/shopping-basket" element={<ShoppingBasket />} />
 

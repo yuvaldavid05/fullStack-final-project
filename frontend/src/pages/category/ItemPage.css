@@ -22,35 +22,17 @@
 }
 
 .col.item-page-info-right .item-color-div{
-    display: flex;
-    justify-content: center;
+    width: 50%;
+   margin: auto;
 }
 
- .col.item-page-info-right .item-color-div .the-color{
-    width: 30px;
-    height: 30px;
-    background-color: blue;
-}
 
 .col.item-page-info-right .item-size-div{
-    display: flex;
-    justify-content: center;
-    margin: 25px 0;
+    width: 50%;
+    margin:20px  auto;
+    /* margin: 20px 0; */
 }
 
-.col.item-page-info-right .item-size-div div{
-    width:30px;
-    height: 30px;
-    border: 1px solid rgba(128, 128, 128, 0.479);
-    border-radius: 5px;
-    margin:10px 5px;
-    cursor: pointer;
-}
-
-
-.col.item-page-info-right .item-size-div div:hover{
-    background-color: gray;
-}
 
 .col.item-page-info-right .add-item-to{
    display: flex;

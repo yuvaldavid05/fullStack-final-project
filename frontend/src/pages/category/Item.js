@@ -5,35 +5,25 @@ import { IoHeartOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import ButtonModalAddItem from "./ButtonModalAddItem";
 
-export default function Item({ itemImage, itemName, itemColor, ItemPrice, itemSizes }) {
-    useEffect(() => {
-
-        // itemColor.forEach(col => console.log(col))
-        // itemColor.map(col => console.log(col))
-        // console.log(itemColor);
-        // console.log(itemColor.length);
-
-    }, []);
+export default function Item({ itemImage, itemName, itemDescription, itemColor, ItemPrice, itemSizes, itemId }) {
+    const navigate = useNavigate();
 
     return (
         <>
             <Card>
                 <Card.Img variant="top" src={itemImage} />
                 <div className='like'>
-                    {/* <IoHeartOutline /> */}
                     <IoMdHeartEmpty />
                 </div>
                 <Card.Body>
                     <Card.Title>{itemName}</Card.Title>
+                    <Card.Text> {itemDescription}</Card.Text>
                     <Card.Text> {ItemPrice} nis</Card.Text>
                     <Card.Text>
                         <Form.Select aria-label="select-sizes">
-                            {/* <option>sizes  </option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option> */}
                             <option>sizes</option>
                             {
                                 itemSizes.map(s => (
@@ -45,29 +35,24 @@ export default function Item({ itemImage, itemName, itemColor, ItemPrice, itemSi
                         </Form.Select>
                     </Card.Text>
                     <Card.Text className='itemColors'>
-                        {/* עובד רק לצבע אחד */}
-                        <div className="divColor">
-                            <div className="color" style={{ backgroundColor: itemColor }}></div>
-                            <span>{itemColor}</span>
-                        </div>
-                        {/* {
-                            itemColor.forEach((col, i) => {
-                                console.log(col, i);
-                                return (
-                                    <div className="divColor">
-                                        <div className="color" style={{ backgroundColor: col }}></div>
-                                        <span>{col}</span>
-                                    </div>
-                                );
-                            })
-                        } */}
+                        {
+                            itemColor.map(c => (
+                                <div className="divColor">
+                                    <div className="color" style={{ backgroundColor: c }}></div>
+                                    <span>{c}</span>
+                                </div>
+                            ))
+                        }
 
                     </Card.Text>
                     <div className='footerCard'>
-                        <Link to="/item-page">
-                            more info
-                        </Link>
-                        <Button variant="primary">+ add item</Button>
+                        <div onClick={() => navigate(`/products/${itemId}`)}>
+
+                            <u>more info</u>
+
+                        </div>
+
+                        <ButtonModalAddItem itemImage={itemImage} itemName={itemName} itemDescription={itemDescription} ItemPrice={ItemPrice} itemSizes={itemSizes} itemColor={itemColor} />
                     </div>
                 </Card.Body>
             </Card >

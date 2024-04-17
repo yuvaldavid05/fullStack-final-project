@@ -8,6 +8,7 @@
     /* border: 1px solid gray; */
     border: 1px solid rgba(128, 128, 128, 0.182);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-size: 14px;
 }
 
 .body-category .holder .card .like{
@@ -21,6 +22,10 @@
     height:200px;
     margin: 0;
     padding:0;
+}
+
+.body-category .holder .card p.card-text{
+    margin: 5px;
 }
 
 .body-category .holder .card p.itemColors{
@@ -40,9 +45,10 @@
     margin: 5px auto;
 }
 
-.body-category .holder .card p.itemColors .divColor .color:hover{
+/* הובר על הצבעים של הפריט */
+/* .body-category .holder .card p.itemColors .divColor .color:hover{
 border: 2px solid gray;
-}
+} */
 
 .body-category .holder .card .footerCard{
     display: flex;
@@ -50,8 +56,9 @@ border: 2px solid gray;
     align-items: center;
 } 
 
-.body-category .holder .card .footerCard a{
+.body-category .holder .card .footerCard div{
     color:rgb(97, 92, 92) ;
+    cursor: pointer;
 }
 
 .body-category .holder .card .footerCard button{
