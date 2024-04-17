@@ -29,6 +29,9 @@ export default function ItemPage() {
             })
     }, [])
 
+    function addProduct() {
+        alert()
+    }
 
     return (
         <section id="item-page" className='item-page-body'>
@@ -36,7 +39,6 @@ export default function ItemPage() {
                 oneCard.map(oneC => (
 
                     <Container fluid>
-
                         <Row xs={1} md={2} className='item-page-header'>
                             <>
 
@@ -77,7 +79,7 @@ export default function ItemPage() {
                                         <span>
                                             <IoMdHeartEmpty />
                                         </span>
-                                        <Button>+ add item</Button>
+                                        <Button onClick={addProduct}>+ add item</Button>
                                     </div>
                                 </Col >
                             </>

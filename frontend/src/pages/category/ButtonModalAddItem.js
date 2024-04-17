@@ -11,7 +11,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
-function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, ItemPrice, itemSizes }) {
+function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, ItemPrice, itemSizes, size }) {
     // const { products, setProducts } = useContext(GeneralContext);
     const [userChoiceSize, setUserChoiceSize] = useState("");
     const [userChoiceColor, setUserChoiceColor] = useState("");
@@ -46,11 +46,14 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, I
                             <Row>
                                 <Col><b>size : </b>
                                     <Form.Select aria-label="Default select example" onChange={(choice) => setUserChoiceSize(choice.target.value)}>
-                                        <option>choose size</option>
+                                        {size === "" ? <option>choose size</option> : <option>{size}</option>}
+                                        {/* <option>choose size</option> */}
                                         {
                                             itemSizes.map(sItem => (
                                                 <>
-                                                    <option value={sItem}>{sItem}</option>
+                                                    {/* {size === "" ? <option value={sItem}>{sItem}</option> : size = sItem ? "" : <option value={sItem}>{sItem}</option>} */}
+                                                    {size == sItem ? "" : <option value={sItem}>{sItem}</option>}
+                                                    {/* <option value={sItem}>{sItem}</option> */}
                                                 </>
                                             ))
                                         }
