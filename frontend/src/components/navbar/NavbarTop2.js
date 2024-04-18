@@ -5,6 +5,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 
+// משתמש רגיל - יכוללבצע הכל מלבד לעשות לייק על מוצרים
+// משתמש רשום - יכול לעשות לייק - וישנט ליסט
 
 export default function NavbarTop2() {
 
@@ -25,6 +27,8 @@ export default function NavbarTop2() {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
+                        <Nav.Link href="/login">login</Nav.Link>
+                        <Nav.Link href="/sign-up">Sign-Up</Nav.Link>
                         <Nav.Link href="/about">about</Nav.Link>
                         <Nav.Link href="/contact-us">contact us</Nav.Link>
                         <NavDropdown title="Categories" id="collapsible-nav-dropdown">
