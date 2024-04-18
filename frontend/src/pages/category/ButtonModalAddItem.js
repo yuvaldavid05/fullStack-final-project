@@ -1,5 +1,5 @@
 import './ButtonModalAddItem.css';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Item from './Item';
@@ -12,16 +12,32 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
 function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, ItemPrice, itemSizes, size }) {
-    // const { products, setProducts } = useContext(GeneralContext);
+    // const { userSize, setUserSize } = useContext(GeneralContext);
     const [userChoiceSize, setUserChoiceSize] = useState("");
     const [userChoiceColor, setUserChoiceColor] = useState("");
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false)
+        // איפוס ערכים בעת סגירת המודל
+        setUserChoiceSize("")
+        setUserChoiceColor("");
+    }
     const handleShow = () => setShow(true);
 
     function sendToBasket() {
-        alert(userChoiceColor + userChoiceSize);
+
+        // בדיקה שכל התאים מלאים (מידה וצבע) והשמה של המידה מהדף קטגוריה
+        if (userChoiceSize == "" && size != "" && userChoiceColor != "") {
+            alert(userChoiceColor + size)
+        } else if (userChoiceSize != "" && size == "" && userChoiceColor != "") {
+            alert(userChoiceColor + userChoiceSize)
+        } else {
+            alert("have to pick size and color");
+        }
+
+        console.log(userChoiceColor + userChoiceSize);
+        console.log(size);
     }
 
     return (
@@ -46,21 +62,18 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, I
                             <Row>
                                 <Col><b>size : </b>
                                     <Form.Select aria-label="Default select example" onChange={(choice) => setUserChoiceSize(choice.target.value)}>
-                                        {size === "" ? <option>choose size</option> : <option>{size}</option>}
-                                        {/* <option>choose size</option> */}
+                                        {size === "" ? <option>choose size</option> : <option> {size}</option>}
                                         {
                                             itemSizes.map(sItem => (
                                                 <>
-                                                    {/* {size === "" ? <option value={sItem}>{sItem}</option> : size = sItem ? "" : <option value={sItem}>{sItem}</option>} */}
                                                     {size == sItem ? "" : <option value={sItem}>{sItem}</option>}
-                                                    {/* <option value={sItem}>{sItem}</option> */}
                                                 </>
                                             ))
                                         }
                                     </Form.Select>
                                 </Col>
                                 <Col> <b>color :  </b>
-                                    <Form.Select aria-label="Default select example" onChange={(choice) => setUserChoiceColor(choice.target.value)}>
+                                    <Form.Select aria-label="Default select example" onChange={(choice) => setUserChoiceColor(choice.target.value == "choose color" ? "" : choice.target.value)}>
                                         <option>choose color</option>
                                         {
                                             itemColor.map(cItem => (
@@ -87,7 +100,7 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, I
                         Add To Basket
                     </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal >
         </>
     );
 }

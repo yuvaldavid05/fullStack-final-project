@@ -16,6 +16,8 @@ import { useParams } from 'react-router-dom';
 export default function ItemPage() {
     const { id } = useParams();
     const [oneCard, setOneCard] = useState([]);
+    const [colorChosenItemPage, setColorChosenItemPage] = useState("");
+    const [sizeChosenItemPage, setSizeChosenItemPage] = useState("");
 
 
     useEffect(() => {
@@ -30,7 +32,8 @@ export default function ItemPage() {
     }, [])
 
     function addProduct() {
-        alert()
+        alert(colorChosenItemPage + sizeChosenItemPage);
+
     }
 
     return (
@@ -49,7 +52,7 @@ export default function ItemPage() {
                                     <h3>{oneC.productName}</h3>
                                     <div className='item-price'>{oneC.price} nis</div>
                                     <div className='item-color-div'>
-                                        <Form.Select aria-label="select-sizes">
+                                        <Form.Select aria-label="select-sizes" onChange={(choice) => setColorChosenItemPage(choice.target.value)}>
                                             <option>choose color</option>
                                             {
                                                 oneC.color.map(c => (
@@ -63,7 +66,7 @@ export default function ItemPage() {
 
 
                                     <div className='item-size-div'>
-                                        <Form.Select aria-label="select-sizes">
+                                        <Form.Select aria-label="select-sizes" onChange={(choice) => setSizeChosenItemPage(choice.target.value)}>
                                             <option>choose size</option>
                                             {
                                                 oneC.sizes.map(s => (

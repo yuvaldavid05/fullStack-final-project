@@ -1,16 +1,20 @@
 import './Item.css';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import { IoHeartOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import ButtonModalAddItem from "./ButtonModalAddItem";
 
+export const GeneralContext = React.createContext();
+
 export default function Item({ itemImage, itemName, itemDescription, itemColor, ItemPrice, itemSizes, itemId }) {
     const [userSize, setUserSize] = useState("");
     const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     console.log(userSize)
+    // }, [userSize])
 
     return (
         <>
@@ -24,7 +28,7 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                     <Card.Text> {itemDescription}</Card.Text>
                     <Card.Text> {ItemPrice} nis</Card.Text>
                     <Card.Text>
-                        <Form.Select aria-label="select-sizes" onChange={(choice) => setUserSize(choice.target.value)}>
+                        <Form.Select aria-label="select-sizes" onChange={(choice) => setUserSize(choice.target.value == "sizes" ? "" : choice.target.value)}>
                             <option>sizes</option>
                             {
                                 itemSizes.map(s => (
