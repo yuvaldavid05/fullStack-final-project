@@ -1,0 +1,27 @@
+.sign-up-page-body .frame-form-sign-up{
+    width:60%;
+    margin:50px auto;
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid rgba(128, 128, 128, 0.456);
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.sign-up-page-body .frame-form-sign-up h2{
+    margin: 10px 0 15px 0;
+}
+
+.sign-up-page-body .frame-form-sign-up .input-form{
+ margin: 10px 0;
+}
+
+.sign-up-page-body .frame-form-sign-up .input-form .form-label{
+    float: left;
+}
+
+
+.sign-up-page-body .frame-form-sign-up .formSignUp .fieldError{
+    border: 2px red solid;
+}
+
