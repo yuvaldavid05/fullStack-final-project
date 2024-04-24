@@ -21,7 +21,20 @@
 }
 
 
-.sign-up-page-body .frame-form-sign-up .formSignUp .fieldError{
-    border: 2px red solid;
+.sign-up-page-body .frame-form-sign-up .input-form .fieldError{
+    border: 1px red solid;
 }
 
+.sign-up-page-body .frame-form-sign-up .input-form .fieldErrorSignup{
+    color: red;
+}
+
+.sign-up-page-body .frame-form-sign-up button{
+    margin: 15px 0;
+}
+
+@media (max-width : 768px) {
+    .sign-up-page-body .frame-form-sign-up{
+        width: 100%;
+    }
+}

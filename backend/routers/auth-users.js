@@ -61,7 +61,8 @@ router.post("/signup", async (req, res) => {
         email,
         phone,
         password: await bcrypt.hash(password, 10),
-        createdTime: moment().format('DD/MM/YYYY HH:mm:ss')
+        // createdTime: moment().format('DD/MM/YYYY HH:mm:ss')
+        // לא עובד הזמן
     });
 
     const newUser = await user.save();

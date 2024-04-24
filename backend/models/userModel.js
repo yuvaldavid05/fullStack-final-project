@@ -21,7 +21,7 @@ exports.validUser = (_bodyData) => {
         password: Joi.string().min(8).max(32).regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=(.*?[0-9]){4})(?=.*?[#?!@$%^&*-]).{8,}$/).required().messages({
             "string.pattern.base": "The password must include at least one uppercase letter and one lowercase letter, at least four numbers and a special character from the following characters (!@%$#^&*-_*)",
         }),
-        role: Joi.array().items(Joi.string()).required()
+        // role: Joi.array().items(Joi.string()).required()
         // regex
     })
 
