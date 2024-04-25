@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 const { UserModel, validUser } = require("../models/userModel");
 const bcrypt = require('bcrypt');
-const moment = require("moment/moment");
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = "FinalProject2024MyToken";
+const moment = require("moment");
+
 
 // לחבר את הגראד לכל הפונקציות - בדיקה אם הוא מורשה
 // לייבא את מומנט לבדוק אם עובד - זמן שבוא היוזר נוצר
@@ -18,24 +21,18 @@ router.get("/", async (req, res) => {
 
 // Login
 router.post("/login", async (req, res) => {
-    // ולידציה - לבדוק אם עובד
-    let validBody = validUser(req.body);
-    if (validBody.error) {
-        return res.status(400).json(validBody.error.details);
-    }
-
     const { email, password } = req.body;
 
-    const user = await UserAdmin.findOne({ email });
+    const user = await UserModel.findOne({ email });
 
     if (!user) {
-        return res.status(403).send("username or password is incorrect");
+        return res.status(400).send("username or password is incorrect");
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-        return res.status(403).send("username or password is incorrect");
+        return res.status(400).send("username or password is incorrect");
     }
 
     const userResult = user.toObject();

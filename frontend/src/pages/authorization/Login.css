@@ -19,10 +19,12 @@
 
 .login-page-body .frame-form-login button{
     width:150px;
+    height:40px;
+    margin: auto;
 }
 
 .login-page-body .frame-form-login a{
-    display: block;
+    /* display: block; */
     margin:15px 0;
     font-size: 18px;
 }

@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Joi from 'joi';
-import { JOI_HEBREW } from '../../joi-hebrew';
+// import { JOI_HEBREW } from '../../joi-hebrew';
 
 
 export default function SignUp() {
@@ -23,7 +23,7 @@ export default function SignUp() {
     const navigate = useNavigate();
 
 
-    const loginSchema = Joi.object({
+    const signUpSchema = Joi.object({
         firstName: Joi.string().min(2).max(10).required(),
         lastName: Joi.string().min(2).max(10).required(),
         email: Joi.string().required().email({ tlds: false }),
@@ -51,7 +51,7 @@ export default function SignUp() {
             [id]: value,
         };
 
-        const schema = loginSchema.validate(obj, { abortEarly: false });
+        const schema = signUpSchema.validate(obj, { abortEarly: false });
         const err = { ...errors, [id]: undefined };
 
         if (schema.error) {
