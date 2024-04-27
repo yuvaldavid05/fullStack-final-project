@@ -29,8 +29,8 @@ const pages = [
     { route: '/login', title: 'login', permissions: [RoleTypes.none] },
     { route: '/sign-up', title: 'Sign-Up', permissions: [RoleTypes.none] },
     { route: '/about', title: 'about' },
-    { route: '/products', title: 'category' },
     { route: '/contact-us', title: 'contact us', permissions: [RoleTypes.none, RoleTypes.user, RoleTypes.admin] },
+    { route: '/products', title: 'all categories' },
 ];
 
 const pages2 = [

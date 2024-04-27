@@ -32,7 +32,7 @@ export default function StruCategory() {
             <Container fluid>
                 <div className='title-holder'>
                     <h2>{cat}</h2>
-                    <div>Our {cat} collection </div>
+                    <div>{cat ? `Our  ${cat} collection` : "All Categories"}</div>
                     <hr></hr>
                 </div>
                 <Row xs={2} md={5}>
