@@ -54,7 +54,6 @@ router.post("/login", async (req, res) => {
 
 // SignUp
 router.post("/signup", async (req, res) => {
-    // ולידציה - לבדוק אם עובד
     let validBody = validUser(req.body);
     if (validBody.error) {
         return res.status(400).json(validBody.error.details);
@@ -68,6 +67,7 @@ router.post("/signup", async (req, res) => {
         email,
         phone,
         password: await bcrypt.hash(password, 10),
+        admin: false,
         // createdTime: moment().format('DD/MM/YYYY HH:mm:ss')
         // לא עובד הזמן
     });
@@ -78,7 +78,7 @@ router.post("/signup", async (req, res) => {
 });
 
 // Logout - אלישיב סיים דרך הצד לקוח
-router.get("/signup", async (req, res) => {
+router.get("/logout", async (req, res) => {
 
 });
 

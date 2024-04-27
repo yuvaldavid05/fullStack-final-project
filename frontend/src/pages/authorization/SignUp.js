@@ -71,7 +71,7 @@ export default function SignUp() {
         // setLoader(true);
         ev.preventDefault();
 
-        fetch(`http://localhost:2222/users/signup`, {
+        fetch(`http://localhost:2222/auth/signup`, {
             credentials: 'include',
             method: 'POST',
             headers: { 'Content-type': 'application/json' },

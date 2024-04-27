@@ -4,6 +4,10 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { GeneralContext } from '../../App';
+
+
 
 // משתמש רגיל - יכוללבצע הכל מלבד לעשות לייק על מוצרים
 // משתמש רשום - יכול לעשות לייק - וישנט ליסט
@@ -14,22 +18,58 @@ export const RoleTypes = {
     admin: 2,
 };
 
+export const checkPermissions = (permissions, userRoleType) => {
+    return permissions.includes(userRoleType);
+}
+
+
+export let pageCategory = {};
+
 const pages = [
     { route: '/login', title: 'login', permissions: [RoleTypes.none] },
-    { route: '/signup', title: 'Sign-Up', permissions: [RoleTypes.none] },
-    { route: '/about', title: 'about', permissions: [RoleTypes.none, RoleTypes.user, RoleTypes.admin] },
+    { route: '/sign-up', title: 'Sign-Up', permissions: [RoleTypes.none] },
+    { route: '/about', title: 'about' },
+    { route: '/category', title: 'category' },
+    // { route: '/products/:cat', title: 'categoryTry' },
     { route: '/contact-us', title: 'contact us', permissions: [RoleTypes.none, RoleTypes.user, RoleTypes.admin] },
 ];
 
-export default function NavbarTop2() {
+const pages2 = [
+    { route: '/wish-list', title: 'WistList', permissions: [RoleTypes.user] },
+    { route: '/shopping-basket', title: 'Shopping-basket', permissions: [RoleTypes.none, RoleTypes.user, RoleTypes.admin] },
+];
 
-    const category2 = [
-        { name: '/dresses', title: 'dresses', number: '0' },
-        { name: '/jeans', title: 'jeans', number: '1' },
-        { name: '/shirts', title: 'shirts', number: '2' },
-        { name: '/shoes', title: 'shoes', number: '3' },
-        { name: '/category', title: 'category', number: '4' },
-    ]
+
+export default function NavbarTop2() {
+    const { user, roleType, setUser, setRoleType } = useContext(GeneralContext);
+    const [products, setProducts] = useState([]);
+
+    // פילטור של מוצר אחד(ראשון) מכל קטגוריה
+    pageCategory = products.filter((p, i) => products.findIndex(x => x.category == p.category) === i);
+
+    // const category2 = [
+    //     { name: '/dresses', title: 'dresses', number: '0' },
+    //     { name: '/jeans', title: 'jeans', number: '1' },
+    //     { name: '/shirts', title: 'shirts', number: '2' },
+    //     { name: '/shoes', title: 'shoes', number: '3' },
+    //     { name: '/category', title: 'category', number: '4' },
+    // ]
+
+    // let arrayOfCategory = [];
+    useEffect(() => {
+        fetch("http://localhost:2222/products", {
+            credentials: 'include',
+        })
+            .then(res => res.json())
+            .then(data => {
+                setProducts(data);
+                // arrayOfCategory.fill(products.filter((c,i) => products.findIndex(c.category) === i));
+                // arrayOfCategory = products.filter((c, i) => products.findIndex(c.category) === i)
+            });
+    }, []);
+
+    // let pageCategory = products.filter((p, i) => products.findIndex(x => x.category == p.category) === i);
+    // console.log(pageCategory)
 
     return (
 
@@ -39,16 +79,20 @@ export default function NavbarTop2() {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/login">login</Nav.Link>
-                        <Nav.Link href="/sign-up">Sign-Up</Nav.Link>
-                        <Nav.Link href="/about">about</Nav.Link>
-                        <Nav.Link href="/contact-us">contact us</Nav.Link>
+                        {pages.filter(p => !p.permissions || checkPermissions(p.permissions, roleType)).map((page) => (
+                            <Nav.Link>
+                                <Link to={page.route} key={page.route}>
+                                    {page.title}
+                                </Link>
+                            </Nav.Link>
+                        ))}
+
                         <NavDropdown title="Categories" id="collapsible-nav-dropdown">
                             {
-                                category2.map((c) => (
+                                products.filter((p, i) => products.findIndex(x => x.category == p.category) === i).map((t) => (
                                     <NavDropdown.Item>
-                                        <Link to={c.name}>
-                                            {c.title}
+                                        <Link to={`/products/category/${t.category}`}>
+                                            {t.category}
                                         </Link>
                                     </NavDropdown.Item>
                                 ))
@@ -56,16 +100,13 @@ export default function NavbarTop2() {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <Nav.Link>
-                            <Link to="/wish-list">
-                                WistList
-                            </Link>
-                        </Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes">
-                            <Link to="/shopping-basket">
-                                shopping-basket
-                            </Link>
-                        </Nav.Link>
+                        {pages2.filter(p => !p.permissions || checkPermissions(p.permissions, roleType)).map((page) => (
+                            <Nav.Link>
+                                <Link to={page.route} key={page.route}>
+                                    {page.title}
+                                </Link>
+                            </Nav.Link>
+                        ))}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

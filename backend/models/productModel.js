@@ -7,7 +7,8 @@ const productSchema = new mongoose.Schema({
     price: Number,
     sizes: Array,
     color: Array,
-    img: String
+    img: String,
+    category: String
 });
 
 const ProductModel = mongoose.model("products", productSchema);
@@ -21,6 +22,7 @@ exports.validProduct = (_bodyData) => {
         sizes: Joi.array().items(Joi.string()).required(),
         color: Joi.array().items(Joi.string()).required(),
         img: Joi.string().min(1).max(150).required(),
+        category: Joi.string().min(1),
     })
 
     return joiSchema.validate(_bodyData);

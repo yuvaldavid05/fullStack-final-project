@@ -10,12 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Joi from 'joi';
 import { GeneralContext } from '../../App';
+import { RoleTypes } from '../../components/navbar/NavbarTop2';
+
 
 
 
 
 export default function Login() {
-    const { user, setUser } = useContext(GeneralContext);
+    const { user, setUser, roleType, setRoleType } = useContext(GeneralContext);
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -67,7 +69,7 @@ export default function Login() {
         // setLoader(true);
         ev.preventDefault();
 
-        fetch(`http://localhost:2222/users/login`, {
+        fetch(`http://localhost:2222/auth/login`, {
             credentials: 'include',
             method: 'POST',
             headers: { 'Content-type': 'application/json' },
@@ -86,21 +88,23 @@ export default function Login() {
                 setUser(data);
                 // שמירה לפי התוקן של היוזר
                 localStorage.token = data.token;
+                setRoleType(RoleTypes.user);
 
-                // setRoleType(RoleTypes.user);
-                // snackbarOn('המשתמש נרשם בהצלחה')
+                if (data.admin) {
+                    setRoleType(RoleTypes.admin);
+                }
 
-                alert('המשתמש התחבר');
-                // navigate('/');
+                // snackbarOn('המשתמש התחבר בהצלחה')
+                navigate('/');
 
                 console.log(data);
-                // console.log(roleType);
             })
             .catch(err => {
                 alert(err.message);
                 console.log(err.message);
             })
         // .finally(() => setLoader(false))
+
     }
 
 

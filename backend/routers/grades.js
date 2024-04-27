@@ -26,7 +26,7 @@ router.put("/:id", async (req, res) => {
     const { date, grade, title } = req.body;
     const gradeFind = await GradeModel.findOne({ _id: req.params.id });
 
-    if (!user) {
+    if (!gradeFind) {
         return res.status(403).send("משתמש לא קיים");
     }
 

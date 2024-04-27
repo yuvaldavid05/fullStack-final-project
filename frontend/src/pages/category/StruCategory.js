@@ -6,38 +6,22 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Item from './Item';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 
 
-// export const items = [
-//     {
-//         itemImage: "https://media.terminalx.com/pub/media/catalog/product/cache/f112238e8de94b6d480bd02e7a9501b8/w/0/w041110001-11690953404.jpg",
-//         itemName: 'black-pants',
-//         itemDescription: "hhhhhh",
-//         itemColor: ['black'],
-//         itemPrice: '80',
-//         itemSizes: ['S', 'M', 'L']
-//     },
-//     {
-//         itemImage: "https://img.fruugo.com/product/4/09/513051094_max.jpg",
-//         itemName: 'red-shirt',
-//         itemDescription: "gggggg",
-//         itemColor: ['red'],
-//         itemPrice: '60',
-//         itemSizes: ['S', 'L']
-//     },
-// ]
 
 export default function StruCategory() {
-    const [products, setProducts] = useState([]);
+    const { cat } = useParams();
+    const [productCat, setProductCat] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:2222/products", {
+        fetch(`http://localhost:2222/products/category/${cat}`, {
             credentials: 'include',
         })
             .then(res => res.json())
             .then(data => {
-                setProducts(data);
+                setProductCat(data);
             });
     }, []);
 
@@ -62,7 +46,7 @@ export default function StruCategory() {
                         //     )
                         // })
 
-                        products.map(p => {
+                        productCat.map(p => {
                             return (
                                 <Col>
                                     <div className='holder'>

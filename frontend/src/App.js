@@ -12,13 +12,13 @@ export const GeneralContext = React.createContext();
 function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
-  // const [roleType, setRoleType] = useState(RoleTypes.none);
+  const [roleType, setRoleType] = useState(RoleTypes.none);
 
   useEffect(() => {
     if (localStorage.token) {
       // setLoading(true);
 
-      fetch("http://localhost:2222/users/login", {
+      fetch("http://localhost:2222/auth/login", {
         credentials: 'include',
         headers: {
           'Authorization': localStorage.token
@@ -35,22 +35,32 @@ function App() {
         })
         .then(data => {
           setUser(data);
+          setRoleType(RoleTypes.user);
+
+          if (data.admin) {
+            setRoleType(RoleTypes.admin);
+          }
+
+          navigate('/');
+          console.log(data);
         })
         .catch(err => {
+          setRoleType(RoleTypes.none);
           // snackbar('משתמש לא מחובר');
-          // navigate('/');
+          navigate('/');
         })
         .finally(() => {
           // setLoading(false);
         });
     } else {
+      setRoleType(RoleTypes.none);
       navigate('/');
     }
   }, []);
 
   return (
     <GeneralContext.Provider value={{
-      user, setUser
+      user, setUser, roleType, setRoleType
     }}>
       <div className="App">
         <header className="App-header">
