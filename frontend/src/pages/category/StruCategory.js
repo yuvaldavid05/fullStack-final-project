@@ -16,39 +16,30 @@ export default function StruCategory() {
     const [productCat, setProductCat] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:2222/products/category/${cat}`, {
+        fetch(`http://localhost:2222/products/` + (cat ? `category/${cat}` : ""), {
             credentials: 'include',
         })
             .then(res => res.json())
             .then(data => {
                 setProductCat(data);
+                console.log(data)
             });
-    }, []);
+    }, [cat]);
 
 
     return (
         <section id="category" className='body-category'>
             <Container fluid>
                 <div className='title-holder'>
-                    <h2>Category Name</h2>
-                    <div>jjdfnafnd</div>
+                    <h2>{cat}</h2>
+                    <div>Our {cat} collection </div>
                     <hr></hr>
                 </div>
                 <Row xs={2} md={5}>
                     {
-                        // items.map(it => {
-                        //     return (
-                        //         <Col>
-                        //             <div className='holder'>
-                        //                 <Item itemImage={it.itemImage} itemName={it.itemName} itemColor={it.itemColor} ItemPrice={it.itemPrice} itemSizes={it.itemSizes} />
-                        //             </div>
-                        //         </Col>
-                        //     )
-                        // })
-
-                        productCat.map(p => {
+                        productCat.map((p, i) => {
                             return (
-                                <Col>
+                                <Col key={i}>
                                     <div className='holder'>
                                         <Item itemImage={p.img} itemName={p.productName} itemDescription={p.description} ItemPrice={p.price} itemSizes={p.sizes} itemColor={p.color} itemId={p._id} />
                                     </div>

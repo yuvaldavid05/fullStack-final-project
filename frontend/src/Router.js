@@ -24,6 +24,7 @@ export default function Router() {
             <Route path="/login" element={<Login />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/products/category/:cat" element={<StruCategory />} />
+            <Route path="/products" element={<StruCategory />} />
 
 
         </Routes>

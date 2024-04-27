@@ -29,8 +29,7 @@ const pages = [
     { route: '/login', title: 'login', permissions: [RoleTypes.none] },
     { route: '/sign-up', title: 'Sign-Up', permissions: [RoleTypes.none] },
     { route: '/about', title: 'about' },
-    { route: '/category', title: 'category' },
-    // { route: '/products/:cat', title: 'categoryTry' },
+    { route: '/products', title: 'category' },
     { route: '/contact-us', title: 'contact us', permissions: [RoleTypes.none, RoleTypes.user, RoleTypes.admin] },
 ];
 
@@ -45,15 +44,8 @@ export default function NavbarTop2() {
     const [products, setProducts] = useState([]);
 
     // פילטור של מוצר אחד(ראשון) מכל קטגוריה
-    pageCategory = products.filter((p, i) => products.findIndex(x => x.category == p.category) === i);
+    // pageCategory = products.filter((p, i) => products.findIndex(x => x.category == p.category) === i);
 
-    // const category2 = [
-    //     { name: '/dresses', title: 'dresses', number: '0' },
-    //     { name: '/jeans', title: 'jeans', number: '1' },
-    //     { name: '/shirts', title: 'shirts', number: '2' },
-    //     { name: '/shoes', title: 'shoes', number: '3' },
-    //     { name: '/category', title: 'category', number: '4' },
-    // ]
 
     // let arrayOfCategory = [];
     useEffect(() => {
@@ -63,13 +55,9 @@ export default function NavbarTop2() {
             .then(res => res.json())
             .then(data => {
                 setProducts(data);
-                // arrayOfCategory.fill(products.filter((c,i) => products.findIndex(c.category) === i));
-                // arrayOfCategory = products.filter((c, i) => products.findIndex(c.category) === i)
             });
     }, []);
 
-    // let pageCategory = products.filter((p, i) => products.findIndex(x => x.category == p.category) === i);
-    // console.log(pageCategory)
 
     return (
 
@@ -87,11 +75,12 @@ export default function NavbarTop2() {
                             </Nav.Link>
                         ))}
 
+
                         <NavDropdown title="Categories" id="collapsible-nav-dropdown">
                             {
                                 products.filter((p, i) => products.findIndex(x => x.category == p.category) === i).map((t) => (
                                     <NavDropdown.Item>
-                                        <Link to={`/products/category/${t.category}`}>
+                                        <Link to={`/products/category/${t.category}`} key={t._id}>
                                             {t.category}
                                         </Link>
                                     </NavDropdown.Item>
