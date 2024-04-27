@@ -84,11 +84,14 @@ export default function Login() {
             })
             .then(data => {
                 setUser(data);
+                // שמירה לפי התוקן של היוזר
+                localStorage.token = data.token;
+
                 // setRoleType(RoleTypes.user);
                 // snackbarOn('המשתמש נרשם בהצלחה')
 
                 alert('המשתמש התחבר');
-                navigate('/');
+                // navigate('/');
 
                 console.log(data);
                 // console.log(roleType);

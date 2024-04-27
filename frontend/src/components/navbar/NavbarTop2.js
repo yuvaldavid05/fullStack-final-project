@@ -8,6 +8,19 @@ import { Link } from 'react-router-dom';
 // משתמש רגיל - יכוללבצע הכל מלבד לעשות לייק על מוצרים
 // משתמש רשום - יכול לעשות לייק - וישנט ליסט
 
+export const RoleTypes = {
+    none: 0,
+    user: 1,
+    admin: 2,
+};
+
+const pages = [
+    { route: '/login', title: 'login', permissions: [RoleTypes.none] },
+    { route: '/signup', title: 'Sign-Up', permissions: [RoleTypes.none] },
+    { route: '/about', title: 'about', permissions: [RoleTypes.none, RoleTypes.user, RoleTypes.admin] },
+    { route: '/contact-us', title: 'contact us', permissions: [RoleTypes.none, RoleTypes.user, RoleTypes.admin] },
+];
+
 export default function NavbarTop2() {
 
     const category2 = [
@@ -16,7 +29,6 @@ export default function NavbarTop2() {
         { name: '/shirts', title: 'shirts', number: '2' },
         { name: '/shoes', title: 'shoes', number: '3' },
         { name: '/category', title: 'category', number: '4' },
-        { name: '/contact-us', title: 'contact-us', number: '5' },
     ]
 
     return (

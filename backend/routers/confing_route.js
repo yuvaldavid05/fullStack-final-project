@@ -1,6 +1,6 @@
 const indexR = require("./index");
 const gradesR = require("./grades");
-const usersR = require("./auth-users");
+const usersR = require("./auth");
 const productR = require("./products");
 const adminR = require("./admins");
 
