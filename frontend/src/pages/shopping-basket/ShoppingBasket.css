@@ -1,13 +1,9 @@
-/* .basket-page{
-  
-} */
-
 .basket-page .container-fluid .row h3{
-    margin: 25px;
+    margin: 50px auto 10px auto;
 }
 
 .basket-page .basket-body{
-    width:450px;
+    max-width:450px;
     font-size: 15px;
     margin: 35px auto;
     /* justify-content: center; */
@@ -18,11 +14,15 @@
 }
 
 .basket-page .basket-body .sum-div{
-    width:450px;
+    /* width:450px; */
     margin: 10px;
 }
 
 .basket-page .basket-body .sum-div button{
-    width:200px;
+    width:inherit;
     margin:15px
+}
+
+.basket-page .basket-body h4{
+    font-weight: 100;
 }

@@ -10,23 +10,23 @@ import { GeneralContext } from '../../App';
 import Button from 'react-bootstrap/esm/Button';
 
 
-export const list = [
-    {
-        itemName: 'חולצת פסים',
-        itemPrice: 120,
-        itemImg: 'https://www.stickdecor.co.il/files/products/image1_1697_2016-09-19_10-43-16.jpg'
-    },
-    {
-        itemName: 'גינס ארוך',
-        itemPrice: 70,
-        itemImg: 'https://www.zico-fashion.co.il/wp-content/uploads/2023/07/20230705_121956-scaled.jpg'
-    },
-    {
-        itemName: 'חצאית קצרה',
-        itemPrice: 50,
-        itemImg: 'https://xversi.com/wp-content/uploads/2023/06/shskirt_black.jpg'
-    }
-]
+// export const list = [
+//     {
+//         itemName: 'חולצת פסים',
+//         itemPrice: 120,
+//         itemImg: 'https://www.stickdecor.co.il/files/products/image1_1697_2016-09-19_10-43-16.jpg'
+//     },
+//     {
+//         itemName: 'גינס ארוך',
+//         itemPrice: 70,
+//         itemImg: 'https://www.zico-fashion.co.il/wp-content/uploads/2023/07/20230705_121956-scaled.jpg'
+//     },
+//     {
+//         itemName: 'חצאית קצרה',
+//         itemPrice: 50,
+//         itemImg: 'https://xversi.com/wp-content/uploads/2023/06/shskirt_black.jpg'
+//     }
+// ]
 export default function ShoppingBasket() {
     const [sum, setSum] = useState();
 
@@ -36,6 +36,7 @@ export default function ShoppingBasket() {
         const s = basket.reduce((res, y) => res += y.item.price, 0);
         setSum(s)
         console.log(s)
+        console.log(basket)
     }, [])
 
 
@@ -49,9 +50,11 @@ export default function ShoppingBasket() {
                 </Row>
 
                 <Row className='basket-body'>
-                    <Col>
-                        <ListGroup as="ol" numbered>
-                            {/* {
+                    {basket.length ?
+
+                        <Col>
+                            <ListGroup as="ol" numbered>
+                                {/* {
                                 list.map((x, i) => (
                                     <ListGroup.Item
                                         as="li"
@@ -69,39 +72,41 @@ export default function ShoppingBasket() {
                                     </ListGroup.Item>
                                 ))
                             } */}
-                            {
-                                basket.map((x, i) => (
-                                    <ListGroup.Item
-                                        as="li"
-                                        className="d-flex justify-content-between align-items-start"
-                                        key={i}
-                                    >
-                                        <div className="ms-2 me-auto">
-                                            <div className="fw-bold">{x.item.productName}</div>
-                                            {x.item.price} <span>nis</span>
-                                        </div>
-                                        <div className="ms-2 me-auto">
-                                            <div className="fw-bold">{x.color}</div>
-                                            <div className="fw-bold">{x.size}</div>
+                                {
+                                    basket.map((x, i) => (
+                                        <ListGroup.Item
+                                            as="li"
+                                            className="d-flex justify-content-between align-items-start"
+                                            key={i}
+                                        >
+                                            <div className="ms-2 me-auto">
+                                                <div className="fw-bold">{x.item.productName}</div>
+                                                {x.item.price} <span>nis</span>
+                                            </div>
+                                            <div className="ms-2 me-auto">
+                                                <div className="fw-bold">{x.color}</div>
+                                                <div className="fw-bold">{x.size}</div>
 
-                                        </div>
-                                        <div className='item-img-basket'>
-                                            <Image src={x.item.img} />
-                                        </div>
+                                            </div>
+                                            <div className='item-img-basket'>
+                                                <Image src={x.item.img} />
+                                            </div>
 
-                                    </ListGroup.Item>
-                                ))
-                            }
-                        </ListGroup>
+                                        </ListGroup.Item>
+                                    ))
+                                }
+                            </ListGroup>
 
-                        <div className=" fw-bold sum-div">
-                            <div>סה"כ {sum}</div>
-                            <Button variant="secondary">finish</Button>
-                        </div>
-                    </Col>
+                            <div className=" fw-bold sum-div">
+                                <div>Items Total : ({basket.length}) </div>
+                                <div>Total : {sum} nis </div>
+                                <Button variant="secondary">checkout ({basket.length})</Button>
+                            </div>
+                        </Col>
+                        : <h4 >There are no products in the shopping basket</h4>}
 
                 </Row>
             </Container>
-        </section>
+        </section >
     );
 }
