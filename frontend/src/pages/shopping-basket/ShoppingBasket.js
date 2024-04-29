@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import { GeneralContext } from '../../App';
 import Button from 'react-bootstrap/esm/Button';
+import { BsTrash3 } from "react-icons/bs";
 
 
 // export const list = [
@@ -37,9 +38,19 @@ export default function ShoppingBasket() {
         setSum(s)
         console.log(s)
         console.log(basket)
-    }, [])
+    }, [basket])
 
+    function deleteItem(itemId) {
+        const itemDeleteIndex = basket.findIndex(t => t.item._id === itemId);
 
+        if (!window.confirm("Delete This Item?")) {
+            return;
+        }
+
+        // basket[itemDeleteIndex]
+        basket.splice(itemDeleteIndex, 1);
+        console.log(basket)
+    }
 
 
     return (
@@ -51,10 +62,11 @@ export default function ShoppingBasket() {
 
                 <Row className='basket-body'>
                     {basket.length ?
+                        <>
 
-                        <Col>
-                            <ListGroup as="ol" numbered>
-                                {/* {
+                            <Col>
+                                <ListGroup as="ol" numbered>
+                                    {/* {
                                 list.map((x, i) => (
                                     <ListGroup.Item
                                         as="li"
@@ -72,37 +84,51 @@ export default function ShoppingBasket() {
                                     </ListGroup.Item>
                                 ))
                             } */}
-                                {
-                                    basket.map((x, i) => (
-                                        <ListGroup.Item
-                                            as="li"
-                                            className="d-flex justify-content-between align-items-start"
-                                            key={i}
-                                        >
-                                            <div className="ms-2 me-auto">
-                                                <div className="fw-bold">{x.item.productName}</div>
-                                                {x.item.price} <span>nis</span>
-                                            </div>
-                                            <div className="ms-2 me-auto">
-                                                <div className="fw-bold">{x.color}</div>
-                                                <div className="fw-bold">{x.size}</div>
+                                    {
+                                        basket.map((x, i) => (
+                                            <ListGroup.Item
+                                                as="li"
+                                                className="d-flex justify-content-between align-items-start"
+                                                key={i}
+                                            >
+                                                <div className="ms-2 me-auto">
+                                                    <div className="fw-bold">{x.item.productName}</div>
+                                                    {x.item.price} <span>nis</span>
+                                                    <div className="icon-trash" onClick={() => deleteItem(x.item._id)}>
+                                                        <BsTrash3 />
+                                                    </div>
+                                                </div>
 
-                                            </div>
-                                            <div className='item-img-basket'>
-                                                <Image src={x.item.img} />
-                                            </div>
+                                                <div className="ms-2 me-auto">
+                                                    <div className="fw-bold">{x.color}</div>
+                                                    <div className="fw-bold">{x.size}</div>
 
-                                        </ListGroup.Item>
-                                    ))
-                                }
-                            </ListGroup>
 
-                            <div className=" fw-bold sum-div">
-                                <div>Items Total : ({basket.length}) </div>
-                                <div>Total : {sum} nis </div>
-                                <Button variant="secondary">checkout ({basket.length})</Button>
-                            </div>
-                        </Col>
+                                                </div>
+                                                <div className='item-img-basket'>
+                                                    <Image src={x.item.img} />
+                                                </div>
+                                                {/* <div className="icon-trash">
+                                                <BsTrash3 />
+                                            </div> */}
+                                            </ListGroup.Item>
+
+                                        ))
+                                    }
+                                </ListGroup>
+
+                                <div className=" fw-bold sum-div">
+                                    <div>Items Total : ({basket.length}) </div>
+                                    <div>Total : {sum} nis </div>
+                                    <Button variant="secondary">checkout ({basket.length})</Button>
+                                </div>
+                            </Col>
+                            {/* <Col>
+                                <div className="icon-trash">
+                                    <BsTrash3 />
+                                </div>
+                            </Col> */}
+                        </>
                         : <h4 >There are no products in the shopping basket</h4>}
 
                 </Row>
