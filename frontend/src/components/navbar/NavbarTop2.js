@@ -68,8 +68,8 @@ export default function NavbarTop2() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         {pages.filter(p => !p.permissions || checkPermissions(p.permissions, roleType)).map((page) => (
-                            <Nav.Link>
-                                <Link to={page.route} key={page.route}>
+                            <Nav.Link key={page.route}>
+                                <Link to={page.route}>
                                     {page.title}
                                 </Link>
                             </Nav.Link>
@@ -79,8 +79,8 @@ export default function NavbarTop2() {
                         <NavDropdown title="Categories" id="collapsible-nav-dropdown">
                             {
                                 products.filter((p, i) => products.findIndex(x => x.category == p.category) === i).map((t) => (
-                                    <NavDropdown.Item>
-                                        <Link to={`/products/category/${t.category}`} key={t._id}>
+                                    <NavDropdown.Item key={t._id}>
+                                        <Link to={`/products/category/${t.category}`}>
                                             {t.category}
                                         </Link>
                                     </NavDropdown.Item>
@@ -90,8 +90,8 @@ export default function NavbarTop2() {
                     </Nav>
                     <Nav>
                         {pages2.filter(p => !p.permissions || checkPermissions(p.permissions, roleType)).map((page) => (
-                            <Nav.Link>
-                                <Link to={page.route} key={page.route}>
+                            <Nav.Link key={page.route}>
+                                <Link to={page.route} >
                                     {page.title}
                                 </Link>
                             </Nav.Link>

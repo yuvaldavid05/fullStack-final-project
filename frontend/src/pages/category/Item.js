@@ -8,7 +8,7 @@ import ButtonModalAddItem from "./ButtonModalAddItem";
 
 export const GeneralContext = React.createContext();
 
-export default function Item({ itemImage, itemName, itemDescription, itemColor, ItemPrice, itemSizes, itemId }) {
+export default function Item({ itemImage, itemName, itemDescription, itemColor, itemPrice, itemSizes, itemId }) {
     const [userSize, setUserSize] = useState("");
     const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                 <Card.Body>
                     <Card.Title>{itemName}</Card.Title>
                     <Card.Text> {itemDescription}</Card.Text>
-                    <Card.Text> {ItemPrice} nis</Card.Text>
+                    <Card.Text> {itemPrice} nis</Card.Text>
                     <Card.Text>
                         <Form.Select aria-label="select-sizes" onChange={(choice) => setUserSize(choice.target.value == "sizes" ? "" : choice.target.value)}>
                             <option>sizes</option>
@@ -57,7 +57,7 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
 
                         </div>
 
-                        <ButtonModalAddItem itemImage={itemImage} itemName={itemName} itemDescription={itemDescription} ItemPrice={ItemPrice} itemSizes={itemSizes} itemColor={itemColor} size={userSize} />
+                        <ButtonModalAddItem itemImage={itemImage} itemName={itemName} itemDescription={itemDescription} itemPrice={itemPrice} itemSizes={itemSizes} itemColor={itemColor} size={userSize} itemId={itemId} />
                     </div>
                 </Card.Body>
             </Card >

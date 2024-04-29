@@ -66,7 +66,7 @@
     margin: 12px;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .body-category .holder .card .footerCard button{
         font-size: 10px;
     }

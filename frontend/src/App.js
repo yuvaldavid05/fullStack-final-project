@@ -13,6 +13,8 @@ function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [roleType, setRoleType] = useState(RoleTypes.none);
+  const [basket, setBasket] = useState([]);
+  const [productCat, setProductCat] = useState([]);
 
   useEffect(() => {
     if (localStorage.token) {
@@ -60,7 +62,7 @@ function App() {
 
   return (
     <GeneralContext.Provider value={{
-      user, setUser, roleType, setRoleType
+      user, setUser, roleType, setRoleType, basket, setBasket, productCat, setProductCat
     }}>
       <div className="App">
         <header className="App-header">

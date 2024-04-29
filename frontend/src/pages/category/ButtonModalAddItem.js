@@ -3,7 +3,6 @@ import { useContext, useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Item from './Item';
-import { GeneralContext } from '../category/StruCategory';
 
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
@@ -11,11 +10,16 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
-function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, ItemPrice, itemSizes, size }) {
-    // const { userSize, setUserSize } = useContext(GeneralContext);
+import { GeneralContext } from '../../App';
+
+
+function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, itemPrice, itemSizes, size, itemId }) {
     const [userChoiceSize, setUserChoiceSize] = useState("");
     const [userChoiceColor, setUserChoiceColor] = useState("");
     const [show, setShow] = useState(false);
+
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
+
 
     const handleClose = () => {
         setShow(false)
@@ -25,19 +29,35 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, I
     }
     const handleShow = () => setShow(true);
 
-    function sendToBasket() {
+    function sendToBasket(id) {
 
         // בדיקה שכל התאים מלאים (מידה וצבע) והשמה של המידה מהדף קטגוריה
         if (userChoiceSize == "" && size != "" && userChoiceColor != "") {
+            // להוסיף בסנאקבר הדפסה למידה והצבע
             alert(userChoiceColor + size)
         } else if (userChoiceSize != "" && size == "" && userChoiceColor != "") {
+            // להוסיף בסנאקבר הדפסה למידה והצבע
             alert(userChoiceColor + userChoiceSize)
         } else {
             alert("have to pick size and color");
         }
 
+
+        const item = productCat.filter(x => x._id == id);
+
+        const selectedProduct = {
+            item: item.pop(),
+            size: size ? size : userChoiceSize,
+            color: userChoiceColor
+        }
+
         console.log(userChoiceColor + userChoiceSize);
         console.log(size);
+        console.log(selectedProduct);
+
+        setBasket([...basket, selectedProduct]);
+        console.log(basket);
+        handleClose();
     }
 
     return (
@@ -58,7 +78,7 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, I
                             <Image src={itemImage} fluid />
                             <h3>{itemName}</h3>
                             <p>{itemDescription}</p>
-                            <p>{ItemPrice} nis</p>
+                            <p>{itemPrice} nis</p>
                             <Row>
                                 <Col><b>size : </b>
                                     <Form.Select aria-label="Default select example" onChange={(choice) => setUserChoiceSize(choice.target.value)}>
@@ -66,7 +86,7 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, I
                                         {
                                             itemSizes.map(sItem => (
                                                 <>
-                                                    {size == sItem ? "" : <option value={sItem}>{sItem}</option>}
+                                                    {size == sItem ? "" : <option value={sItem} key={sItem}>{sItem}</option>}
                                                 </>
                                             ))
                                         }
@@ -78,7 +98,7 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, I
                                         {
                                             itemColor.map(cItem => (
                                                 <>
-                                                    <option value={cItem}>{cItem}</option>
+                                                    <option value={cItem} key={cItem}>{cItem}</option>
                                                 </>
                                             ))
                                         }
@@ -96,7 +116,7 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, I
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={sendToBasket}>
+                    <Button variant="primary" onClick={() => sendToBasket(itemId)}>
                         Add To Basket
                     </Button>
                 </Modal.Footer>

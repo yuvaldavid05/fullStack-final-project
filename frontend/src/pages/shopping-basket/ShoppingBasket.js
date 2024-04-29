@@ -4,7 +4,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+
+import { GeneralContext } from '../../App';
+import Button from 'react-bootstrap/esm/Button';
+
 
 export const list = [
     {
@@ -24,22 +28,15 @@ export const list = [
     }
 ]
 export default function ShoppingBasket() {
-    const [sum, setSum] = useState(0);
+    const [sum, setSum] = useState();
 
-    // useEffect(() => {
-    //     list.map((y, i) => {
-    //         while (i < list.length) {
-    //             setSum(sum + y.itemPrice);
-    //         }
-    //     }
-    //     );
-    // }, [])
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
 
-    // const sumList = () => {
-    //     list.map((y) => {
-    //         setSum(sum + y.itemPrice)
-    //     })
-    // }
+    useEffect(() => {
+        const s = basket.reduce((res, y) => res += y.item.price, 0);
+        setSum(s)
+        console.log(s)
+    }, [])
 
 
 
@@ -54,7 +51,7 @@ export default function ShoppingBasket() {
                 <Row className='basket-body'>
                     <Col>
                         <ListGroup as="ol" numbered>
-                            {
+                            {/* {
                                 list.map((x, i) => (
                                     <ListGroup.Item
                                         as="li"
@@ -71,13 +68,37 @@ export default function ShoppingBasket() {
 
                                     </ListGroup.Item>
                                 ))
+                            } */}
+                            {
+                                basket.map((x, i) => (
+                                    <ListGroup.Item
+                                        as="li"
+                                        className="d-flex justify-content-between align-items-start"
+                                        key={i}
+                                    >
+                                        <div className="ms-2 me-auto">
+                                            <div className="fw-bold">{x.item.productName}</div>
+                                            {x.item.price} <span>nis</span>
+                                        </div>
+                                        <div className="ms-2 me-auto">
+                                            <div className="fw-bold">{x.color}</div>
+                                            <div className="fw-bold">{x.size}</div>
+
+                                        </div>
+                                        <div className='item-img-basket'>
+                                            <Image src={x.item.img} />
+                                        </div>
+
+                                    </ListGroup.Item>
+                                ))
                             }
                         </ListGroup>
-                    </Col>
 
-                    <div>
-                        סה"כ {sum}
-                    </div>
+                        <div className=" fw-bold sum-div">
+                            <div>סה"כ {sum}</div>
+                            <Button variant="secondary">finish</Button>
+                        </div>
+                    </Col>
 
                 </Row>
             </Container>
