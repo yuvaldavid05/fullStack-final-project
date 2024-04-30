@@ -21,17 +21,17 @@ export default function ShoppingBasket() {
         setSum(s)
         console.log(s)
         console.log(basket)
-    }, [basket])
+    }, [basket, setBasket])
 
-    function deleteItem(itemId) {
-        const itemDeleteIndex = basket.findIndex(t => t.item._id === itemId);
+    function deleteItem(itemId, itemColorPicked, itemSizePicked, itemIndex) {
+        const itemDeleteIndex = basket.findIndex((t, i) => t.item._id === itemId && t.color === itemColorPicked && t.size === itemSizePicked && i === itemIndex);
 
         if (!window.confirm("Delete This Item?")) {
             return;
         }
 
-        let newBaket = basket.splice(itemDeleteIndex, 1);
-        setBasket(newBaket);
+        basket.splice(itemDeleteIndex, 1);
+        setBasket([...basket]);
         console.log(basket)
     }
 
@@ -59,7 +59,7 @@ export default function ShoppingBasket() {
                                                 <div className="ms-2 me-auto">
                                                     <div className="fw-bold">{x.item.productName}</div>
                                                     {x.item.price} <span>nis</span>
-                                                    <div className="icon-trash" onClick={() => deleteItem(x.item._id)}>
+                                                    <div className="icon-trash" onClick={() => deleteItem(x.item._id, x.color, x.size, i)}>
                                                         <BsTrash3 />
                                                     </div>
                                                 </div>
@@ -73,9 +73,7 @@ export default function ShoppingBasket() {
                                                 <div className='item-img-basket'>
                                                     <Image src={x.item.img} />
                                                 </div>
-                                                {/* <div className="icon-trash">
-                                                <BsTrash3 />
-                                            </div> */}
+
                                             </ListGroup.Item>
 
                                         ))
@@ -88,11 +86,6 @@ export default function ShoppingBasket() {
                                     <Button variant="secondary">checkout ({basket.length})</Button>
                                 </div>
                             </Col>
-                            {/* <Col>
-                                <div className="icon-trash">
-                                    <BsTrash3 />
-                                </div>
-                            </Col> */}
                         </>
                         : <h4 >There are no products in the shopping basket</h4>}
 

@@ -3,6 +3,19 @@
   font-size: 20px;
 }
 
+.admin{
+  width:70px;
+  height: 70px;
+  border-radius: 20px;
+  background-color: blueviolet;
+  position: fixed;
+  top:50px;
+  right: 10px;
+  z-index: 15;
+}
+
+
+
 .App-header {
   /* background-color: #c4d0e9; */
   background-color: #d5e1fa;
@@ -16,6 +29,22 @@
   align-items: center;
   justify-content: center; */
   /* font-size: calc(10px + 2vmin); */
+}
+
+.App body .userName{
+  width:100px ;
+  height:150px;
+  background-color: aliceblue;
+  border: 0.5px solid gray;
+  border-radius: 0 25px 25px 0;
+  position: fixed;
+  top:20%;
+}
+
+.App body  .userName .logout{
+  border:none;
+  background-color: inherit;
+  color:rgb(43, 43, 227)
 }
 
 

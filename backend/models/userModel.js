@@ -7,6 +7,11 @@ const userSchema = new mongoose.Schema({
     email: String,
     phone: String,
     password: String,
+    country: String,
+    city: String,
+    street: String,
+    houseNumber: Number,
+    zip: Number,
     admin: Boolean,
 });
 
@@ -22,6 +27,11 @@ exports.validUser = (_bodyData) => {
         password: Joi.string().min(8).max(32).regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=(.*?[0-9]){4})(?=.*?[#?!@$%^&*-]).{8,}$/).required().messages({
             "string.pattern.base": "The password must include at least one uppercase letter and one lowercase letter, at least four numbers and a special character from the following characters (!@%$#^&*-_*)",
         }),
+        country: Joi.string().min(1).required(),
+        city: Joi.string().min(1).required(),
+        street: Joi.string().min(1).required(),
+        houseNumber: Joi.number().min(1).required(),
+        zip: Joi.number().min(0),
         admin: Joi.boolean().default(false),
         // role: Joi.array().items(Joi.string()).default("user"),
         // createdTime: Joi.date().greater('now').iso(),

@@ -8,7 +8,8 @@ import ItemPage from "./pages/category/ItemPage";
 import ContactUs from "./pages/contact-us/ContactUs";
 import Login from "./pages/authorization/Login";
 import SignUp from "./pages/authorization/SignUp";
-import { pageCategory } from "./components/navbar/NavbarTop2"
+import Admin from "./pages/admin/Admin";
+import AdminUsers from "./pages/admin/AdminUsers";
 
 
 export default function Router() {
@@ -25,6 +26,9 @@ export default function Router() {
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/products/category/:cat" element={<StruCategory />} />
             <Route path="/products" element={<StruCategory />} />
+            <Route path="/admin" element={<Admin />} />
+
+            <Route path="/admin/users" element={<AdminUsers />} />
 
 
         </Routes>

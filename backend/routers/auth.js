@@ -14,13 +14,7 @@ const authGuard = require('../auth-guard');
 
 
 // Authorization
-// jwt.verify(req.headers.authorization, JWT_SECRET, (err, decode) => {
-//     if (err) {
-//         res.status(401).send("User is not authorized")
-//     } else {
-//         res.send(decode.user);
-//     }
-// })
+
 // Login status
 router.get("/login", authGuard, async (req, res) => {
     const user = getUser(req);
@@ -59,7 +53,8 @@ router.post("/signup", async (req, res) => {
         return res.status(400).json(validBody.error.details);
     }
 
-    const { firstName, lastName, email, phone, password } = req.body;
+    const { firstName, lastName, email, phone, password, country, city, street, houseNumber, zip } = req.body;
+
 
     const user = new UserModel({
         firstName,
@@ -67,6 +62,11 @@ router.post("/signup", async (req, res) => {
         email,
         phone,
         password: await bcrypt.hash(password, 10),
+        country,
+        city,
+        street,
+        houseNumber,
+        zip,
         admin: false,
         // createdTime: moment().format('DD/MM/YYYY HH:mm:ss')
         // לא עובד הזמן

@@ -17,6 +17,11 @@ export default function SignUp() {
         email: "",
         phone: "",
         password: "",
+        country: "",
+        city: "",
+        street: "",
+        houseNumber: "",
+        zip: "",
     });
 
     const [errors, setErrors] = useState({});
@@ -31,14 +36,24 @@ export default function SignUp() {
         password: Joi.string().min(8).max(32).regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=(.*?[0-9]){4})(?=.*?[#?!@$%^&*-]).{8,}$/).required().messages({
             "string.pattern.base": "The password must include at least one uppercase letter and one lowercase letter, at least four numbers and a special character from the following characters (!@%$#^&*-_*)",
         }),
+        country: Joi.string().min(1).required(),
+        city: Joi.string().min(1).required(),
+        street: Joi.string().min(1).required(),
+        houseNumber: Joi.number().min(1).required(),
+        zip: Joi.number().min(0),
     });
 
     const structureForm = [
-        { name: 'firstName', type: 'text', label: 'First Name', required: true, block: false, sm: '6' },
-        { name: 'lastName', type: 'text', label: 'Last Name', required: true, block: false, sm: '6' },
-        { name: 'email', type: 'email', label: 'Email', required: true, block: false, sm: '12' },
-        { name: 'phone', type: 'tel', label: 'Phone', required: true, block: false, sm: '12' },
-        { name: 'password', type: 'password', label: 'Password', required: true, block: true, sm: '12' },
+        { name: 'firstName', type: 'text', label: 'First Name', required: true, sm: '6' },
+        { name: 'lastName', type: 'text', label: 'Last Name', required: true, sm: '6' },
+        { name: 'email', type: 'email', label: 'Email', required: true, sm: '12' },
+        { name: 'phone', type: 'tel', label: 'Phone', required: true, sm: '12' },
+        { name: 'country', type: 'text', label: 'country', required: true, sm: '4' },
+        { name: 'city', type: 'text', label: 'city', required: true, sm: '4' },
+        { name: 'street', type: 'text', label: 'street', required: true, sm: '4' },
+        { name: 'houseNumber', type: 'number', label: 'house Number', required: true, sm: '6' },
+        { name: 'zip', type: 'number', label: 'zip', required: false, sm: '6' },
+        { name: 'password', type: 'password', label: 'Password', required: true, sm: '12' },
     ]
 
     const handleInputChange = (ev) => {

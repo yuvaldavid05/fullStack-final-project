@@ -15,6 +15,7 @@ router.get("/:id", async (req, res) => {
     res.send(await ProductModel.find({ _id: req.params.id }));
 });
 
+// משיכה של קטגוריה אחת
 router.get("/category/:cat", async (req, res) => {
     res.send(await ProductModel.find({ category: req.params.cat }));
 });
@@ -42,7 +43,7 @@ router.get("/category/:cat", async (req, res) => {
 //     res.send(newProduct);
 // });
 
-// // לעדכן מוצר - לבדוק
+// // // לעדכן מוצר - לבדוק
 // router.put("/:id", async (req, res) => {
 //     const { productName, description, price, sizes, color, img, category } = req.body;
 //     const productFind = await ProductModel.findOne({ _id: req.params.id });
@@ -69,7 +70,7 @@ router.get("/category/:cat", async (req, res) => {
 //     res.send(productFind);
 // });
 
-// // מחיקת מוצר 
+// מחיקת מוצר 
 // router.delete("/:id", async (req, res) => {
 //     await ProductModel.deleteOne({ _id: req.params.id });
 //     res.send();
