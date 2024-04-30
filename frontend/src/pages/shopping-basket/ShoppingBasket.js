@@ -11,23 +11,6 @@ import Button from 'react-bootstrap/esm/Button';
 import { BsTrash3 } from "react-icons/bs";
 
 
-// export const list = [
-//     {
-//         itemName: 'חולצת פסים',
-//         itemPrice: 120,
-//         itemImg: 'https://www.stickdecor.co.il/files/products/image1_1697_2016-09-19_10-43-16.jpg'
-//     },
-//     {
-//         itemName: 'גינס ארוך',
-//         itemPrice: 70,
-//         itemImg: 'https://www.zico-fashion.co.il/wp-content/uploads/2023/07/20230705_121956-scaled.jpg'
-//     },
-//     {
-//         itemName: 'חצאית קצרה',
-//         itemPrice: 50,
-//         itemImg: 'https://xversi.com/wp-content/uploads/2023/06/shskirt_black.jpg'
-//     }
-// ]
 export default function ShoppingBasket() {
     const [sum, setSum] = useState();
 
@@ -47,8 +30,8 @@ export default function ShoppingBasket() {
             return;
         }
 
-        // basket[itemDeleteIndex]
-        basket.splice(itemDeleteIndex, 1);
+        let newBaket = basket.splice(itemDeleteIndex, 1);
+        setBasket(newBaket);
         console.log(basket)
     }
 
@@ -66,24 +49,6 @@ export default function ShoppingBasket() {
 
                             <Col>
                                 <ListGroup as="ol" numbered>
-                                    {/* {
-                                list.map((x, i) => (
-                                    <ListGroup.Item
-                                        as="li"
-                                        className="d-flex justify-content-between align-items-start"
-                                        key={i}
-                                    >
-                                        <div className="ms-2 me-auto">
-                                            <div className="fw-bold">{x.itemName}</div>
-                                            {x.itemPrice} <span>ש"ח</span>
-                                        </div>
-                                        <div className='item-img-basket'>
-                                            <Image src={x.itemImg} />
-                                        </div>
-
-                                    </ListGroup.Item>
-                                ))
-                            } */}
                                     {
                                         basket.map((x, i) => (
                                             <ListGroup.Item

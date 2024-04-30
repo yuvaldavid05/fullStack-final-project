@@ -27,6 +27,7 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, i
         setUserChoiceSize("")
         setUserChoiceColor("");
     }
+
     const handleShow = () => setShow(true);
 
     function sendToBasket(id) {
