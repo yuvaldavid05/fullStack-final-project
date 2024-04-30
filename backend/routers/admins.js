@@ -27,7 +27,7 @@ router.put("/users/update/:id", async (req, res) => {
     const { firstName, lastName, email, phone } = req.body;
     const userFind = await UserModel.findOne({ _id: req.params.id });
 
-    if (!user) {
+    if (!userFind) {
         return res.status(403).send("User does not exist");
     }
 
@@ -38,6 +38,24 @@ router.put("/users/update/:id", async (req, res) => {
 
     await userFind.save();
     res.send(userFind);
+});
+
+// שינוי הרשאות ADMIN - עובד
+router.put("/users/update-admin/:id", async (req, res) => {
+
+    // const { admin } = req.body;
+    const userFind = await UserModel.findOne({ _id: req.params.id });
+
+    if (!userFind) {
+        return res.status(403).send("User does not exist");
+    }
+
+    userFind.admin = !userFind.admin;
+
+    await userFind.save();
+    // res.send(userFind);
+    res.send();
+
 });
 
 // מחיקה של יוזר ע"י אדמין - עובד

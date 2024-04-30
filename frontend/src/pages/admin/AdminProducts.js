@@ -7,20 +7,17 @@ import { AiFillDelete } from "react-icons/ai";
 
 // לסדר שירנדר בכל שינוי 
 
-function AdminUsers() {
+function AdminProducts() {
     const [clients, setClients] = useState([]);
 
     const s = [
-        { name: 'firstName', type: 'text', label: 'First Name', required: true, sm: '6' },
-        { name: 'lastName', type: 'text', label: 'Last Name', required: true, sm: '6' },
-        { name: 'email', type: 'email', label: 'Email', required: true, sm: '12' },
-        { name: 'phone', type: 'tel', label: 'Phone', required: true, sm: '12' },
-        { name: 'country', type: 'text', label: 'Country', required: true, sm: '4' },
-        { name: 'city', type: 'text', label: 'City', required: true, sm: '4' },
-        { name: 'street', type: 'text', label: 'Street', required: true, sm: '4' },
-        { name: 'houseNumber', type: 'number', label: 'House Number', required: true, sm: '6' },
-        { name: 'zip', type: 'number', label: 'Zip', required: false, sm: '6' },
-        { name: 'admin', type: 'boolean', label: 'Admin', sm: '6' }
+        { name: 'productName', type: 'text', label: 'product Name', required: true, sm: '6' },
+        { name: 'description', type: 'text', label: 'description', required: true, sm: '6' },
+        { name: 'price', type: 'email', label: 'price', required: true, sm: '12' },
+        { name: 'sizes', type: 'tel', label: 'sizes', required: true, sm: '12' },
+        { name: 'color', type: 'text', label: 'color', required: true, sm: '4' },
+        { name: 'img', type: 'text', label: 'img', required: true, sm: '4' },
+        { name: 'category', type: 'text', label: 'category', required: true, sm: '4' },
     ]
 
     useEffect(() => {
@@ -111,4 +108,4 @@ function AdminUsers() {
     );
 }
 
-export default AdminUsers;
+export default AdminProducts;

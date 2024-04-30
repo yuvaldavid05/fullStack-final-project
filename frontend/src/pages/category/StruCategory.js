@@ -12,8 +12,6 @@ import { GeneralContext } from '../../App';
 
 
 
-
-
 export default function StruCategory() {
     const { cat } = useParams();
     // const [productCat, setProductCat] = useState([]);
@@ -51,16 +49,6 @@ export default function StruCategory() {
                             )
                         })
                     }
-
-
-                    {/* <Col>
-                        <div className='holder'>
-                            <Item itemImage={'https://dalicanvas.co.il/wp-content/uploads/2022/10/%D7%AA%D7%9E%D7%95%D7%A0%D7%AA-%D7%A0%D7%95%D7%A3-%D7%99%D7%9D-%D7%A0%D7%A7%D7%99.jpg'} itemName={'מכנסי עור'} itemColor={['black']} ItemPrice={'100'} />
-                        </div>
-                    </Col>
-                   */}
-
-
                 </Row>
             </Container>
         </section>
