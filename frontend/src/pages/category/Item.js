@@ -16,22 +16,31 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
     const [favorite, setFavorite] = useState(false);
 
     const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
-    let u = {
-        id: user._id
-    };
+
+    // if (user) {
+    //     let u = {
+    //         id: user._id
+    //     };
+    // }
 
     useEffect(() => {
-        const array = itemLikesUsers.filter(x => x === u.id);
-        console.log(array)
-        if (array.length && array[0] == user._id) {
-            setFavorite(true);
-        } else {
-            setFavorite(false);
+        if (itemLikesUsers.length && user) {
+            const array = itemLikesUsers.filter(x => x === user._id);
+            console.log(array)
+            if (array.length && array[0] == user._id) {
+                setFavorite(true);
+            } else {
+                setFavorite(false);
 
+            }
         }
     }, [])
 
     const changeFavorite = (itemId) => {
+        const u = {
+            id: user._id
+        };
+
         if (!favorite) {
             setFavorite(true);
             fetch(`http://localhost:2222/products/${itemId}/favorite`, {
@@ -61,7 +70,6 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                     alert("succsed unlike")
                 });
         }
-
     }
 
     return (

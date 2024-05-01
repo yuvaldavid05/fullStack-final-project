@@ -54,7 +54,7 @@ router.put("/:productId/unfavorite", async (req, res) => {
 
     const UserIndex = ProductFind.likes.findIndex(x => x == id);
 
-    if (!UserIndex) {
+    if (!UserIndex || UserIndex == "-1") {
         return res.status(403).send("User does not exist");
     }
 
