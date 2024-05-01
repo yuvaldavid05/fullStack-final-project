@@ -14,7 +14,6 @@ import { GeneralContext } from '../../App';
 
 export default function StruCategory() {
     const { cat } = useParams();
-    // const [productCat, setProductCat] = useState([]);
     const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
 
     useEffect(() => {
@@ -43,7 +42,7 @@ export default function StruCategory() {
                             return (
                                 <Col key={i}>
                                     <div className='holder'>
-                                        <Item itemImage={p.img} itemName={p.productName} itemDescription={p.description} itemPrice={p.price} itemSizes={p.sizes} itemColor={p.color} itemId={p._id} />
+                                        <Item itemImage={p.img} itemName={p.productName} itemDescription={p.description} itemPrice={p.price} itemSizes={p.sizes} itemColor={p.color} itemId={p._id} itemLikesUsers={p.likes} />
                                     </div>
                                 </Col>
                             )

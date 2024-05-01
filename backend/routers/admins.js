@@ -18,32 +18,31 @@ router.get("/users/:id", async (req, res) => {
 
 
 // עריכה של יוזר אחד
-router.put("/users/update/:id", async (req, res) => {
-    let validBody = validUser(req.body);
-    if (validBody.error) {
-        return res.status(400).json(validBody.error.details);
-    }
+// router.put("/users/update/:id", async (req, res) => {
+//     let validBody = validUser(req.body);
+//     if (validBody.error) {
+//         return res.status(400).json(validBody.error.details);
+//     }
 
-    const { firstName, lastName, email, phone } = req.body;
-    const userFind = await UserModel.findOne({ _id: req.params.id });
+//     const { firstName, lastName, email, phone } = req.body;
+//     const userFind = await UserModel.findOne({ _id: req.params.id });
 
-    if (!userFind) {
-        return res.status(403).send("User does not exist");
-    }
+//     if (!userFind) {
+//         return res.status(403).send("User does not exist");
+//     }
 
-    userFind.firstName = firstName;
-    userFind.lastName = lastName;
-    userFind.email = email;
-    userFind.phone = phone;
+//     userFind.firstName = firstName;
+//     userFind.lastName = lastName;
+//     userFind.email = email;
+//     userFind.phone = phone;
 
-    await userFind.save();
-    res.send(userFind);
-});
+//     await userFind.save();
+//     res.send(userFind);
+// });
 
 // שינוי הרשאות ADMIN - עובד
 router.put("/users/update-admin/:id", async (req, res) => {
 
-    // const { admin } = req.body;
     const userFind = await UserModel.findOne({ _id: req.params.id });
 
     if (!userFind) {
@@ -53,7 +52,6 @@ router.put("/users/update-admin/:id", async (req, res) => {
     userFind.admin = !userFind.admin;
 
     await userFind.save();
-    // res.send(userFind);
     res.send();
 
 });
@@ -72,8 +70,9 @@ router.post("/products/new-product", async (req, res) => {
         return res.status(400).json(validBody.error.details);
     }
 
-    const { productName, description, price, sizes, color, img, category } = req.body;
+    const { productName, description, price, sizes, color, img, category, stock } = req.body;
 
+    // לבדוק את המערך LIKES איך הוא חוזר
     const product = new ProductModel({
         productName,
         description,
@@ -82,6 +81,8 @@ router.post("/products/new-product", async (req, res) => {
         color,
         img,
         category,
+        stock,
+        likes
     });
 
     const newProduct = await product.save();
@@ -90,7 +91,7 @@ router.post("/products/new-product", async (req, res) => {
 
 // // לעדכן מוצר - לבדוק
 router.put("/products/update/:id", async (req, res) => {
-    const { productName, description, price, sizes, color, img, category } = req.body;
+    const { productName, description, price, sizes, color, img, category, stock } = req.body;
     const productFind = await ProductModel.findOne({ _id: req.params.id });
 
     if (!productFind) {
@@ -110,6 +111,7 @@ router.put("/products/update/:id", async (req, res) => {
     productFind.color = color;
     productFind.img = img;
     productFind.category = category;
+    productFind.stock = stock;
 
     await productFind.save();
     res.send(productFind);

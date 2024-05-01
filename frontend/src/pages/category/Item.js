@@ -1,27 +1,77 @@
 import './Item.css';
 import Card from 'react-bootstrap/Card';
 import { IoMdHeartEmpty } from "react-icons/io";
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import ButtonModalAddItem from "./ButtonModalAddItem";
+import { GeneralContext } from '../../App';
+import { IoMdHeart } from "react-icons/io";
 
-export const GeneralContext = React.createContext();
 
-export default function Item({ itemImage, itemName, itemDescription, itemColor, itemPrice, itemSizes, itemId }) {
+
+export default function Item({ itemImage, itemName, itemDescription, itemColor, itemPrice, itemSizes, itemId, itemLikesUsers }) {
     const [userSize, setUserSize] = useState("");
     const navigate = useNavigate();
+    const [favorite, setFavorite] = useState(false);
 
-    // useEffect(() => {
-    //     console.log(userSize)
-    // }, [userSize])
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
+    let u = {
+        id: user._id
+    };
+
+    useEffect(() => {
+        const array = itemLikesUsers.filter(x => x === u.id);
+        console.log(array)
+        if (array.length && array[0] == user._id) {
+            setFavorite(true);
+        } else {
+            setFavorite(false);
+
+        }
+    }, [])
+
+    const changeFavorite = (itemId) => {
+        if (!favorite) {
+            setFavorite(true);
+            fetch(`http://localhost:2222/products/${itemId}/favorite`, {
+                credentials: 'include',
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': localStorage.token
+                },
+                body: JSON.stringify(u),
+            })
+                .then(() => {
+                    alert("succsed")
+                });
+        } else if (favorite) {
+            setFavorite(false);
+            fetch(`http://localhost:2222/products/${itemId}/unfavorite`, {
+                credentials: 'include',
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': localStorage.token
+                },
+                body: JSON.stringify(u),
+            })
+                .then(() => {
+                    alert("succsed unlike")
+                });
+        }
+
+    }
 
     return (
         <>
             <Card>
                 <Card.Img variant="top" src={itemImage} />
-                <div className='like'>
-                    <IoMdHeartEmpty />
+                <div className='like' onClick={() => changeFavorite(itemId)}>
+                    {!favorite ? <IoMdHeartEmpty /> : <IoMdHeart />}
+
+                    {/* <IoMdHeart /> */}
                 </div>
                 <Card.Body>
                     <Card.Title>{itemName}</Card.Title>

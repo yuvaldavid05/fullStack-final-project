@@ -4,6 +4,7 @@ const { ProductModel, validProduct } = require("../models/productModel");
 
 // ולידציה?
 // לבדוק אם הקטגוריה עובד בהוספת מוצר 
+// להוסיף פונקציית גארד
 
 // משיכה של כל המוצרים
 router.get("/", async (req, res) => {
@@ -19,6 +20,53 @@ router.get("/:id", async (req, res) => {
 router.get("/category/:cat", async (req, res) => {
     res.send(await ProductModel.find({ category: req.params.cat }));
 });
+
+// הוספה של מוצר למועדפים
+router.put("/:productId/favorite", async (req, res) => {
+    const { id } = req.body;
+    const ProductFind = await ProductModel.findOne({ _id: req.params.productId });
+
+    if (!ProductFind) {
+        return res.status(403).send("Product does not exist");
+    }
+
+    // לבדוק אם עובד
+    // let validBody = validGrade(req.body);
+    // if (validBody.error) {
+    //     return res.status(400).json(validBody.error.details);
+    // }
+
+    ProductFind.likes = [...ProductFind.likes, id];
+    // ProductFind.likes.push(id);
+
+    await ProductFind.save();
+    res.send();
+});
+
+
+router.put("/:productId/unfavorite", async (req, res) => {
+    const { id } = req.body;
+    const ProductFind = await ProductModel.findOne({ _id: req.params.productId });
+
+    if (!ProductFind) {
+        return res.status(403).send("Product does not exist");
+    }
+
+    const UserIndex = ProductFind.likes.findIndex(x => x == id);
+
+    if (!UserIndex) {
+        return res.status(403).send("User does not exist");
+    }
+
+    ProductFind.likes.splice(UserIndex, 1);
+
+    await ProductFind.save();
+    res.send();
+});
+
+
+
+
 
 // הוספה של מוצר אחד - לבדוק
 // router.post("/new-product", async (req, res) => {
