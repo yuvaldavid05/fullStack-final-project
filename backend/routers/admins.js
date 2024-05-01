@@ -62,6 +62,10 @@ router.delete("/users/delete/:userId", async (req, res) => {
     res.send();
 });
 
+// משיכה של כל המוצרים
+router.get("/products", async (req, res) => {
+    res.send(await ProductModel.find({}));
+});
 
 // הוספה של מוצר אחד - לבדוק
 router.post("/products/new-product", async (req, res) => {

@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Item from './Item';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { GeneralContext } from '../../App';
@@ -15,6 +15,7 @@ import { GeneralContext } from '../../App';
 export default function StruCategory() {
     const { cat } = useParams();
     const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
+    const myRef = useRef();
 
     useEffect(() => {
         fetch(`http://localhost:2222/products/` + (cat ? `category/${cat}` : ""), {
@@ -22,6 +23,7 @@ export default function StruCategory() {
         })
             .then(res => res.json())
             .then(data => {
+                // myRef.current = data;
                 setProductCat(data);
                 console.log(data)
             });
@@ -42,7 +44,7 @@ export default function StruCategory() {
                             return (
                                 <Col key={i}>
                                     <div className='holder'>
-                                        <Item itemImage={p.img} itemName={p.productName} itemDescription={p.description} itemPrice={p.price} itemSizes={p.sizes} itemColor={p.color} itemId={p._id} itemLikesUsers={p.likes} />
+                                        <Item itemImage={p.img} itemName={p.productName} itemDescription={p.description} itemPrice={p.price} itemSizes={p.sizes} itemColor={p.color} itemId={p._id} itemLikesUsers={p.likes} cat={cat ? cat : ""} />
                                     </div>
                                 </Col>
                             )

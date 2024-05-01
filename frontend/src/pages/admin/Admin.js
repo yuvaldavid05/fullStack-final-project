@@ -11,6 +11,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import AdminUsers from "./AdminUsers";
 
 import { IoAddOutline } from "react-icons/io5";
+import AdminProducts from "./AdminProducts";
 
 
 export default function About() {
@@ -36,11 +37,11 @@ export default function About() {
                 >
 
                     <Tab eventKey="users" title="Users">
-                        {/* Tab content for Home */}
                         <AdminUsers />
                     </Tab>
                     <Tab eventKey="profile" title="Profile">
-                        Tab content for Profile
+                        {/* Tab content for Profile */}
+                        <AdminProducts />
                     </Tab>
                     <Tab eventKey="contact" title="Contact" disabled>
                         Tab content for Contact
