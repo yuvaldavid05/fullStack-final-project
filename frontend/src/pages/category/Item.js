@@ -79,11 +79,13 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
         <>
             <Card>
                 <Card.Img variant="top" src={itemImage} />
-                <div className='like' onClick={() => changeFavorite(itemId)}>
-                    {!favorite ? <IoMdHeartEmpty /> : <IoMdHeart />}
+                {user ?
+                    <div className='like' onClick={() => changeFavorite(itemId)}>
+                        {!favorite ? <IoMdHeartEmpty /> : <IoMdHeart />}
 
-                    {/* <IoMdHeart /> */}
-                </div>
+                        {/* <IoMdHeart /> */}
+                    </div> : ""}
+
                 <Card.Body>
                     <Card.Title>{itemName}</Card.Title>
                     <Card.Text> {itemDescription}</Card.Text>

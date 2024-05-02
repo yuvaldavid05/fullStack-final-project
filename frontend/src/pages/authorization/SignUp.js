@@ -36,9 +36,9 @@ export default function SignUp() {
         password: Joi.string().min(8).max(32).regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=(.*?[0-9]){4})(?=.*?[#?!@$%^&*-]).{8,}$/).required().messages({
             "string.pattern.base": "The password must include at least one uppercase letter and one lowercase letter, at least four numbers and a special character from the following characters (!@%$#^&*-_*)",
         }),
-        country: Joi.string().min(1).required(),
-        city: Joi.string().min(1).required(),
-        street: Joi.string().min(1).required(),
+        country: Joi.string().min(3).max(32).required(),
+        city: Joi.string().min(2).max(32).required(),
+        street: Joi.string().min(2).required(),
         houseNumber: Joi.number().min(1).required(),
         zip: Joi.number().min(0),
     });
