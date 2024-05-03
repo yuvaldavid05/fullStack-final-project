@@ -42,7 +42,7 @@ export default function ItemPage() {
                 oneCard.map(oneC => (
 
                     <Container fluid>
-                        <Row xs={1} md={2} className='item-page-header'>
+                        <Row xs={1} md={2} key={oneC.productName} className='item-page-header'>
                             <>
 
                                 <Col className='item-page-img-left'>
@@ -79,9 +79,9 @@ export default function ItemPage() {
                                     </div>
 
                                     <div className='add-item-to' >
-                                        <span>
+                                        {/* <span>
                                             <IoMdHeartEmpty />
-                                        </span>
+                                        </span> */}
                                         <Button onClick={addProduct}>+ add item</Button>
                                     </div>
                                 </Col >

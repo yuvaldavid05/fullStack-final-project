@@ -8,7 +8,7 @@ import ButtonModalAddItem from "./ButtonModalAddItem";
 import { GeneralContext } from '../../App';
 import { IoMdHeart } from "react-icons/io";
 
-
+// דף מבנה של מוצר
 
 export default function Item({ itemImage, itemName, itemDescription, itemColor, itemPrice, itemSizes, itemId, itemLikesUsers, cat }) {
     const [userSize, setUserSize] = useState("");

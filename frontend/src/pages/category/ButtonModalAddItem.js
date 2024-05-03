@@ -2,8 +2,7 @@ import './ButtonModalAddItem.css';
 import { useContext, useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Item from './Item';
-
+// import Item from './Item';
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -12,6 +11,7 @@ import Form from 'react-bootstrap/Form';
 
 import { GeneralContext } from '../../App';
 
+// דף של מודל - הוספה של מוצר לרשימה
 
 function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, itemPrice, itemSizes, size, itemId }) {
     const [userChoiceSize, setUserChoiceSize] = useState("");

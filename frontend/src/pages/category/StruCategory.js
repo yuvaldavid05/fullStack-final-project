@@ -2,15 +2,14 @@ import './StruCategory.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+// import Card from 'react-bootstrap/Card';
+// import Button from 'react-bootstrap/Button';
 import Item from './Item';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import { GeneralContext } from '../../App';
 
-
+// דף של מבנה קטגוריה
 
 export default function StruCategory() {
     const { cat } = useParams();
