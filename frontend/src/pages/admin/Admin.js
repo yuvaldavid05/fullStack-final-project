@@ -20,16 +20,16 @@ export default function About() {
 
     return (
         <>
-            <Button>
+            {/* <Button>
                 <Link to="/" >
                     back
                 </Link>
-            </Button>
+            </Button> */}
             <section id="admin-page" className='admin-page-body'>
-                <div className='icon-add'>
+                {/* <div className='icon-add'>
                     <IoAddOutline />
-                </div>
-                <p>admin</p>
+                </div> */}
+                <h2>Admin</h2>
                 <Tabs
                     defaultActiveKey="users"
                     id="uncontrolled-tab-example"
@@ -39,7 +39,7 @@ export default function About() {
                     <Tab eventKey="users" title="Users">
                         <AdminUsers />
                     </Tab>
-                    <Tab eventKey="profile" title="Profile">
+                    <Tab eventKey="profile" title="Products">
                         {/* Tab content for Profile */}
                         <AdminProducts />
                     </Tab>

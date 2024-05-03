@@ -1,9 +1,11 @@
-import "./AdminUsers.css";
+import "./AdminProducts.css";
 import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 
 import { AiFillDelete } from "react-icons/ai";
-
+import { IoAddOutline } from "react-icons/io5";
+import Button from "react-bootstrap/esm/Button";
+import { CiEdit } from "react-icons/ci";
 
 // לסדר שירנדר בכל שינוי 
 
@@ -52,16 +54,20 @@ function AdminProducts() {
 
 
     return (
-        <>
-            <Table responsive striped bordered hover>
+        <section id="admin-user-page" className='admin-user-page-body'>
+            <div className="add-pro">
+                <Button >+ add product</Button>
+            </div>
+            <Table responsive="md" striped bordered hover className="align-middle">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th className="align-middle">#</th>
                         {s.map((str, i) => (
 
-                            <th>{str.label}</th>
+                            <th key={i} className="align-middle">{str.label}</th>
                         ))}
-                        <th>Delete</th>
+                        <th className="align-middle">Delete</th>
+                        <th className="align-middle">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,17 +78,20 @@ function AdminProducts() {
                             {s.map((str2, index) => (
 
                                 str2.type === 'array' ?
-                                    <td key={index}>
+                                    <td key={index} >
                                         {items[str2.name].join(", ")}
                                     </td>
                                     :
-                                    <td key={index}>{items[str2.name] || '-'}</td>
-
-
+                                    str2.name === "stock" ?
+                                        <td key={index} > {items[str2.name] || 'out of stock'}</td>
+                                        : <td td key={index}  > {items[str2.name] || '-'}</td>
                             ))}
                             <>
-                                <td onClick={() => removeItem(items._id)}>
+                                <td className="delete-icon" onClick={() => removeItem(items._id)}>
                                     <AiFillDelete />
+                                </td>
+                                <td className="edit-icon">
+                                    <CiEdit />
                                 </td>
 
                             </>
@@ -91,7 +100,7 @@ function AdminProducts() {
                     ))}
                 </tbody>
             </Table >
-        </>
+        </section>
     );
 }
 

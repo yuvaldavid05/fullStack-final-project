@@ -67,15 +67,15 @@ function AdminUsers() {
 
     return (
         <>
-            <Table responsive striped bordered hover>
+            <Table responsive="md" striped bordered hover className="align-middle">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th className="align-middle">#</th>
                         {s.map((str, i) => (
 
-                            <th>{str.label}</th>
+                            <th key={i} className="align-middle">{str.label}</th>
                         ))}
-                        <th>Delete</th>
+                        <th className="align-middle">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,7 +86,7 @@ function AdminUsers() {
                             {s.map((str2, index) => (
 
                                 str2.type === 'boolean' ?
-                                    <td key={index}>
+                                    <td key={index} >
                                         {client[str2.name] === true ? 'Yes' : 'No'}
                                         <br></br>
                                         <button className='admin-change' onClick={() => changePermission(client._id)}>click to change</button>
