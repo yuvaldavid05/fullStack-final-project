@@ -17,6 +17,7 @@ function App() {
   const [roleType, setRoleType] = useState(RoleTypes.none);
   const [basket, setBasket] = useState([]);
   const [productCat, setProductCat] = useState([]);
+  const [comment, setComment] = useState([]);
   // const [commentData, setCommentData] = useState({
   //   firstName: "",
   //   lastName: "",
@@ -81,7 +82,7 @@ function App() {
 
   return (
     <GeneralContext.Provider value={{
-      user, setUser, roleType, setRoleType, basket, setBasket, productCat, setProductCat, admin, setAdmin
+      user, setUser, roleType, setRoleType, basket, setBasket, productCat, setProductCat, admin, setAdmin, comment, setComment
     }}>
       <div className='admin'>
         <Link to="/admin">click here</Link>

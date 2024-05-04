@@ -36,7 +36,7 @@ export default function About() {
                         <AdminProducts />
                     </Tab>
                     <Tab eventKey="comment" title="Comments">
-                        {/* <AdminComments /> */}
+                        <AdminComments />
                     </Tab>
                     <Tab eventKey="contact" title="Contact" disabled>
                         Tab content for Contact

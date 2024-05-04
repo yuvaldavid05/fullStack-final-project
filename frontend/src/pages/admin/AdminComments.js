@@ -13,7 +13,7 @@ import { GeneralContext } from '../../App';
 
 function AdminComments() {
     // const [items, setItems] = useState([]);
-    const { user, roleType, setUser, setRoleType, admin, setAdmin, commentData, setCommentData } = useContext(GeneralContext);
+    const { user, roleType, setUser, setRoleType, admin, setAdmin, comment, setComment } = useContext(GeneralContext);
     const myRef = useRef(null);
 
     const structureFormC = [
@@ -63,18 +63,40 @@ function AdminComments() {
 
             <Table responsive="md" striped bordered hover className="align-middle">
                 <thead>
-                    <tr>
-                        <th className="align-middle">#</th>
-                        {structureFormC.map((str, i) => (
+                    {comment.length &&
+                        <tr>
+                            <th className="align-middle">#</th>
+                            {structureFormC.map((str, i) => (
 
-                            <th key={i} className="align-middle">{str.label}</th>
-                        ))}
-                        <th className="align-middle">Delete</th>
+                                <th key={i} className="align-middle">{str.label}</th>
+                            ))}
+                            <th className="align-middle">Delete</th>
 
-                    </tr>
+                        </tr>
+                    }
                 </thead>
                 <tbody>
-                    {commentData.map((c, i) => (
+                    {comment.length ?
+                        comment.map((c, i) => (
+
+                            <tr key={i}>
+                                <th>{i + 1}</th>
+                                {structureFormC.map((str2, index) => (
+
+                                    <td key={index} > {c[str2.name] || '-'}</td>
+                                ))}
+                                <>
+                                    <td className="delete-icon">
+                                        <AiFillDelete />
+                                    </td>
+
+
+                                </>
+                            </tr>
+
+                        )) : <td>no comment</td>
+                    }
+                    {/* {comment.map((c, i) => (
 
                         <tr key={i}>
                             <th>{i + 1}</th>
@@ -91,7 +113,7 @@ function AdminComments() {
                             </>
                         </tr>
 
-                    ))}
+                    ))} */}
                 </tbody>
             </Table >
         </section>
