@@ -79,7 +79,8 @@ router.post("/products/new-product", async (req, res) => {
         return res.status(400).json(validBody.error.details);
     }
 
-    const { productName, description, price, sizes, color, img, category, stock } = req.body;
+    const { productName, description, price, sizes, color, img, category, stock, publishDate } = req.body;
+
 
     // לבדוק את המערך LIKES איך הוא חוזר
     const product = new ProductModel({
@@ -91,7 +92,7 @@ router.post("/products/new-product", async (req, res) => {
         img,
         category,
         stock,
-        likes
+        likes: [],
     });
 
     const newProduct = await product.save();
@@ -102,11 +103,6 @@ router.post("/products/new-product", async (req, res) => {
 router.put("/products/update/:id", async (req, res) => {
     const { productName, description, price, sizes, color, img, category, stock } = req.body;
 
-    // לבדוק אם עובד
-    // let validBody = validProduct(req.body);
-    // if (validBody.error) {
-    //     return res.status(400).json(validBody.error.details);
-    // }
 
     const productFind = await ProductModel.findOne({ _id: req.params.id });
 

@@ -83,7 +83,6 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                     <div className='like' onClick={() => changeFavorite(itemId)}>
                         {!favorite ? <IoMdHeartEmpty /> : <IoMdHeart />}
 
-                        {/* <IoMdHeart /> */}
                     </div> : ""}
 
                 <Card.Body>

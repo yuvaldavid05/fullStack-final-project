@@ -1,10 +1,26 @@
-.admin-user-page-body .add-pro{
+.admin-user-page-body table{
+    /* width: 70%; */
+   font-size: 13px;
+}
+
+.admin-user-page-body .new-pro{
     margin: 5px 0 10px 0;
 }
 
+.admin-user-page-body .new-pro a{
+    text-decoration: none;
+    color: white;
+}
 
 .admin-user-page-body .delete-icon{
     font-size: 20px;
     cursor: pointer;
 }
 
+.admin-user-page-body .edit-icon button{
+    background-color: initial;
+    border:1px solid gray;
+}
+.admin-user-page-body .edit-icon button svg{
+    color:rgb(73, 71, 71);
+}

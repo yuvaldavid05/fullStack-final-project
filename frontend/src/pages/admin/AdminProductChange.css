@@ -1,6 +1,21 @@
 .change-item-page-body form{
     width: 90%;
-    margin: auto;
+    margin:50px auto;
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid rgba(128, 128, 128, 0.456);
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
+}
+
+
+.change-item-page-body button.back{
+    margin:30px 0 0 0;
+}
+.change-item-page-body button a{
+    color: white;
+    text-decoration: none;
 }
 
 .change-item-page-body form .frame-form-update .form-label{
@@ -13,4 +28,9 @@
 
 .change-item-page-body .frame-form-update .fieldErrorUpdate{
     font-size: 15px;
+}
+
+.change-item-page-body form button{
+    margin: 25px 0;
+    width: 50%;
 }

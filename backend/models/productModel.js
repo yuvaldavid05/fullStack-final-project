@@ -11,6 +11,7 @@ const productSchema = new mongoose.Schema({
     category: String,
     stock: Number,
     likes: Array,
+    // publishDate: String,
 });
 
 const ProductModel = mongoose.model("products", productSchema);
@@ -24,9 +25,10 @@ exports.validProduct = (_bodyData) => {
         sizes: Joi.array().items(Joi.string()).required(),
         color: Joi.array().items(Joi.string()).required(),
         img: Joi.string().min(1).max(150).required(),
-        category: Joi.string().min(1),
+        category: Joi.string().min(1).required(),
         stock: Joi.number().min(0).max(600).required(),
-        likes: Joi.array().items(Joi.string()).required(),
+        likes: Joi.array().items(Joi.string()),
+        // publishDate: Joi.date().format('YYYY-MM-DD HH:mm'),
     })
 
     return joiSchema.validate(_bodyData);

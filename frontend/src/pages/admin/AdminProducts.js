@@ -1,6 +1,6 @@
 import "./AdminProducts.css";
 import Table from 'react-bootstrap/Table';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { AiFillDelete } from "react-icons/ai";
 import { IoAddOutline } from "react-icons/io5";
@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 function AdminProducts() {
     const [items, setItems] = useState([]);
 
+    const myRef = useRef(null);
 
     const s = [
         { name: 'productName', type: 'text', label: 'product Name', required: true, sm: '6' },
@@ -31,19 +32,21 @@ function AdminProducts() {
         })
             .then(res => res.json())
             .then(data => {
+                myRef.current = data;
                 setItems(data);
                 console.log(data);
+                console.log(myRef);
             });
-    }, []);
+    }, [myRef]);
 
 
-    // לבדוק
+
     const removeItem = (itemId) => {
-        if (!window.confirm("Delete This User?")) {
+        if (!window.confirm("Delete This Product?")) {
             return;
         }
 
-        fetch(`http://localhost:2222/admin/users/delete/${itemId}`, {
+        fetch(`http://localhost:2222/admin/products/${itemId}`, {
             credentials: 'include',
             method: 'DELETE',
         })
@@ -57,11 +60,11 @@ function AdminProducts() {
 
     return (
         <section id="admin-user-page" className='admin-user-page-body'>
-            <div className="add-pro">
-                <Button >
-                    <Link to="/admin/products/new-product">+ add product</Link>
-                </Button>
-            </div>
+
+            <Button className="new-pro">
+                <Link to="/admin/products/new-product">+ add product</Link>
+            </Button>
+
             <Table responsive="md" striped bordered hover className="align-middle">
                 <thead>
                     <tr>
@@ -88,7 +91,7 @@ function AdminProducts() {
                                     :
                                     str2.name === "stock" ?
                                         <td key={index} > {items[str2.name] || 'out of stock'}</td>
-                                        : <td td key={index}  > {items[str2.name] || '-'}</td>
+                                        : <td key={index}  > {items[str2.name] || '-'}</td>
                             ))}
                             <>
                                 <td className="delete-icon" onClick={() => removeItem(items._id)}>

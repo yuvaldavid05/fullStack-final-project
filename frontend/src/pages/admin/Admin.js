@@ -19,15 +19,8 @@ export default function About() {
 
     return (
         <>
-            {/* <Button>
-                <Link to="/" >
-                    back
-                </Link>
-            </Button> */}
             <section id="admin-page" className='admin-page-body'>
-                {/* <div className='icon-add'>
-                    <IoAddOutline />
-                </div> */}
+
                 <h2>Admin</h2>
                 <Tabs
                     defaultActiveKey="users"

@@ -1,11 +1,12 @@
 .body-category .holder .card{
     font-size: 15px;
     max-width: 250px;
-    max-height: 500px;
+    /* לבדוק!!! */
+    /* max-height: 500px; */
+    height: 480px;
     border: none;
     position: relative;
     margin: 10px 0;
-    /* border: 1px solid gray; */
     border: 1px solid rgba(128, 128, 128, 0.182);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     font-size: 14px;
@@ -18,8 +19,9 @@
 }
 
 .body-category .holder .card img{
-    /* max-width: 250px; */
+    max-width: 250px;
     max-height:200px;
+    /* max-height:150px; */
     margin: 0;
     padding:0;
 }
@@ -67,6 +69,10 @@
 }
 
 @media (max-width: 768px) {
+    .body-category .holder .card img{
+    max-height:150px;
+    }
+
     .body-category .holder .card .footerCard button{
         font-size: 10px;
     }

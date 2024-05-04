@@ -2,6 +2,8 @@ import "./AdminProductChange.css";
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import Joi from 'joi';
+import moment from 'moment';
+
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -29,7 +31,6 @@ export default function AdminProductChange() {
                 img: "",
                 category: "",
                 stock: "",
-                likes: "",
             });
         } else {
             // setLoading(true);
@@ -50,9 +51,8 @@ export default function AdminProductChange() {
         sizes: Joi.array().items(Joi.string()).required(),
         color: Joi.array().items(Joi.string()).required(),
         img: Joi.string().min(1).max(150).required(),
-        category: Joi.string().min(1),
+        category: Joi.string().min(1).required(),
         stock: Joi.number().min(0).max(600).required(),
-        likes: Joi.array().items(Joi.string()).required(),
     });
 
     const structureFormUpdatePro = [
@@ -160,12 +160,12 @@ export default function AdminProductChange() {
             body: JSON.stringify(formData),
         })
             .then(data => {
-                // if (formData.id) {
-                //     alert('הכתבה נשמרה בהצלחה');
-                // } else {
-                //     alert('הכתבה נוספה בהצלחה');
-                // }
-                console.log(data)
+                if (formData._id) {
+                    alert('The product has been updated successfully');
+                } else {
+                    alert('The product has been successfully added');
+                    console.log(data)
+                }
                 navigate('/admin');
             })
             .catch(err => {
@@ -179,7 +179,7 @@ export default function AdminProductChange() {
     return (
 
         <section id="change-item-page" className='change-item-page-body'>
-            <Button>
+            <Button className="back">
                 <Link to="/admin">
                     back
                 </Link>
@@ -189,40 +189,39 @@ export default function AdminProductChange() {
                     <Form onSubmit={updateItem}>
                         <h2>{formData._id ? "Edit" : "Add"} Item</h2>
                         <Row className='frame-form-update'>
-                            {structureFormUpdatePro.filter(str => str.sm).map(s => (
+                            {structureFormUpdatePro.filter(str => str.sm).map((s, index) => (
                                 <Col sm={s.sm} key={s.name} className='input-form'>
                                     <Form.Label name={s.name}>{s.required ? s.label + ' *' : s.label}</Form.Label>
 
                                     {s.name === "sizes" || s.name === "color" ?
                                         s.name === "sizes" ?
-                                            <>
-                                                <div key={"inline-checkbox"} className="mb-3">
-                                                    {sizesStr.map((a, i) => (
-                                                        <>
 
-                                                            <Form.Check key={i}
-                                                                inline
-                                                                label={a}
-                                                                name={a}
-                                                                type="checkbox"
-                                                                // checked={formData._id ? formData.sizes.map(e => e == a) : ""}
-                                                                checked={formData._id ? formData.sizes.includes(a) : ""}
+                                            <div key={`inline-checkbox-${index}`} className="mb-3">
+                                                {sizesStr.map((a, i) => (
+                                                    <>
 
-                                                                id={s.name}
-                                                                onChange={handleInputChange}
-                                                            />
+                                                        <Form.Check key={i}
+                                                            inline
+                                                            label={a}
+                                                            name={a}
+                                                            type="checkbox"
+                                                            checked={formData._id && formData.sizes.includes(a)}
+
+                                                            id={s.name}
+                                                            onChange={handleInputChange}
+                                                        />
 
 
-                                                            {/* {s.required ? (errors[s.name] ? <div className='fieldErrorUpdate'>{errors[s.name]}</div> : '') : ''} */}
-                                                        </>
-                                                    ))}
-                                                    <div>
-                                                        <Form.Text muted>
-                                                            *At least one size
-                                                        </Form.Text>
-                                                    </div>
+                                                        {/* {s.required ? (errors[s.name] ? <div className='fieldErrorUpdate'>{errors[s.name]}</div> : '') : ''} */}
+                                                    </>
+                                                ))}
+                                                <div>
+                                                    <Form.Text muted>
+                                                        *At least one size
+                                                    </Form.Text>
                                                 </div>
-                                            </> : <div key={"inline-checkbox"} className="mb-3">
+                                            </div>
+                                            : <div key={"inline-checkbox"} className="mb-3">
                                                 {colorsStr.map((a, i) => (
                                                     <>
 
@@ -232,7 +231,7 @@ export default function AdminProductChange() {
                                                             name={a}
                                                             type="checkbox"
                                                             // checked={formData._id ? formData.color.map(e => e === a) : ""}
-                                                            checked={formData._id ? formData.color.includes(a) : ""}
+                                                            checked={formData._id && formData.sizes.includes(a)}
                                                             id={s.name}
                                                             onChange={handleInputChange}
                                                         />
