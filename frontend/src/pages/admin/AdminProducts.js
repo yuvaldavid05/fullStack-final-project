@@ -59,7 +59,7 @@ function AdminProducts() {
 
 
     return (
-        <section id="admin-user-page" className='admin-user-page-body'>
+        <section id="admin-products-page" className='admin-products-page-body'>
 
             <Button className="new-pro">
                 <Link to="/admin/products/new-product">+ add product</Link>

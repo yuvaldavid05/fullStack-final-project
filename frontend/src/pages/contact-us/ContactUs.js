@@ -107,8 +107,10 @@ export default function ContactUs() {
 
                 setCommentData(objComment);
                 // setSubmit(true);
+                // setComments(commentData);
                 alert("This form has been successfully submitted - user")
                 console.log(commentData)
+                // console.log(comments)
 
 
             } else {
@@ -155,7 +157,7 @@ export default function ContactUs() {
 
 
                     <Row className='contact-form'>
-                        <h4>fill the inputs</h4>
+                        <h4>Contact Form</h4>
                         <div className='costumer-details'>
                             <Row>
                                 {structureFormContact.filter(str => str.sm).map(s => (

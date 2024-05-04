@@ -8,6 +8,7 @@ import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import AdminUsers from "./AdminUsers";
+import AdminComments from "./AdminComments";
 
 import { IoAddOutline } from "react-icons/io5";
 import AdminProducts from "./AdminProducts";
@@ -33,6 +34,9 @@ export default function About() {
                     </Tab>
                     <Tab eventKey="profile" title="Products">
                         <AdminProducts />
+                    </Tab>
+                    <Tab eventKey="comment" title="Comments">
+                        {/* <AdminComments /> */}
                     </Tab>
                     <Tab eventKey="contact" title="Contact" disabled>
                         Tab content for Contact

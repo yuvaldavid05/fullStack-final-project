@@ -8,8 +8,9 @@ import Button from 'react-bootstrap/esm/Button';
 import { IoHeartOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import Accordion from 'react-bootstrap/Accordion';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { GeneralContext } from '../../App';
 
 
 
@@ -18,6 +19,8 @@ export default function ItemPage() {
     const [oneCard, setOneCard] = useState([]);
     const [colorChosenItemPage, setColorChosenItemPage] = useState("");
     const [sizeChosenItemPage, setSizeChosenItemPage] = useState("");
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -31,17 +34,68 @@ export default function ItemPage() {
             })
     }, [])
 
-    function addProduct() {
-        alert(colorChosenItemPage + sizeChosenItemPage);
+    function addProduct(itemId) {
+        if ((colorChosenItemPage == "choose color") || (sizeChosenItemPage == "choose size") || (colorChosenItemPage == "choose color" && sizeChosenItemPage == "choose size")) {
 
+            alert("have to pick size and color");
+        } else {
+            alert(colorChosenItemPage + sizeChosenItemPage);
+        }
+
+        // const item = productCat.filter(x => x._id == itemId);
+
+        const selectedProduct = {
+            item: oneCard.pop(),
+            size: sizeChosenItemPage,
+            color: colorChosenItemPage
+        }
+
+        console.log(colorChosenItemPage + sizeChosenItemPage);
+        console.log(selectedProduct);
+
+        setBasket([...basket, selectedProduct]);
+        console.log(basket);
+        navigate("/products")
     }
+
+    // function sendToBasket(id) {
+
+    //     // בדיקה שכל התאים מלאים (מידה וצבע) והשמה של המידה מהדף קטגוריה
+    //     if (userChoiceSize == "" && size != "" && userChoiceColor != "") {
+    //         // להוסיף בסנאקבר הדפסה למידה והצבע
+    //         alert(userChoiceColor + size)
+    //     } else if (userChoiceSize != "" && size == "" && userChoiceColor != "") {
+    //         // להוסיף בסנאקבר הדפסה למידה והצבע
+    //         alert(userChoiceColor + userChoiceSize)
+    //     } else {
+    //         alert("have to pick size and color");
+    //     }
+
+
+    //     const item = productCat.filter(x => x._id == id);
+
+    //     const selectedProduct = {
+    //         item: item.pop(),
+    //         size: size ? size : userChoiceSize,
+    //         color: userChoiceColor
+    //     }
+
+    //     console.log(userChoiceColor + userChoiceSize);
+    //     console.log(size);
+    //     console.log(selectedProduct);
+
+    //     setBasket([...basket, selectedProduct]);
+    //     console.log(basket);
+    //     handleClose();
+    // }
+
 
     return (
         <section id="item-page" className='item-page-body'>
             {
-                oneCard.map(oneC => (
+                oneCard.map((oneC, index) => (
 
-                    <Container fluid>
+                    <Container fluid key={index}>
                         <Row xs={1} md={2} key={oneC.productName} className='item-page-header'>
                             <>
 
@@ -55,9 +109,9 @@ export default function ItemPage() {
                                         <Form.Select aria-label="select-sizes" onChange={(choice) => setColorChosenItemPage(choice.target.value)}>
                                             <option>choose color</option>
                                             {
-                                                oneC.color.map(c => (
+                                                oneC.color.map((c, i) => (
                                                     <>
-                                                        <option value={c}>{c}</option>
+                                                        <option key={i} value={c}>{c}</option>
                                                     </>
                                                 ))
                                             }

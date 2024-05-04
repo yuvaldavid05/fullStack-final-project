@@ -17,6 +17,12 @@ function App() {
   const [roleType, setRoleType] = useState(RoleTypes.none);
   const [basket, setBasket] = useState([]);
   const [productCat, setProductCat] = useState([]);
+  // const [commentData, setCommentData] = useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   email: "",
+  //   text: "",
+  // });;
 
   const [admin, setAdmin] = useState(false);
 
