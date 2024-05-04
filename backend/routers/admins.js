@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { UserModel, validUser } = require("../models/userModel");
-const { ProductModel } = require("../models/productModel");
+const { ProductModel, validProduct } = require("../models/productModel");
 
 
 // להוסיף את authGuard
@@ -67,6 +67,11 @@ router.get("/products", async (req, res) => {
     res.send(await ProductModel.find({}));
 });
 
+// משיכה של כל המוצרים
+router.get("/products/:id", async (req, res) => {
+    res.send(await ProductModel.findOne({ _id: req.params.id }));
+});
+
 // הוספה של מוצר אחד - לבדוק
 router.post("/products/new-product", async (req, res) => {
     let validBody = validProduct(req.body);
@@ -96,17 +101,19 @@ router.post("/products/new-product", async (req, res) => {
 // // לעדכן מוצר - לבדוק
 router.put("/products/update/:id", async (req, res) => {
     const { productName, description, price, sizes, color, img, category, stock } = req.body;
+
+    // לבדוק אם עובד
+    // let validBody = validProduct(req.body);
+    // if (validBody.error) {
+    //     return res.status(400).json(validBody.error.details);
+    // }
+
     const productFind = await ProductModel.findOne({ _id: req.params.id });
 
     if (!productFind) {
         return res.status(403).send("Product does not exist");
     }
 
-    // לבדוק אם עובד
-    let validBody = validGrade(req.body);
-    if (validBody.error) {
-        return res.status(400).json(validBody.error.details);
-    }
 
     productFind.productName = productName;
     productFind.description = description;
@@ -118,7 +125,8 @@ router.put("/products/update/:id", async (req, res) => {
     productFind.stock = stock;
 
     await productFind.save();
-    res.send(productFind);
+    // const updateProduct = await productFind.save();
+    res.send();
 });
 
 // מחיקה של מוצר ע"י האדמין - עובד

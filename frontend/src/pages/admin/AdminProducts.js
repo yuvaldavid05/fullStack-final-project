@@ -6,21 +6,23 @@ import { AiFillDelete } from "react-icons/ai";
 import { IoAddOutline } from "react-icons/io5";
 import Button from "react-bootstrap/esm/Button";
 import { CiEdit } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 // לסדר שירנדר בכל שינוי 
 
 function AdminProducts() {
     const [items, setItems] = useState([]);
 
+
     const s = [
         { name: 'productName', type: 'text', label: 'product Name', required: true, sm: '6' },
-        { name: 'description', type: 'text', label: 'description', required: true, sm: '6' },
-        { name: 'price', type: 'number', label: 'price', required: true, sm: '12' },
-        { name: 'sizes', type: 'array', label: 'sizes', required: true, sm: '12' },
-        { name: 'color', type: 'array', label: 'color', required: true, sm: '4' },
-        { name: 'img', type: 'text', label: 'img', required: true, sm: '4' },
-        { name: 'category', type: 'text', label: 'category', required: true, sm: '4' },
-        { name: 'stock', type: 'number', label: 'stock', required: true, sm: '4' },
+        { name: 'description', type: 'text', label: 'Description', required: true, sm: '6' },
+        { name: 'price', type: 'number', label: 'Price', required: true, sm: '12' },
+        { name: 'sizes', type: 'array', label: 'Sizes', required: true, sm: '12' },
+        { name: 'color', type: 'array', label: 'Color', required: true, sm: '4' },
+        { name: 'img', type: 'text', label: 'Img URL', required: true, sm: '4' },
+        { name: 'category', type: 'text', label: 'Category', required: true, sm: '4' },
+        { name: 'stock', type: 'number', label: 'Stock', required: true, sm: '4' },
     ]
 
     useEffect(() => {
@@ -56,7 +58,9 @@ function AdminProducts() {
     return (
         <section id="admin-user-page" className='admin-user-page-body'>
             <div className="add-pro">
-                <Button >+ add product</Button>
+                <Button >
+                    <Link to="/admin/products/new-product">+ add product</Link>
+                </Button>
             </div>
             <Table responsive="md" striped bordered hover className="align-middle">
                 <thead>
@@ -91,7 +95,10 @@ function AdminProducts() {
                                     <AiFillDelete />
                                 </td>
                                 <td className="edit-icon">
-                                    <CiEdit />
+                                    <Button>
+                                        <Link to={`/admin/products/${items._id}`}><CiEdit /></Link>
+
+                                    </Button>
                                 </td>
 
                             </>

@@ -2,11 +2,9 @@
     margin: 5px 0 10px 0;
 }
 
-.admin-user-page-body .edit-icon{
-    font-size: 21px;
-}
 
 .admin-user-page-body .delete-icon{
     font-size: 20px;
+    cursor: pointer;
 }
 

@@ -4,7 +4,6 @@ import { GeneralContext } from '../../App';
 import Button from "react-bootstrap/esm/Button";
 import { Link } from "react-router-dom";
 import Nav from 'react-bootstrap/Nav';
-import RouterAdmin from "../../RouterAdmin";
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -40,7 +39,6 @@ export default function About() {
                         <AdminUsers />
                     </Tab>
                     <Tab eventKey="profile" title="Products">
-                        {/* Tab content for Profile */}
                         <AdminProducts />
                     </Tab>
                     <Tab eventKey="contact" title="Contact" disabled>

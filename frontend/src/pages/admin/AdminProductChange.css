@@ -1,0 +1,16 @@
+.change-item-page-body form{
+    width: 90%;
+    margin: auto;
+}
+
+.change-item-page-body form .frame-form-update .form-label{
+    margin-top: 15px;
+}
+
+.change-item-page-body .frame-form-update .fieldError{
+    border: 1px red solid;
+}
+
+.change-item-page-body .frame-form-update .fieldErrorUpdate{
+    font-size: 15px;
+}

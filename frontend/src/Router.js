@@ -10,6 +10,7 @@ import Login from "./pages/authorization/Login";
 import SignUp from "./pages/authorization/SignUp";
 import Admin from "./pages/admin/Admin";
 import AdminUsers from "./pages/admin/AdminUsers";
+import AdminProductChange from "./pages/admin/AdminProductChange";
 
 
 export default function Router() {
@@ -27,8 +28,9 @@ export default function Router() {
             <Route path="/products/category/:cat" element={<StruCategory />} />
             <Route path="/products" element={<StruCategory />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/products/:id" element={<AdminProductChange />} />
 
-            <Route path="/admin/users" element={<AdminUsers />} />
+            {/* <Route path="/admin/users" element={<AdminUsers />} /> */}
 
 
         </Routes>

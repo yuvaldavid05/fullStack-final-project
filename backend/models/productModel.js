@@ -25,7 +25,7 @@ exports.validProduct = (_bodyData) => {
         color: Joi.array().items(Joi.string()).required(),
         img: Joi.string().min(1).max(150).required(),
         category: Joi.string().min(1),
-        stock: Joi.number().min(1).max(600).required(),
+        stock: Joi.number().min(0).max(600).required(),
         likes: Joi.array().items(Joi.string()).required(),
     })
 
