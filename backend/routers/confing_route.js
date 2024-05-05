@@ -3,7 +3,6 @@ const gradesR = require("./grades");
 const authR = require("./auth");
 const productR = require("./products");
 const adminR = require("./admins");
-// const userR = require("./users");
 const userR = require("./users");
 
 exports.routeInit = (app) => {
@@ -11,7 +10,7 @@ exports.routeInit = (app) => {
 
     app.use("/grades", gradesR);
 
-    // app.use("/users", userR);
+    app.use("/users", userR);
 
     app.use("/auth", authR);
 

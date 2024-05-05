@@ -68,6 +68,7 @@ router.post("/signup", async (req, res) => {
         houseNumber,
         zip,
         admin: false,
+        orders: []
         // createdTime: moment().format('DD/MM/YYYY HH:mm:ss')
         // לא עובד הזמן
     });

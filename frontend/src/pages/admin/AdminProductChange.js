@@ -95,6 +95,11 @@ export default function AdminProductChange() {
                 console.log(obj)
                 console.log(sizeRemoveIndex)
             }
+
+            // בודק שהמידות מלא
+            // if (!formData.sizes.length) {
+            //     alert("have to")
+            // }
             console.log(id, value)
             // כותרת הקליק
             console.log(ev.target.name)
@@ -230,8 +235,8 @@ export default function AdminProductChange() {
                                                             label={a}
                                                             name={a}
                                                             type="checkbox"
-                                                            // checked={formData._id ? formData.color.map(e => e === a) : ""}
                                                             checked={formData._id && formData.sizes.includes(a)}
+
                                                             id={s.name}
                                                             onChange={handleInputChange}
                                                         />

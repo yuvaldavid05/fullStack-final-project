@@ -13,6 +13,20 @@ router.get("/:id", async (req, res) => {
     res.send(await UserModel.findOne({ _id: req.params.id }));
 });
 
+router.put("/update-order/:id", async (req, res) => {
+    const { order } = req.body;
+    const userFind = await UserModel.findOne({ _id: req.params.id });
+
+    if (!userFind) {
+        return res.status(403).send("User does not exist");
+    }
+
+    userFind.orders.push(order);
+    await userFind.save();
+    res.send();
+
+});
+
 
 // router.post("/", async (req, res) => {
 //     // לבדוק אם הולידציה חיונית,מתאימה
@@ -46,3 +60,5 @@ router.get("/:id", async (req, res) => {
 //     await gradeFind.save();
 //     res.send(gradeFind);
 // });
+
+module.exports = router;

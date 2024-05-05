@@ -79,7 +79,7 @@ router.post("/products/new-product", async (req, res) => {
         return res.status(400).json(validBody.error.details);
     }
 
-    const { productName, description, price, sizes, color, img, category, stock, publishDate } = req.body;
+    const { productName, description, price, sizes, color, img, category, stock } = req.body;
 
 
     // לבדוק את המערך LIKES איך הוא חוזר
@@ -99,7 +99,7 @@ router.post("/products/new-product", async (req, res) => {
     res.send(newProduct);
 });
 
-// // לעדכן מוצר - לבדוק
+// // לעדכן מוצר - עובד
 router.put("/products/update/:id", async (req, res) => {
     const { productName, description, price, sizes, color, img, category, stock } = req.body;
 

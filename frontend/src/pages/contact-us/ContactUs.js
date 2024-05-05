@@ -20,7 +20,7 @@ export default function ContactUs() {
         email: "",
         text: "",
     });
-    // const [clients, setClients] = useState([]);
+    const [clients, setClients] = useState([]);
     const [isValid, setIsValid] = useState(false);
 
 
@@ -115,7 +115,8 @@ export default function ContactUs() {
 
 
             } else {
-                // fetch("http://localhost:2222/admin/users", {
+                // חיפוש אם קיים יוזר
+                // fetch(`http://localhost:2222/users`, {
                 //     credentials: 'include',
                 // })
                 //     .then(res => res.json())
@@ -131,6 +132,7 @@ export default function ContactUs() {
                 //     alert("Not found")
                 // }
 
+                // הכנסה של הפרטים ל-OBJ
                 objComment = {
                     ...commentData,
                     user: false

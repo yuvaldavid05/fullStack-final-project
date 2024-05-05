@@ -30,14 +30,7 @@ router.put("/:productId/favorite", async (req, res) => {
         return res.status(403).send("Product does not exist");
     }
 
-    // לבדוק אם עובד
-    // let validBody = validGrade(req.body);
-    // if (validBody.error) {
-    //     return res.status(400).json(validBody.error.details);
-    // }
-
     ProductFind.likes = [...ProductFind.likes, id];
-    // ProductFind.likes.push(id);
 
     await ProductFind.save();
     res.send();
@@ -62,6 +55,22 @@ router.put("/:productId/unfavorite", async (req, res) => {
 
     await ProductFind.save();
     res.send();
+});
+
+// לסיים - פונציה שמורידה את המלאי של הפריטים שנקנו
+router.put("/update-stock/:productId", async (req, res) => {
+
+    const productFind = await UserModel.findOne({ _id: req.params.productId });
+
+    if (!productFind) {
+        return res.status(403).send("User does not exist");
+    }
+
+    productFind.stock = userFind.stock;
+
+    await userFind.save();
+    res.send();
+
 });
 
 

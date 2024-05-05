@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
     houseNumber: Number,
     zip: Number,
     admin: Boolean,
+    orders: Array,
 });
 
 const UserModel = mongoose.model("users", userSchema);
@@ -33,6 +34,7 @@ exports.validUser = (_bodyData) => {
         houseNumber: Joi.number().min(1).required(),
         zip: Joi.number().min(0),
         admin: Joi.boolean().default(false),
+        admin: Joi.array().items(Joi.string()),
         // role: Joi.array().items(Joi.string()).default("user"),
         // createdTime: Joi.date().greater('now').iso(),
         // regex

@@ -39,3 +39,28 @@
 .basket-page .basket-body .icon-trash{
     display: block;
 }
+
+.basket-page .basketUserData{
+    margin: 10px auto 25px 10px;
+}
+
+.basket-page .formUserData{
+    width: 85%;
+    border:1px solid rgba(128, 128, 128, 0.614);
+    border-radius: 25px;
+    font-size: 15px;
+    margin: auto;
+    padding: 20px;
+}
+
+.basket-page .paymentUser{
+    margin:25px auto;
+}
+
+.basket-page .deliveryUser{
+    margin:25px auto;
+}
+
+.basket-page button{
+    margin: 0 0 0 15px;
+}

@@ -26,6 +26,8 @@ export default function SignUp() {
 
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
+    const [isValid, setIsValid] = useState(false);
+
 
 
     const signUpSchema = Joi.object({
@@ -75,7 +77,9 @@ export default function SignUp() {
             if (error) {
                 err[id] = error.message;
             }
-
+            setIsValid(false);
+        } else {
+            setIsValid(true);
         }
 
         setFormData(obj);
@@ -163,7 +167,7 @@ export default function SignUp() {
                             </Col>
                         )
                         )}
-                        <Button variant="primary" type="submit">submit</Button>
+                        <Button variant="primary" type="submit" disabled={!isValid}>submit</Button>
                     </Row>
                 </Form>
             </Container>
