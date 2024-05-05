@@ -13,11 +13,11 @@ import { GeneralContext } from '../../App';
 
 export default function StruCategory() {
     const { cat } = useParams();
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader } = useContext(GeneralContext);
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, search, searchWord } = useContext(GeneralContext);
     const myRef = useRef();
 
     useEffect(() => {
-        setLoader(true);
+        // setLoader(true);
         fetch(`http://localhost:2222/products/` + (cat ? `category/${cat}` : ""), {
             credentials: 'include',
         })
@@ -27,7 +27,7 @@ export default function StruCategory() {
                 setProductCat(data);
                 console.log(data)
             })
-            .finally(() => setLoader(false));
+        // .finally(() => setLoader(false));
     }, [cat]);
 
 

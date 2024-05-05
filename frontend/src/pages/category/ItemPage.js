@@ -19,7 +19,7 @@ export default function ItemPage() {
     const [oneCard, setOneCard] = useState([]);
     const [colorChosenItemPage, setColorChosenItemPage] = useState("");
     const [sizeChosenItemPage, setSizeChosenItemPage] = useState("");
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader } = useContext(GeneralContext);
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, snackbarOn } = useContext(GeneralContext);
     const navigate = useNavigate();
 
 
@@ -42,7 +42,7 @@ export default function ItemPage() {
             alert("have to pick size and color");
         } else {
             // alert(colorChosenItemPage + sizeChosenItemPage);
-            snackbarOn(`The product has been added to the shopping cart, size: ${userChoiceSize} color: ${userChoiceColor}`);
+            snackbarOn(`The product has been added to the shopping cart, size: ${sizeChosenItemPage} color: ${colorChosenItemPage}`);
         }
 
         // const item = productCat.filter(x => x._id == itemId);

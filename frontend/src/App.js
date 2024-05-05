@@ -27,6 +27,8 @@ function App() {
   const [loader, setLoader] = useState(true);
   const [snackbar, setSnackbar] = useState('');
   const [admin, setAdmin] = useState(false);
+  const [searchWord, setSearchWord] = useState('')
+
 
   const snackbarOn = text => {
     setSnackbar(text);
@@ -88,7 +90,7 @@ function App() {
 
   return (
     <GeneralContext.Provider value={{
-      user, setUser, roleType, setRoleType, basket, setBasket, productCat, setProductCat, admin, setAdmin, comment, setComment, loader, setLoader, snackbarOn
+      user, setUser, roleType, setRoleType, basket, setBasket, productCat, setProductCat, admin, setAdmin, comment, setComment, loader, setLoader, snackbarOn, searchWord, setSearchWord
     }}>
 
 

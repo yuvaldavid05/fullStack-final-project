@@ -6,6 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { GeneralContext } from '../../App';
+import Searchbar from '../searchbar/Searchbar';
 
 
 
@@ -40,7 +41,7 @@ const pages2 = [
 
 
 export default function NavbarTop2() {
-    const { user, roleType, setUser, setRoleType } = useContext(GeneralContext);
+    const { user, roleType, setUser, setRoleType, searchWord, setSearchWord } = useContext(GeneralContext);
     const [products, setProducts] = useState([]);
 
     // פילטור של מוצר אחד(ראשון) מכל קטגוריה
@@ -88,6 +89,7 @@ export default function NavbarTop2() {
                             }
                         </NavDropdown>
                     </Nav>
+                    <Searchbar />
                     <Nav>
                         {pages2.filter(p => !p.permissions || checkPermissions(p.permissions, roleType)).map((page) => (
                             <Nav.Link key={page.route}>

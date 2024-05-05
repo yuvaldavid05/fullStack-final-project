@@ -1,5 +1,5 @@
 import './ButtonModalAddItem.css';
-import { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 // import Item from './Item';
@@ -88,13 +88,13 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, i
                             <p>{itemPrice} nis</p>
                             <Row>
                                 <Col><b>size : </b>
-                                    <Form.Select aria-label="Default select " onChange={(choice) => setUserChoiceSize(choice.target.value)}>
+                                    <Form.Select aria-label="Default select" onChange={(choice) => setUserChoiceSize(choice.target.value)}>
                                         {size === "" ? <option>choose size</option> : <option> {size}</option>}
                                         {
-                                            itemSizes.map(sItem => (
-                                                <>
+                                            itemSizes.map((sItem, ind) => (
+                                                <React.Fragment key={ind}>
                                                     {size == sItem ? "" : <option value={sItem} key={sItem}>{sItem}</option>}
-                                                </>
+                                                </React.Fragment>
                                             ))
                                         }
                                     </Form.Select>

@@ -7,6 +7,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import ButtonModalAddItem from "./ButtonModalAddItem";
 import { GeneralContext } from '../../App';
 import { IoMdHeart } from "react-icons/io";
+import Button from 'react-bootstrap/esm/Button';
 
 // דף מבנה של מוצר
 
@@ -16,15 +17,11 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
     const [favorite, setFavorite] = useState(false);
 
     const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, snackbarOn } = useContext(GeneralContext);
+    const [u, setU] = useState({});
 
-    // if (user) {
-    //     let u = {
-    //         id: user._id
-    //     };
-    // }
 
     const myRef = useRef();
-
+    // let u = {};
 
     useEffect(() => {
         if (itemLikesUsers.length && user) {
@@ -37,12 +34,31 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
             }
         }
         console.log(favorite);
-    }, [])
+
+        // if (user) {
+        //     u = {
+        //         id: user._id
+        //     };
+        // }
+        if (user) {
+            setU({
+                id: user._id,
+            })
+        }
+
+        // console.log(u)
+    }, [itemLikesUsers, cat])
+
 
     const changeFavorite = (itemId) => {
-        const u = {
-            id: user._id
-        };
+        // const u = {
+        //     id: user._id
+        // };
+
+        // console.log(u)
+        // console.log(favorite)
+        // console.log(itemId)
+
 
         if (!favorite) {
             setLoader(true);
@@ -56,7 +72,6 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                 },
                 body: JSON.stringify(u),
             })
-                .then(res => res.json())
                 .then(() => {
                     snackbarOn("Added to favorites");
                     // alert("succsed")
@@ -75,8 +90,8 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                 },
                 body: JSON.stringify(u),
             })
-                .then(res => res.json())
-                .then(() => {
+                .then(data => {
+                    console.log(data)
                     snackbarOn("Removed from favorites");
                     // alert("succsed unlike")
                 })
@@ -102,10 +117,10 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                         <Form.Select aria-label="select-sizes" onChange={(choice) => setUserSize(choice.target.value == "sizes" ? "" : choice.target.value)}>
                             <option>sizes</option>
                             {
-                                itemSizes.map(s => (
-                                    <>
+                                itemSizes.map((s, i) => (
+                                    <React.Fragment key={i}>
                                         <option value={s}>{s}</option>
-                                    </>
+                                    </React.Fragment>
                                 ))
                             }
                         </Form.Select>

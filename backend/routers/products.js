@@ -47,14 +47,14 @@ router.put("/:productId/unfavorite", async (req, res) => {
 
     const UserIndex = ProductFind.likes.findIndex(x => x == id);
 
-    if (!UserIndex || UserIndex == "-1") {
-        return res.status(403).send("User does not exist");
+    if (UserIndex == "-1") {
+        return res.status(403).send("User does not exist ");
     }
 
     ProductFind.likes.splice(UserIndex, 1);
 
     await ProductFind.save();
-    res.send();
+    res.send({ UserIndex });
 });
 
 // לסיים - פונציה שמורידה את המלאי של הפריטים שנקנו
