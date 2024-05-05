@@ -127,8 +127,8 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                     </Card.Text>
                     <Card.Text className='itemColors'>
                         {
-                            itemColor.map(c => (
-                                <div className="divColor">
+                            itemColor.map((c, index) => (
+                                <div className="divColor" key={index}>
                                     <div className="color" style={{ backgroundColor: c }}></div>
                                     <span>{c}</span>
                                 </div>

@@ -103,9 +103,9 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, i
                                     <Form.Select aria-label="Default select " onChange={(choice) => setUserChoiceColor(choice.target.value == "choose color" ? "" : choice.target.value)}>
                                         <option>choose color</option>
                                         {
-                                            itemColor.map(cItem => (
+                                            itemColor.map((cItem, i) => (
                                                 <>
-                                                    <option value={cItem} key={cItem}>{cItem}</option>
+                                                    <option value={cItem} key={i}>{cItem}</option>
                                                 </>
                                             ))
                                         }
