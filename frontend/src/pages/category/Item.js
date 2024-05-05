@@ -15,7 +15,7 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
     const navigate = useNavigate();
     const [favorite, setFavorite] = useState(false);
 
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, snackbarOn } = useContext(GeneralContext);
 
     // if (user) {
     //     let u = {
@@ -45,6 +45,7 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
         };
 
         if (!favorite) {
+            setLoader(true);
             setFavorite(true);
             fetch(`http://localhost:2222/products/${itemId}/favorite`, {
                 credentials: 'include',
@@ -55,10 +56,15 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                 },
                 body: JSON.stringify(u),
             })
+                .then(res => res.json())
                 .then(() => {
-                    alert("succsed")
-                });
+                    snackbarOn("Added to favorites");
+                    // alert("succsed")
+                })
+                .finally(() => setLoader(false));
+
         } else if (favorite) {
+            setLoader(true);
             setFavorite(false);
             fetch(`http://localhost:2222/products/${itemId}/unfavorite`, {
                 credentials: 'include',
@@ -69,9 +75,12 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                 },
                 body: JSON.stringify(u),
             })
+                .then(res => res.json())
                 .then(() => {
-                    alert("succsed unlike")
-                });
+                    snackbarOn("Removed from favorites");
+                    // alert("succsed unlike")
+                })
+                .finally(() => setLoader(false));
         }
     }
 

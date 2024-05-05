@@ -6,8 +6,8 @@ import React, { useEffect, useState } from 'react';
 import { RoleTypes } from './components/navbar/NavbarTop2';
 import { Link, useNavigate } from 'react-router-dom';
 import Admin from "./pages/admin/Admin";
-
-
+import Loader from "./components/loader/Loader";
+import Snackbar from './components/snackbar/Snackbar';
 
 export const GeneralContext = React.createContext();
 
@@ -24,12 +24,18 @@ function App() {
   //   email: "",
   //   text: "",
   // });;
-
+  const [loader, setLoader] = useState(true);
+  const [snackbar, setSnackbar] = useState('');
   const [admin, setAdmin] = useState(false);
+
+  const snackbarOn = text => {
+    setSnackbar(text);
+    setTimeout(() => setSnackbar(''), 3 * 1000);
+  }
 
   useEffect(() => {
     if (localStorage.token) {
-      // setLoading(true);
+      setLoader(true);
 
       fetch("http://localhost:2222/auth/login", {
         credentials: 'include',
@@ -48,6 +54,7 @@ function App() {
         })
         .then(data => {
           setUser(data);
+          snackbarOn(`User ${data.firstName}  is logged in!`)
           setRoleType(RoleTypes.user);
 
           if (data.admin) {
@@ -59,13 +66,12 @@ function App() {
         })
         .catch(err => {
           setRoleType(RoleTypes.none);
-          // snackbar('משתמש לא מחובר');
+          snackbarOn("User not logged in");
           navigate('/');
         })
-        .finally(() => {
-          // setLoading(false);
-        });
+        .finally(() => setLoader(false));
     } else {
+      setLoader(false)
       setRoleType(RoleTypes.none);
       navigate('/');
     }
@@ -76,27 +82,31 @@ function App() {
     setUser();
     setRoleType(RoleTypes.none);
     navigate('/');
-    // snackbar('המשתמש התנתק בהצלחה');
+    snackbarOn('User logged out successfully');
 
   }
 
   return (
     <GeneralContext.Provider value={{
-      user, setUser, roleType, setRoleType, basket, setBasket, productCat, setProductCat, admin, setAdmin, comment, setComment
+      user, setUser, roleType, setRoleType, basket, setBasket, productCat, setProductCat, admin, setAdmin, comment, setComment, loader, setLoader, snackbarOn
     }}>
-      <div className='admin'>
-        <Link to="/admin">click here</Link>
-        {/* <Admin /> */}
 
-      </div>
 
       <div className="App">
+        {loader && <Loader />}
+        {/* {snackbar && <Snackbar text={snackbar} />} */}
+        {snackbar && <Snackbar text={snackbar} />}
+
+        <div className='admin'>
+          <Link to="/admin">click here</Link>
+        </div>
 
         <header className="App-header">
-          {/* {!admin ? <NavbarTop2 /> : ""} */}
           <NavbarTop2 />
           <Router />
         </header>
+
+
         {user ?
           <body>
             <div className='userName'>
@@ -110,8 +120,8 @@ function App() {
           ""
         }
 
+
         <footer>
-          {/* {!admin ? <Footer2 /> : ""} */}
           <Footer2 />
         </footer>
 

@@ -1,17 +1,18 @@
 import "./AdminProducts.css";
 import Table from 'react-bootstrap/Table';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 import { AiFillDelete } from "react-icons/ai";
 import { IoAddOutline } from "react-icons/io5";
 import Button from "react-bootstrap/esm/Button";
 import { CiEdit } from "react-icons/ci";
 import { Link } from "react-router-dom";
-
+import { GeneralContext } from '../../App';
 // לסדר שירנדר בכל שינוי 
 
 function AdminProducts() {
     const [items, setItems] = useState([]);
+    const { loader, setLoader } = useContext(GeneralContext);
 
     const myRef = useRef(null);
 
@@ -27,6 +28,7 @@ function AdminProducts() {
     ]
 
     useEffect(() => {
+        setLoader(true);
         fetch("http://localhost:2222/products", {
             credentials: 'include',
         })
@@ -37,7 +39,8 @@ function AdminProducts() {
                 setItems(data);
                 console.log(data);
                 console.log(myRef);
-            });
+            })
+            .finally(() => setLoader(false));
     }, [myRef]);
 
 

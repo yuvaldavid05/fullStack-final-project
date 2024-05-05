@@ -4,11 +4,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Joi from 'joi';
-// import { JOI_HEBREW } from '../../joi-hebrew';
-
+import { GeneralContext } from '../../App';
 
 export default function SignUp() {
     const [formData, setFormData] = useState({
@@ -27,6 +26,8 @@ export default function SignUp() {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     const [isValid, setIsValid] = useState(false);
+    const { loader, setLoader, snackbarOn } = useContext(GeneralContext);
+
 
 
 
@@ -87,7 +88,7 @@ export default function SignUp() {
     };
 
     const signup = ev => {
-        // setLoader(true);
+        setLoader(true);
         ev.preventDefault();
 
         fetch(`http://localhost:2222/auth/signup`, {
@@ -107,16 +108,15 @@ export default function SignUp() {
             })
             .then(() => {
                 navigate('/login');
-                // snackbarOn('המשתמש נרשם בהצלחה')
+                snackbarOn('User has successfully registered')
                 const u = formData;
                 delete u.password;
                 console.log(u);
-                alert('המשתמש נרשם')
             })
             .catch(err => {
                 alert(err.message);
             })
-        // .finally(() => setLoader(false))
+            .finally(() => setLoader(false))
     }
 
 

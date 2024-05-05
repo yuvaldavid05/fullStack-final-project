@@ -1,14 +1,15 @@
 import "./AdminUsers.css";
 import Table from 'react-bootstrap/Table';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { AiFillDelete } from "react-icons/ai";
-
+import { GeneralContext } from '../../App';
 
 // לסדר שירנדר בכל שינוי 
 
 function AdminUsers() {
     const [clients, setClients] = useState([]);
+    const { loader, setLoader } = useContext(GeneralContext);
 
     const s = [
         { name: 'firstName', type: 'text', label: 'First Name', required: true, sm: '6' },
@@ -24,6 +25,7 @@ function AdminUsers() {
     ]
 
     useEffect(() => {
+        setLoader(true);
         fetch("http://localhost:2222/admin/users", {
             credentials: 'include',
         })
@@ -31,7 +33,8 @@ function AdminUsers() {
             .then(data => {
                 setClients(data);
                 console.log(data)
-            });
+            })
+            .finally(() => setLoader(false));
     }, []);
 
     const removeClient = (clientdId) => {
@@ -39,13 +42,15 @@ function AdminUsers() {
             return;
         }
 
+        setLoader(true);
         fetch(`http://localhost:2222/admin/users/delete/${clientdId}`, {
             credentials: 'include',
             method: 'DELETE',
         })
             .then(() => {
                 setClients(clients.filter(c => c.id !== clientdId));
-            });
+            })
+            .finally(() => setLoader(false));
     }
 
     const changePermission = (clientdId) => {
@@ -53,14 +58,15 @@ function AdminUsers() {
             return;
         }
 
-
+        setLoader(true);
         fetch(`http://localhost:2222/admin/users/update-admin/${clientdId}`, {
             credentials: 'include',
             method: 'PUT',
         })
             .then(() => {
                 // setClients();
-            });
+            })
+            .finally(() => setLoader(false));
     }
 
 

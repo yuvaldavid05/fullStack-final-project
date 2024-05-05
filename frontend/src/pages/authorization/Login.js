@@ -17,7 +17,7 @@ import { RoleTypes } from '../../components/navbar/NavbarTop2';
 
 
 export default function Login() {
-    const { user, setUser, roleType, setRoleType } = useContext(GeneralContext);
+    const { user, setUser, roleType, setRoleType, loader, setLoader, snackbarOn } = useContext(GeneralContext);
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -66,7 +66,7 @@ export default function Login() {
     };
 
     const login = ev => {
-        // setLoader(true);
+        setLoader(true);
         ev.preventDefault();
 
         fetch(`http://localhost:2222/auth/login`, {
@@ -94,7 +94,7 @@ export default function Login() {
                     setRoleType(RoleTypes.admin);
                 }
 
-                // snackbarOn('המשתמש התחבר בהצלחה')
+                snackbarOn('User successfully logged in')
                 navigate('/');
 
                 console.log(data);
@@ -103,7 +103,7 @@ export default function Login() {
                 alert(err.message);
                 console.log(err.message);
             })
-        // .finally(() => setLoader(false))
+            .finally(() => setLoader(false))
 
     }
 
@@ -129,14 +129,6 @@ export default function Login() {
                                         onChange={handleInputChange}
                                     />
                                 </InputGroup>
-                                {/* <InputGroup className="mb-3">
-                                <InputGroup.Text id="basic-addon1">#</InputGroup.Text>
-                                <Form.Control
-                                    placeholder="Password"
-                                    aria-label="Password"
-                                    aria-describedby="basic-addon1"
-                                />
-                            </InputGroup> */}
 
 
                             </Col>

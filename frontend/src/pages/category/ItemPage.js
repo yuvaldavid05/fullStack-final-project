@@ -19,11 +19,12 @@ export default function ItemPage() {
     const [oneCard, setOneCard] = useState([]);
     const [colorChosenItemPage, setColorChosenItemPage] = useState("");
     const [sizeChosenItemPage, setSizeChosenItemPage] = useState("");
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader } = useContext(GeneralContext);
     const navigate = useNavigate();
 
 
     useEffect(() => {
+        setLoader(true);
         fetch(`http://localhost:2222/products/${id}`, {
             credentials: 'include',
         })
@@ -32,14 +33,16 @@ export default function ItemPage() {
                 setOneCard(data);
                 console.log(oneCard);
             })
+            .finally(() => setLoader(false))
     }, [])
 
-    function addProduct(itemId) {
+    function addProduct() {
         if ((colorChosenItemPage == "choose color") || (sizeChosenItemPage == "choose size") || (colorChosenItemPage == "choose color" && sizeChosenItemPage == "choose size")) {
 
             alert("have to pick size and color");
         } else {
-            alert(colorChosenItemPage + sizeChosenItemPage);
+            // alert(colorChosenItemPage + sizeChosenItemPage);
+            snackbarOn(`The product has been added to the shopping cart, size: ${userChoiceSize} color: ${userChoiceColor}`);
         }
 
         // const item = productCat.filter(x => x._id == itemId);
@@ -133,9 +136,6 @@ export default function ItemPage() {
                                     </div>
 
                                     <div className='add-item-to' >
-                                        {/* <span>
-                                            <IoMdHeartEmpty />
-                                        </span> */}
                                         <Button onClick={addProduct}>+ add item</Button>
                                     </div>
                                 </Col >

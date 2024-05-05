@@ -18,7 +18,7 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, i
     const [userChoiceColor, setUserChoiceColor] = useState("");
     const [show, setShow] = useState(false);
 
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, snackbarOn } = useContext(GeneralContext);
 
     useEffect(() => {
         sessionStorage.setItem('basketDate', JSON.stringify(basket));
@@ -38,10 +38,13 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, i
         // בדיקה שכל התאים מלאים (מידה וצבע) והשמה של המידה מהדף קטגוריה
         if (userChoiceSize == "" && size != "" && userChoiceColor != "") {
             // להוסיף בסנאקבר הדפסה למידה והצבע
-            alert(userChoiceColor + size)
+            // alert(userChoiceColor + size)
+            snackbarOn(`The product has been added to the shopping cart, size: ${size} color: ${userChoiceColor}`);
         } else if (userChoiceSize != "" && size == "" && userChoiceColor != "") {
             // להוסיף בסנאקבר הדפסה למידה והצבע
-            alert(userChoiceColor + userChoiceSize)
+            // alert(userChoiceColor + userChoiceSize)
+            snackbarOn(`The product has been added to the shopping cart, size: ${userChoiceSize} color: ${userChoiceColor}`);
+
         } else {
             alert("have to pick size and color");
         }

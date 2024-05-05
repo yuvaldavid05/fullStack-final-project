@@ -13,7 +13,7 @@ import { GeneralContext } from '../../App';
 
 
 export default function ContactUs() {
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, comment, setComment } = useContext(GeneralContext);
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, comment, setComment, snackbarOn } = useContext(GeneralContext);
     const [commentData, setCommentData] = useState({
         firstName: "",
         lastName: "",
@@ -108,7 +108,8 @@ export default function ContactUs() {
                 setCommentData(objComment);
                 // setSubmit(true);
                 setComment(objComment);
-                alert("This form has been successfully submitted - user")
+                snackbarOn("This form has been successfully submitted - user")
+                // alert("This form has been successfully submitted - user")
                 console.log(commentData)
                 console.log(comment)
                 // console.log(comments)
@@ -139,7 +140,9 @@ export default function ContactUs() {
                 }
                 setCommentData(objComment);
                 // setSubmit(true);
-                alert("This form has been successfully submitted - Not user");
+                // לזכור להוריד את היוזר
+                snackbarOn("This form has been successfully submitted -Not user")
+                // alert("This form has been successfully submitted - Not user");
                 setComment(objComment);
                 console.log(comment)
             }

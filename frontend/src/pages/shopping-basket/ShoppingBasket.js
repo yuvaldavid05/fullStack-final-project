@@ -22,7 +22,7 @@ export default function ShoppingBasket() {
     })
     const [next, setNext] = useState(false);
 
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, snackbarOn } = useContext(GeneralContext);
 
     let myRef = useRef(null);
 
@@ -60,7 +60,7 @@ export default function ShoppingBasket() {
         if (!window.confirm("Delete This Item?")) {
             return;
         }
-
+        snackbarOn("The product has been deleted from the cart")
         basket.splice(itemDeleteIndex, 1);
         let tmp = JSON.parse(sessionStorage.getItem('basketDate'));
         tmp.splice(itemDeleteIndex, 1)

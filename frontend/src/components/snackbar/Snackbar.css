@@ -1,0 +1,57 @@
+#frameSnackbar .alert-dark{
+    width: 35%;
+    position: fixed;
+    /* left:50%; */
+    right: 25px;
+    bottom: 5%;
+}
+
+
+
+#snackbar {
+    min-width: 250px; 
+    margin-left: -125px; 
+    background-color: #333; 
+    color: #fff; 
+    text-align: center; 
+    border-radius: 2px; 
+    padding: 16px; 
+    position: fixed; 
+    z-index: 1; 
+    left: 50%; 
+    bottom: 30px; 
+    font-size: 15px;
+  }
+  
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+
+@media (max-width: 768px) {
+    #frameSnackbar .alert-dark{
+        width:90%;
+        left:15px;
+        margin: auto;
+    }
+  }
+
+
+  

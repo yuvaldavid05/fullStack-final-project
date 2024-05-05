@@ -2,14 +2,14 @@ import "./AdminProductChange.css";
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useContext, useEffect, useRef, useState } from 'react';
 import Joi from 'joi';
-import moment from 'moment';
-
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { GeneralContext } from '../../App';
+
 
 export default function AdminProductChange() {
     const { id } = useParams();
@@ -19,6 +19,7 @@ export default function AdminProductChange() {
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({});
     const [isValid, setIsValid] = useState(false);
+    const { loader, setLoader } = useContext(GeneralContext);
 
 
     useEffect(() => {
@@ -35,7 +36,7 @@ export default function AdminProductChange() {
                 stock: "",
             });
         } else {
-            // setLoading(true);
+            setLoader(true);
 
             fetch(`http://localhost:2222/admin/products/${id}`, {
                 credentials: 'include',
@@ -44,7 +45,7 @@ export default function AdminProductChange() {
                 .then(data => {
                     setFormData(data)
                 })
-            // .finally(() => setLoading(false));
+                .finally(() => setLoader(false));
         }
     }, [id]);
 
