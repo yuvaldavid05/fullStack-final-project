@@ -1,6 +1,6 @@
 import "./AdminProductChange.css";
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Joi from 'joi';
 import moment from 'moment';
 
@@ -18,6 +18,8 @@ export default function AdminProductChange() {
 
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({});
+    const [isValid, setIsValid] = useState(false);
+
 
     useEffect(() => {
         if (id === 'new-product') {
@@ -39,7 +41,9 @@ export default function AdminProductChange() {
                 credentials: 'include',
             })
                 .then(res => res.json())
-                .then(data => setFormData(data))
+                .then(data => {
+                    setFormData(data)
+                })
             // .finally(() => setLoading(false));
         }
     }, [id]);
@@ -75,67 +79,117 @@ export default function AdminProductChange() {
         const { id, value } = ev.target;
 
         let obj = {};
-
-        if (id === 'sizes') {
+        if (ev.target.name == "sizes") {
+            const { name, value } = ev.target;
             if (ev.target.checked) {
                 obj = {
                     ...formData,
-                    [id]: [...formData.sizes, ev.target.name],
+                    [name]: [...formData.sizes, value],
                 };
-                console.log(obj)
 
             } else if (!ev.target.checked) {
-                const sizeRemoveIndex = formData.sizes.findIndex(x => x === ev.target.name);
+                const sizeRemoveIndex = formData.sizes.findIndex(x => x === value);
                 let NewArray = formData.sizes;
                 NewArray.splice(sizeRemoveIndex, 1);
                 obj = {
                     ...formData,
-                    [id]: NewArray,
+                    [name]: NewArray,
                 };
                 console.log(obj)
                 console.log(sizeRemoveIndex)
             }
-
-            // בודק שהמידות מלא
-            // if (!formData.sizes.length) {
-            //     alert("have to")
-            // }
-            console.log(id, value)
-            // כותרת הקליק
-            console.log(ev.target.name)
-            // אם מופעל או לא
-            console.log(ev.target.checked)
-
-        } else if (id === "color") {
+        } else if (ev.target.name == "color") {
+            const { name, value } = ev.target;
             if (ev.target.checked) {
                 obj = {
                     ...formData,
-                    [id]: [...formData.color, ev.target.name],
+                    [name]: [...formData.color, value],
                 };
-                console.log(obj)
 
             } else if (!ev.target.checked) {
-                const colorRemoveIndex = formData.color.findIndex(x => x === ev.target.name);
-                let NewArrayC = formData.color;
-                NewArrayC.splice(colorRemoveIndex, 1);
+                const colorRemoveIndex = formData.color.findIndex(x => x === value);
+                let NewArray = formData.color;
+                NewArray.splice(colorRemoveIndex, 1);
                 obj = {
                     ...formData,
-                    [id]: NewArrayC,
+                    [name]: NewArray,
                 };
-                console.log(obj)
-                console.log(colorRemoveIndex)
+
+                // const colorRemoveIndex = formData.color.findIndex(x => x === ev.target.name);
+                // let NewArrayC = formData.color;
+                // NewArrayC.splice(colorRemoveIndex, 1);
+                // obj = {
+                //     ...formData,
+                //     [id]: NewArrayC,
+                // };
             }
-            console.log(id, value)
-            // כותרת הקליק
-            console.log(ev.target.name)
-            // אם מופעל או לא
-            console.log(ev.target.checked)
+
         } else {
             obj = {
                 ...formData,
                 [id]: value,
             };
         }
+
+
+
+
+        // if (id === 'sizes') {
+        //     if (ev.target.checked) {
+        //         obj = {
+        //             ...formData,
+        //             [id]: [...formData.sizes, ev.target.name],
+        //         };
+        //         console.log(obj)
+
+        //     } else if (!ev.target.checked) {
+        //         const sizeRemoveIndex = formData.sizes.findIndex(x => x === ev.target.name);
+        //         let NewArray = formData.sizes;
+        //         NewArray.splice(sizeRemoveIndex, 1);
+        //         obj = {
+        //             ...formData,
+        //             [id]: NewArray,
+        //         };
+        //         console.log(obj)
+        //         console.log(sizeRemoveIndex)
+        //     }
+
+        //     console.log(id, value)
+        //     // כותרת הקליק
+        //     console.log(ev.target.name)
+        //     // אם מופעל או לא
+        //     console.log(ev.target.checked)
+
+        // } else if (id === "color") {
+        //     if (ev.target.checked) {
+        //         obj = {
+        //             ...formData,
+        //             [id]: [...formData.color, ev.target.name],
+        //         };
+        //         console.log(obj)
+
+        //     } else if (!ev.target.checked) {
+        //         const colorRemoveIndex = formData.color.findIndex(x => x === ev.target.name);
+        //         let NewArrayC = formData.color;
+        //         NewArrayC.splice(colorRemoveIndex, 1);
+        //         obj = {
+        //             ...formData,
+        //             [id]: NewArrayC,
+        //         };
+        //         console.log(obj)
+        //         console.log(colorRemoveIndex)
+        //     }
+        //     console.log(id, value)
+        //     // כותרת הקליק
+        //     console.log(ev.target.name)
+        //     // אם מופעל או לא
+        //     console.log(ev.target.checked)
+        // } else {
+        //     obj = {
+        //         ...formData,
+        //         [id]: value,
+        //     };
+        // }
 
         const schema = UpdateSchema.validate(obj, { abortEarly: false });
         const err = { ...errors, [id]: undefined };
@@ -146,7 +200,9 @@ export default function AdminProductChange() {
             if (error) {
                 err[id] = error.message;
             }
-
+            setIsValid(false);
+        } else {
+            setIsValid(true);
         }
 
         setFormData(obj);
@@ -158,27 +214,33 @@ export default function AdminProductChange() {
         ev.preventDefault();
         // setLoading(true);
 
-        fetch("http://localhost:2222/admin/products" + (formData._id ? `/update/${id}` : '/new-product'), {
-            credentials: 'include',
-            method: formData._id ? "PUT" : "POST",
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify(formData),
-        })
-            .then(data => {
-                if (formData._id) {
-                    alert('The product has been updated successfully');
-                } else {
-                    alert('The product has been successfully added');
-                    console.log(data)
-                }
-                navigate('/admin');
-            })
-            .catch(err => {
-                alert(err.message);
-            })
-        // .finally(() => setLoading(false));
+        if (!formData.sizes.length || !formData.color.length) {
+            alert("have to choose size and color")
+        } else {
 
-        // alert("something")
+
+
+            fetch("http://localhost:2222/admin/products" + (formData._id ? `/update/${id}` : '/new-product'), {
+                credentials: 'include',
+                method: formData._id ? "PUT" : "POST",
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(formData),
+            })
+                .then(data => {
+                    if (formData._id) {
+                        alert('The product has been updated successfully');
+                    } else {
+                        alert('The product has been successfully added');
+                        console.log(data)
+                    }
+                    navigate('/admin');
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+            // .finally(() => setLoading(false));
+
+        }
     }
 
     return (
@@ -205,19 +267,25 @@ export default function AdminProductChange() {
                                                 {sizesStr.map((a, i) => (
                                                     <>
 
-                                                        <Form.Check key={i}
+                                                        {/* <Form.Check key={i}
                                                             inline
                                                             label={a}
                                                             name={a}
                                                             type="checkbox"
                                                             checked={formData._id && formData.sizes.includes(a)}
-
                                                             id={s.name}
                                                             onChange={handleInputChange}
+                                                        /> */}
+                                                        <Form.Check
+                                                            inline
+                                                            label={a}
+                                                            name="sizes"
+                                                            value={a}
+                                                            type="checkbox"
+                                                            checked={formData._id && formData.sizes.includes(a)}
+                                                            id={`inline-'radio'-${i}`}
+                                                            onChange={handleInputChange}
                                                         />
-
-
-                                                        {/* {s.required ? (errors[s.name] ? <div className='fieldErrorUpdate'>{errors[s.name]}</div> : '') : ''} */}
                                                     </>
                                                 ))}
                                                 <div>
@@ -227,20 +295,29 @@ export default function AdminProductChange() {
                                                 </div>
                                             </div>
                                             : <div key={"inline-checkbox"} className="mb-3">
-                                                {colorsStr.map((a, i) => (
+                                                {colorsStr.map((c, i) => (
                                                     <>
 
-                                                        <Form.Check key={i}
+                                                        {/* <Form.Check key={i}
                                                             inline
                                                             label={a}
                                                             name={a}
                                                             type="checkbox"
                                                             checked={formData._id && formData.sizes.includes(a)}
-
                                                             id={s.name}
                                                             onChange={handleInputChange}
+                                                        /> */}
+
+                                                        <Form.Check
+                                                            inline
+                                                            label={c}
+                                                            name="color"
+                                                            value={c}
+                                                            type="checkbox"
+                                                            checked={formData._id && formData.color.includes(c)}
+                                                            id={`inline-'radio'-${i}`}
+                                                            onChange={handleInputChange}
                                                         />
-                                                        {s.required ? (errors[s.name] ? <div className='fieldErrorUpdate'>{errors[s.name]}</div> : '') : ''}
                                                     </>
                                                 ))}
                                                 <div>
@@ -284,7 +361,7 @@ export default function AdminProductChange() {
                             ))}
 
                         </Row>
-                        <Button variant="primary" type="submit">Submit</Button>
+                        <Button variant="primary" type="submit" disabled={id === 'new-product' ? !isValid : isValid}>Submit</Button>
                     </Form>
                 </Container>
             }

@@ -33,6 +33,7 @@ function AdminProducts() {
             .then(res => res.json())
             .then(data => {
                 myRef.current = data;
+                // setItems(myRef.current);
                 setItems(data);
                 console.log(data);
                 console.log(myRef);

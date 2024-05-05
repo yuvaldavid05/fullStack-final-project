@@ -66,7 +66,7 @@ router.put("/update-stock/:productId", async (req, res) => {
         return res.status(403).send("User does not exist");
     }
 
-    productFind.stock = userFind.stock;
+    // productFind.stock = userFind.stock;
 
     await userFind.save();
     res.send();
