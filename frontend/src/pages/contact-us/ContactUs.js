@@ -133,7 +133,7 @@ export default function ContactUs() {
 
                 objComment = {
                     ...commentData,
-                    [user]: false
+                    user: false
                 }
                 setCommentData(objComment);
                 // setSubmit(true);

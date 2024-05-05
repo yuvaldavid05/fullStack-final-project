@@ -24,7 +24,9 @@ function AdminComments() {
 
     ]
 
-
+    useEffect(() => {
+        console.log(comment);
+    }, [])
     // useEffect(() => {
     //     fetch("http://localhost:2222/products", {
     //         credentials: 'include',

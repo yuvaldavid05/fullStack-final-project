@@ -20,6 +20,9 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, i
 
     const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
 
+    useEffect(() => {
+        sessionStorage.setItem('basketDate', JSON.stringify(basket));
+    }, [basket, setBasket])
 
     const handleClose = () => {
         setShow(false)

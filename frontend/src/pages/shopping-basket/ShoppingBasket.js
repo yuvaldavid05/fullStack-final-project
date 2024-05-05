@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 import { GeneralContext } from '../../App';
 import Button from 'react-bootstrap/esm/Button';
@@ -16,12 +16,19 @@ export default function ShoppingBasket() {
 
     const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat } = useContext(GeneralContext);
 
+    let myRef = useRef(null);
+
     useEffect(() => {
         const s = basket.reduce((res, y) => res += y.item.price, 0);
         setSum(s)
+
+        let objBasket = JSON.parse(sessionStorage.getItem('basketDate'));
+        console.log(objBasket)
+        myRef = basket;
+        setBasket(objBasket);
         console.log(s)
         console.log(basket)
-    }, [basket, setBasket])
+    }, [myRef, setBasket])
 
     function deleteItem(itemId, itemColorPicked, itemSizePicked, itemIndex) {
         const itemDeleteIndex = basket.findIndex((t, i) => t.item._id === itemId && t.color === itemColorPicked && t.size === itemSizePicked && i === itemIndex);
@@ -31,6 +38,9 @@ export default function ShoppingBasket() {
         }
 
         basket.splice(itemDeleteIndex, 1);
+        let tmp = JSON.parse(sessionStorage.getItem('basketDate'));
+        tmp.splice(itemDeleteIndex, 1)
+        sessionStorage.setItem('basketDate', JSON.stringify(tmp))
         setBasket([...basket]);
         console.log(basket)
     }
