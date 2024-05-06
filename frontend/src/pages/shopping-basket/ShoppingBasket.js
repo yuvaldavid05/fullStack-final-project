@@ -91,10 +91,33 @@ export default function ShoppingBasket() {
         if (userOrder.payment == "" || userOrder.delivery == "" || (userOrder.payment == "" && userOrder.delivery == "")) {
             alert("have to fill Payment && Delivery")
         } else {
-            setUserOrder({
-                ...userOrder,
-                basket: basket,
-            })
+            // setUserOrder({
+            //     ...userOrder,
+            //     basket: basket,
+            // })
+            Promise.resolve(() => {
+                setUserOrder({
+                    ...userOrder,
+                    basket: basket,
+                })
+            }
+            ).then(() => {
+                fetch(`http://localhost:2222/users/update-order/${user._id}`, {
+                    credentials: 'include',
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        // 'Authorization': localStorage.token
+                    },
+                    body: JSON.stringify(userOrder),
+                })
+                    .then(data => {
+                        console.log(data)
+                        console.log(user.orders)
+                        alert("Succeeded")
+                        console.log(user);
+                    });
+            });
         }
         // setUserOrder({
         //     ...userOrder,
@@ -102,8 +125,8 @@ export default function ShoppingBasket() {
         // })
 
         // console.log(userOrder)
-        const order = userOrder;
-        sendRequste(order);
+        // const order = userOrder;
+        // sendRequste(order)
         // fetch(`http://localhost:2222/users/update-order/${user._id}`, {
         //     credentials: 'include',
         //     method: 'PUT',
