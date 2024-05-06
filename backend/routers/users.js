@@ -14,13 +14,17 @@ router.get("/:id", async (req, res) => {
 });
 
 router.put("/update-order/:id", async (req, res) => {
-    const { order } = req.body;
+    const { payment, delivery, basket } = req.body;
     const userFind = await UserModel.findOne({ _id: req.params.id });
 
     if (!userFind) {
         return res.status(403).send("User does not exist");
     }
-
+    const order = {
+        payment: payment,
+        delivery: delivery,
+        basket: basket
+    }
     userFind.orders.push(order);
     await userFind.save();
     res.send();

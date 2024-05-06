@@ -20,6 +20,7 @@ export default function ShoppingBasket() {
         payment: "",
         delivery: ""
     })
+    const order = {};
     const [next, setNext] = useState(false);
 
     const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, snackbarOn } = useContext(GeneralContext);
@@ -91,81 +92,35 @@ export default function ShoppingBasket() {
         if (userOrder.payment == "" || userOrder.delivery == "" || (userOrder.payment == "" && userOrder.delivery == "")) {
             alert("have to fill Payment && Delivery")
         } else {
-            // setUserOrder({
-            //     ...userOrder,
-            //     basket: basket,
-            // })
-            Promise.resolve(() => {
-                setUserOrder({
-                    ...userOrder,
-                    basket: basket,
-                })
-            }
-            ).then(() => {
-                fetch(`http://localhost:2222/users/update-order/${user._id}`, {
-                    credentials: 'include',
-                    method: 'PUT',
-                    headers: {
-                        'Content-type': 'application/json',
-                        // 'Authorization': localStorage.token
-                    },
-                    body: JSON.stringify(userOrder),
-                })
-                    .then(data => {
-                        console.log(data)
-                        console.log(user.orders)
-                        alert("Succeeded")
-                        console.log(user);
-                    });
-            });
+            sendRequste();
         }
-        // setUserOrder({
-        //     ...userOrder,
-        //     basket: basket,
-        // })
 
-        // console.log(userOrder)
-        // const order = userOrder;
-        // sendRequste(order)
-        // fetch(`http://localhost:2222/users/update-order/${user._id}`, {
-        //     credentials: 'include',
-        //     method: 'PUT',
-        //     headers: {
-        //         'Content-type': 'application/json',
-        //         // 'Authorization': localStorage.token
-        //     },
-        //     body: JSON.stringify(order),
-        // })
-        //     .then(data => {
-        //         console.log(data)
-        //         console.log(user.orders)
-        //         alert("Succeeded")
-        //         console.log(user);
-        //     });
-        // user.orders.push(userOrder);
     }
 
-    const sendRequste = (order) => {
+    const sendRequste = () => {
         // מטרות - להוסיף להזמנות של להיוזר
         // להוריד מהמלאי של המוצרים אחד או יותר
-        console.log(userOrder)
-        console.log(order)
+        const o = {
+            ...userOrder,
+            basket: basket
+        }
+        console.log(o)
 
-        // fetch(`http://localhost:2222/users/update-order/${user._id}`, {
-        //     credentials: 'include',
-        //     method: 'PUT',
-        //     headers: {
-        //         'Content-type': 'application/json',
-        //         // 'Authorization': localStorage.token
-        //     },
-        //     body: JSON.stringify(order),
-        // })
-        //     .then(data => {
-        //         console.log(data)
-        //         console.log(user.orders)
-        //         alert("Succeeded")
-        //         console.log(user);
-        //     });
+        fetch(`http://localhost:2222/users/update-order/${user._id}`, {
+            credentials: 'include',
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': localStorage.token
+            },
+            body: JSON.stringify(o),
+        })
+            .then(data => {
+                console.log(data)
+                console.log(user.orders)
+                alert("Succeeded")
+                console.log(user);
+            });
     }
 
     return (
