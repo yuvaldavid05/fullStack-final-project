@@ -228,7 +228,8 @@ export default function ContactUs() {
                                 ))}
                             </Row>
 
-                            <Button type="submit" disabled={!isValid}>submit</Button>
+                            <Button type="submit" disabled={!isValid}>
+                                <a href="mailto:yuvedavid@gmail.com" style={{ color: "white" }}>submit</a></Button>
                         </div>
                         <Row className='Web-details'>
                             <Col>our address: <br></br>hsuhshsdha 54</Col>

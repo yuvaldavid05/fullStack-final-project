@@ -11,6 +11,8 @@ import SignUp from "./pages/authorization/SignUp";
 import Admin from "./pages/admin/Admin";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminProductChange from "./pages/admin/AdminProductChange";
+import OrderReceived from "./pages/shopping-basket/OrderReceived";
+import ErrorPage from "./pages/error-page/ErrorPage";
 
 
 export default function Router() {
@@ -19,7 +21,6 @@ export default function Router() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact-us" element={<ContactUs />} />
-            {/* <Route path="/category" element={<StruCategory />} /> */}
             <Route path="/products/:id" element={<ItemPage />} />
             <Route path="/wish-list" element={<WishList />} />
             <Route path="/shopping-basket" element={<ShoppingBasket />} />
@@ -29,6 +30,8 @@ export default function Router() {
             <Route path="/products" element={<StruCategory />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/products/:id" element={<AdminProductChange />} />
+            <Route path="/succeeded" element={<OrderReceived />} />
+            {/* <Route path="/*" element={<ErrorPage />} /> */}
 
             {/* <Route path="/admin/users" element={<AdminUsers />} /> */}
 

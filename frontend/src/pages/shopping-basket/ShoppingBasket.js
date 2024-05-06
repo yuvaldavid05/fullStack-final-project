@@ -9,7 +9,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { GeneralContext } from '../../App';
 import Button from 'react-bootstrap/esm/Button';
 import { BsTrash3 } from "react-icons/bs";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 
 export default function ShoppingBasket() {
@@ -22,6 +22,7 @@ export default function ShoppingBasket() {
     })
     const order = {};
     const [next, setNext] = useState(false);
+    const navigate = useNavigate();
 
     const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, snackbarOn } = useContext(GeneralContext);
 
@@ -43,15 +44,19 @@ export default function ShoppingBasket() {
     ]
 
     useEffect(() => {
+        // if (basket) {
         const s = basket.reduce((res, y) => res += y.item.price, 0);
         setSum(s)
+        // }
 
         let objBasket = JSON.parse(sessionStorage.getItem('basketDate'));
         console.log(objBasket)
-        myRef = basket;
+
+        myRef.current = basket;
         setBasket(objBasket);
         console.log(s)
         console.log(basket)
+
     }, [myRef, setBasket])
 
 
@@ -67,6 +72,8 @@ export default function ShoppingBasket() {
         tmp.splice(itemDeleteIndex, 1)
         if (tmp.length) {
             sessionStorage.setItem('basketDate', JSON.stringify(tmp))
+            // לבדוק לגבי הרינדור - הוספתי לפה במקום רינדור של יוז אפקט
+            setSum(basket.reduce((res, y) => res += y.item.price, 0))
         } else {
             sessionStorage.removeItem('basketDate');
         }
@@ -118,11 +125,22 @@ export default function ShoppingBasket() {
             .then(data => {
                 console.log(data)
                 console.log(user.orders)
-                alert("Succeeded")
+                // alert("Succeeded")
                 console.log(user);
+                // stockChanged();
+                snackbarOn("Order received! Thank U");
+                sessionStorage.removeItem('basketDate');
+                navigate("/succeeded");
+                setBasket([]);
+                // setNext(false);
             });
     }
 
+    // const stockChanged = () => {
+    //     // let sumIdItem = basket.filter(b => b.item._id === )
+    //     const indexItem = basket.filter(b => b == basket.item._id);
+    //     console.log(indexItem);
+    // }
     return (
         <section id="basket" className='basket-page'>
             <Container fluid>
@@ -131,7 +149,7 @@ export default function ShoppingBasket() {
                 </Row>
 
                 <Row className='basket-body'>
-                    {basket.length ?
+                    {basket && basket.length ?
                         <>
 
                             <Col>
@@ -258,7 +276,8 @@ export default function ShoppingBasket() {
                                             ))}
                                         </Col>
                                     </div>
-                                    <Button variant="primary" onClick={sendOrder}>finish</Button>
+                                    <Button variant="primary" onClick={sendOrder} >
+                                        finish</Button>
                                 </Col>
                             </Row>
                         </>

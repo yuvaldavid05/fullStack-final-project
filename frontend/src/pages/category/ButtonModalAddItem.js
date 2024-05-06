@@ -22,6 +22,7 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, i
 
     useEffect(() => {
         sessionStorage.setItem('basketDate', JSON.stringify(basket));
+        console.log(basket)
     }, [basket, setBasket])
 
     const handleClose = () => {
@@ -62,8 +63,8 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, i
         console.log(size);
         console.log(selectedProduct);
 
-        setBasket([...basket, selectedProduct]);
         console.log(basket);
+        setBasket([...basket, selectedProduct]);
         handleClose();
     }
 

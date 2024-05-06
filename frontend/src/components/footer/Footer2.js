@@ -10,22 +10,22 @@ export default function Footer2() {
             <Container>
                 <Row className="justify-content-md-center">
                     <Col xs lg="2">
-                        <Link to="">
+                        <Link to="/login">
                             login
                         </Link>
                     </Col>
                     <Col xs lg="2">
-                        <Link to="">
+                        <Link to="/sign-up">
                             sign up
                         </Link>
                     </Col>
                     <Col xs lg="2">
-                        <Link to="">
+                        <Link to="/about">
                             about
                         </Link>
                     </Col>
                     <Col xs lg="2">
-                        <Link to="">
+                        <Link to="/contact-us">
                             contact us
                         </Link>
                     </Col>

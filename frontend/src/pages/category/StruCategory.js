@@ -8,12 +8,13 @@ import Item from './Item';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { GeneralContext } from '../../App';
+import { search } from "../../components/searchbar/Searchbar";
 
 // דף של מבנה קטגוריה
 
 export default function StruCategory() {
     const { cat } = useParams();
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, search, searchWord } = useContext(GeneralContext);
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, searchWord } = useContext(GeneralContext);
     const myRef = useRef();
 
     useEffect(() => {
@@ -41,7 +42,7 @@ export default function StruCategory() {
                 </div>
                 <Row xs={2} md={5}>
                     {
-                        productCat.map((p, i) => {
+                        productCat.filter(c => search(searchWord, c.productName, c.description)).map((p, i) => {
                             return (
                                 <Col key={i}>
                                     <div className='holder'>

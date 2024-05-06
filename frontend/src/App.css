@@ -6,12 +6,20 @@
 .admin{
   width:70px;
   height: 70px;
-  border-radius: 20px;
+  border-radius: 50%;
   background-color: blueviolet;
+  background-color: green;
   position: fixed;
-  top:50px;
+  top:100px;
+  /* bottom: 50%; */
   right: 10px;
   z-index: 15;
+  font-size: 15px;
+}
+
+.admin a{
+  /* text-decoration: none; */
+  color: #d5e1fa;
 }
 
 
@@ -33,12 +41,20 @@
 
 .App body .userName{
   width:100px ;
-  height:150px;
+  /* height:150px; */
+  height:100px;
   background-color: aliceblue;
-  border: 0.5px solid gray;
+  background-color: whitesmoke;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-top: 0.5px solid rgb(196, 188, 188);
+  border-right: 0.5px solid rgb(196, 188, 188);
+  border-bottom: 0.5px solid rgb(196, 188, 188);
   border-radius: 0 25px 25px 0;
   position: fixed;
-  top:20%;
+  /* top:20%; */
+  top:10%;
+  /* bottom:10%; */
+  z-index: inherit;
 }
 
 .App body  .userName .logout{

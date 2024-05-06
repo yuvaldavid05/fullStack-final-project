@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Admin from "./pages/admin/Admin";
 import Loader from "./components/loader/Loader";
 import Snackbar from './components/snackbar/Snackbar';
+import { RiAdminLine } from "react-icons/ri";
 
 export const GeneralContext = React.createContext();
 
@@ -69,6 +70,7 @@ function App() {
         .catch(err => {
           setRoleType(RoleTypes.none);
           snackbarOn("User not logged in");
+          // sessionStorage.removeItem("basketData")
           navigate('/');
         })
         .finally(() => setLoader(false));
@@ -85,6 +87,8 @@ function App() {
     setRoleType(RoleTypes.none);
     navigate('/');
     snackbarOn('User logged out successfully');
+    // sessionStorage.removeItem("basketData")
+
 
   }
 
@@ -96,25 +100,30 @@ function App() {
 
       <div className="App">
         {loader && <Loader />}
-        {/* {snackbar && <Snackbar text={snackbar} />} */}
         {snackbar && <Snackbar text={snackbar} />}
 
-        <div className='admin'>
-          <Link to="/admin">click here</Link>
-        </div>
+        {(user && user.admin == true) ?
+
+          <div className='admin'>
+            <Link to="/admin">Admin Click Here
+              <RiAdminLine />
+            </Link>
+          </div> : ""
+        }
 
         <header className="App-header">
           <NavbarTop2 />
           <Router />
         </header>
 
+        {/* {user.firstName + " " + user.lastName} */}
 
         {user ?
           <body>
             <div className='userName'>
               Hey
               <br></br>
-              <span><b>{user.firstName + " " + user.lastName}</b></span>!
+              <span><b>{user.firstName}</b></span>!
               <br></br>
               <button className='logout' onClick={logout}><u>Logout</u></button>
             </div>
