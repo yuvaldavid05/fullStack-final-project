@@ -1,6 +1,6 @@
 import "./AdminProductChange.css";
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Joi from 'joi';
 
 import Container from 'react-bootstrap/Container';
@@ -76,13 +76,14 @@ export default function AdminProductChange() {
         { name: 'img', type: 'text', label: 'Img URL', required: true, sm: '4' },
         { name: 'stock', type: 'number', label: 'Stock', required: true, sm: '4' },
         { name: 'gender', type: 'array', label: 'Gender', required: true, sm: '4' },
-        { name: 'fabricType', type: 'text', label: 'Fabric Type', required: true, sm: '4' },
-        { name: 'collectionP', type: 'text', label: 'collection', required: true, sm: '4' },
+        { name: 'fabricType', type: 'select', label: 'Fabric Type', required: true, sm: '4' },
+        { name: 'collectionP', type: 'select', label: 'collection', required: true, sm: '4' },
     ]
 
     const sizesStr = ["S", "M", "L", "XL"];
     const colorsStr = ["red", "gray", "pink", "brown", "green", "blue", "orange", "white", "black"];
-    const genderSrt = ["men", "women", "kids"];
+    const genderStr = ["men", "women", "kids"];
+    const fabricTypeStr = ["Linen", "silk", "wool", "leather"];
 
 
 
@@ -90,6 +91,7 @@ export default function AdminProductChange() {
         const { id, value } = ev.target;
 
         let obj = {};
+
         if (ev.target.name == "sizes") {
             const { name, value } = ev.target;
             if (ev.target.checked) {
@@ -156,6 +158,7 @@ export default function AdminProductChange() {
                 console.log(genderRemoveIndex)
             }
         } else {
+            console.log(ev.target)
             obj = {
                 ...formData,
                 [id]: value,
@@ -315,11 +318,12 @@ export default function AdminProductChange() {
                                                     </Form.Text>
                                                 </div>
                                             </div>
-                                            : (s.name === "color" ? <div key={"inline-checkbox"} className="mb-3">
-                                                {colorsStr.map((c, i) => (
-                                                    <>
+                                            : (s.name === "color" ?
+                                                <div key={"inline-checkbox"} className="mb-3">
+                                                    {colorsStr.map((c, i) => (
+                                                        <>
 
-                                                        {/* <Form.Check key={i}
+                                                            {/* <Form.Check key={i}
                                                             inline
                                                             label={a}
                                                             name={a}
@@ -329,27 +333,27 @@ export default function AdminProductChange() {
                                                             onChange={handleInputChange}
                                                         /> */}
 
-                                                        <Form.Check
-                                                            inline
-                                                            label={c}
-                                                            name="color"
-                                                            value={c}
-                                                            type="checkbox"
-                                                            checked={formData._id && formData.color.includes(c)}
-                                                            id={`inline-'checkbox'-${i}`}
-                                                            onChange={handleInputChange}
-                                                        />
-                                                    </>
-                                                ))}
-                                                <div>
-                                                    <Form.Text muted>
-                                                        *At least one color
-                                                    </Form.Text>
-                                                </div>
-                                            </div> :
+                                                            <Form.Check
+                                                                inline
+                                                                label={c}
+                                                                name="color"
+                                                                value={c}
+                                                                type="checkbox"
+                                                                checked={formData._id && formData.color.includes(c)}
+                                                                id={`inline-'checkbox'-${i}`}
+                                                                onChange={handleInputChange}
+                                                            />
+                                                        </>
+                                                    ))}
+                                                    <div>
+                                                        <Form.Text muted>
+                                                            *At least one color
+                                                        </Form.Text>
+                                                    </div>
+                                                </div> :
                                                 s.name === "gender" &&
                                                 <div key={"inline-checkbox"} className="mb-3">
-                                                    {genderSrt.map((g, i) => (
+                                                    {genderStr.map((g, i) => (
                                                         <>
                                                             <Form.Check
                                                                 inline
@@ -371,22 +375,43 @@ export default function AdminProductChange() {
                                                 </div>
 
                                             )
-                                        :
-                                        <>
+                                        : (s.type === "select" ?
 
-                                            <Form.Control
-                                                id={s.name}
-                                                type={s.type}
-                                                required={s.required}
-                                                value={formData[s.name]}
-                                                className={s.required ? (errors[s.name] ? 'fieldError' : '') : ''}
-                                                onChange={handleInputChange}
-                                            />
-                                            {s.required ? (errors[s.name] ?
-                                                <Form.Text className='fieldErrorSignup' muted>
-                                                    {errors[s.name]}
-                                                </Form.Text> : "") : ""}
-                                        </>
+                                            (s.name === "fabricType" ?
+
+                                                <>
+                                                    <Form.Select aria-label="Default select example">
+                                                        <option>choose Fabric Type</option>
+                                                        {fabricTypeStr.map((f, i) => (
+                                                            <React.Fragment key={i}>
+
+                                                                <option value={f} name="fabricType">{f}</option>
+                                                            </React.Fragment>
+                                                        ))
+                                                        }
+                                                    </Form.Select>
+
+
+                                                </>
+                                                : "")
+
+                                            :
+                                            <>
+
+                                                <Form.Control
+                                                    id={s.name}
+                                                    type={s.type}
+                                                    required={s.required}
+                                                    value={formData[s.name]}
+                                                    className={s.required ? (errors[s.name] ? 'fieldError' : '') : ''}
+                                                    onChange={handleInputChange}
+                                                />
+                                                {s.required ? (errors[s.name] ?
+                                                    <Form.Text className='fieldErrorSignup' muted>
+                                                        {errors[s.name]}
+                                                    </Form.Text> : "") : ""}
+                                            </>
+                                        )
                                     }
 
 
