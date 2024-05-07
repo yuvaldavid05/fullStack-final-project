@@ -46,7 +46,7 @@ export default function StruCategory() {
                             return (
                                 <Col key={i}>
                                     <div className='holder'>
-                                        <Item itemImage={p.img} itemName={p.productName} itemDescription={p.description} itemPrice={p.price} itemSizes={p.sizes} itemColor={p.color} itemId={p._id} itemLikesUsers={p.likes} cat={cat ? cat : ""} />
+                                        <Item itemImage={p.img} itemName={p.productName} itemDescription={p.description} itemPrice={p.price} itemSizes={p.sizes} itemColor={p.color} itemId={p._id} itemLikesUsers={p.likes} cat={cat ? cat : ""} itemStock={p.stock} />
                                     </div>
                                 </Col>
                             )

@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/esm/Button';
 
 // דף מבנה של מוצר
 
-export default function Item({ itemImage, itemName, itemDescription, itemColor, itemPrice, itemSizes, itemId, itemLikesUsers, cat }) {
+export default function Item({ itemImage, itemName, itemDescription, itemColor, itemPrice, itemSizes, itemId, itemLikesUsers, cat, itemStock }) {
     const [userSize, setUserSize] = useState("");
     const navigate = useNavigate();
     const [favorite, setFavorite] = useState(false);
@@ -143,7 +143,7 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
 
                         </div>
 
-                        <ButtonModalAddItem itemImage={itemImage} itemName={itemName} itemDescription={itemDescription} itemPrice={itemPrice} itemSizes={itemSizes} itemColor={itemColor} size={userSize} itemId={itemId} />
+                        <ButtonModalAddItem itemImage={itemImage} itemName={itemName} itemDescription={itemDescription} itemPrice={itemPrice} itemSizes={itemSizes} itemColor={itemColor} size={userSize} itemId={itemId} itemStock={itemStock} />
                     </div>
                 </Card.Body>
             </Card >

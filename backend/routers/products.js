@@ -60,15 +60,15 @@ router.put("/:productId/unfavorite", async (req, res) => {
 // לסיים - פונציה שמורידה את המלאי של הפריטים שנקנו
 router.put("/update-stock/:productId", async (req, res) => {
 
-    const productFind = await UserModel.findOne({ _id: req.params.productId });
+    const productFind = await ProductModel.findOne({ _id: req.params.productId });
 
     if (!productFind) {
         return res.status(403).send("Product does not exist");
     }
 
-    productFind.stock = userFind.stock - 1;
+    productFind.stock = productFind.stock - 1;
 
-    await userFind.save();
+    await productFind.save();
     res.send();
 
 });

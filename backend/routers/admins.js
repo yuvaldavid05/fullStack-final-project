@@ -67,19 +67,19 @@ router.get("/products", async (req, res) => {
     res.send(await ProductModel.find({}));
 });
 
-// משיכה של כל המוצרים
+// משיכה של מוצר ספציפי
 router.get("/products/:id", async (req, res) => {
     res.send(await ProductModel.findOne({ _id: req.params.id }));
 });
 
-// הוספה של מוצר אחד - לבדוק
+// הוספה של מוצר אחד - עובד
 router.post("/products/new-product", async (req, res) => {
     let validBody = validProduct(req.body);
     if (validBody.error) {
         return res.status(400).json(validBody.error.details);
     }
 
-    const { productName, description, price, sizes, color, img, category, stock } = req.body;
+    const { productName, description, price, sizes, color, img, category, stock, gender, fabricType, collectionP } = req.body;
 
 
     // לבדוק את המערך LIKES איך הוא חוזר
@@ -93,6 +93,9 @@ router.post("/products/new-product", async (req, res) => {
         category,
         stock,
         likes: [],
+        gender,
+        fabricType,
+        collectionP
     });
 
     const newProduct = await product.save();
@@ -101,7 +104,7 @@ router.post("/products/new-product", async (req, res) => {
 
 // // לעדכן מוצר - עובד
 router.put("/products/update/:id", async (req, res) => {
-    const { productName, description, price, sizes, color, img, category, stock } = req.body;
+    const { productName, description, price, sizes, color, img, category, stock, gender, fabricType, collectionP } = req.body;
 
 
     const productFind = await ProductModel.findOne({ _id: req.params.id });
@@ -119,6 +122,9 @@ router.put("/products/update/:id", async (req, res) => {
     productFind.img = img;
     productFind.category = category;
     productFind.stock = stock;
+    productFind.gender = gender;
+    productFind.fabricType = fabricType;
+    productFind.collectionP = collectionP;
 
     await productFind.save();
     // const updateProduct = await productFind.save();

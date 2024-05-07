@@ -34,6 +34,9 @@ export default function AdminProductChange() {
                 img: "",
                 category: "",
                 stock: "",
+                gender: [],
+                fabricType: "",
+                collectionP: "",
             });
         } else {
             setLoader(true);
@@ -58,6 +61,9 @@ export default function AdminProductChange() {
         img: Joi.string().min(1).max(150).required(),
         category: Joi.string().min(1).required(),
         stock: Joi.number().min(0).max(600).required(),
+        gender: Joi.array().items(Joi.string()).required(),
+        fabricType: Joi.string().min(1).max(10).required(),
+        collectionP: Joi.string().min(1).max(15).required(),
     });
 
     const structureFormUpdatePro = [
@@ -69,10 +75,14 @@ export default function AdminProductChange() {
         { name: 'category', type: 'text', label: 'Category', required: true, sm: '4' },
         { name: 'img', type: 'text', label: 'Img URL', required: true, sm: '4' },
         { name: 'stock', type: 'number', label: 'Stock', required: true, sm: '4' },
+        { name: 'gender', type: 'array', label: 'Gender', required: true, sm: '4' },
+        { name: 'fabricType', type: 'text', label: 'Fabric Type', required: true, sm: '4' },
+        { name: 'collectionP', type: 'text', label: 'collection', required: true, sm: '4' },
     ]
 
     const sizesStr = ["S", "M", "L", "XL"];
     const colorsStr = ["red", "gray", "pink", "brown", "green", "blue", "orange", "white", "black"];
+    const genderSrt = ["men", "women", "kids"];
 
 
 
@@ -125,6 +135,26 @@ export default function AdminProductChange() {
                 // };
             }
 
+        } else if (ev.target.name == "gender") {
+            const { name, value } = ev.target;
+            if (ev.target.checked) {
+                obj = {
+                    ...formData,
+                    [name]: [...formData.gender, value],
+                };
+                console.log(obj)
+
+            } else if (!ev.target.checked) {
+                const genderRemoveIndex = formData.gender.findIndex(x => x === value);
+                let NewArray = formData.gender;
+                NewArray.splice(genderRemoveIndex, 1);
+                obj = {
+                    ...formData,
+                    [name]: NewArray,
+                };
+                console.log(obj)
+                console.log(genderRemoveIndex)
+            }
         } else {
             obj = {
                 ...formData,
@@ -215,7 +245,7 @@ export default function AdminProductChange() {
         ev.preventDefault();
         // setLoading(true);
 
-        if (!formData.sizes.length || !formData.color.length) {
+        if (!formData.sizes.length || !formData.color.length || !formData.gender.length) {
             alert("have to choose size and color")
         } else {
 
@@ -261,22 +291,12 @@ export default function AdminProductChange() {
                                 <Col sm={s.sm} key={s.name} className='input-form'>
                                     <Form.Label name={s.name}>{s.required ? s.label + ' *' : s.label}</Form.Label>
 
-                                    {s.name === "sizes" || s.name === "color" ?
+                                    {s.type === "array" ?
                                         s.name === "sizes" ?
 
                                             <div key={`inline-checkbox-${index}`} className="mb-3">
                                                 {sizesStr.map((a, i) => (
                                                     <>
-
-                                                        {/* <Form.Check key={i}
-                                                            inline
-                                                            label={a}
-                                                            name={a}
-                                                            type="checkbox"
-                                                            checked={formData._id && formData.sizes.includes(a)}
-                                                            id={s.name}
-                                                            onChange={handleInputChange}
-                                                        /> */}
                                                         <Form.Check
                                                             inline
                                                             label={a}
@@ -284,7 +304,7 @@ export default function AdminProductChange() {
                                                             value={a}
                                                             type="checkbox"
                                                             checked={formData._id && formData.sizes.includes(a)}
-                                                            id={`inline-'radio'-${i}`}
+                                                            id={`inline-'checkbox'-${i}`}
                                                             onChange={handleInputChange}
                                                         />
                                                     </>
@@ -295,7 +315,7 @@ export default function AdminProductChange() {
                                                     </Form.Text>
                                                 </div>
                                             </div>
-                                            : <div key={"inline-checkbox"} className="mb-3">
+                                            : (s.name === "color" ? <div key={"inline-checkbox"} className="mb-3">
                                                 {colorsStr.map((c, i) => (
                                                     <>
 
@@ -316,7 +336,7 @@ export default function AdminProductChange() {
                                                             value={c}
                                                             type="checkbox"
                                                             checked={formData._id && formData.color.includes(c)}
-                                                            id={`inline-'radio'-${i}`}
+                                                            id={`inline-'checkbox'-${i}`}
                                                             onChange={handleInputChange}
                                                         />
                                                     </>
@@ -326,7 +346,31 @@ export default function AdminProductChange() {
                                                         *At least one color
                                                     </Form.Text>
                                                 </div>
-                                            </div>
+                                            </div> :
+                                                s.name === "gender" &&
+                                                <div key={"inline-checkbox"} className="mb-3">
+                                                    {genderSrt.map((g, i) => (
+                                                        <>
+                                                            <Form.Check
+                                                                inline
+                                                                label={g}
+                                                                name="gender"
+                                                                value={g}
+                                                                type="checkbox"
+                                                                checked={formData._id && formData.color.includes(g)}
+                                                                id={`inline-'checkbox'-${i}`}
+                                                                onChange={handleInputChange}
+                                                            />
+                                                        </>
+                                                    ))}
+                                                    <div>
+                                                        <Form.Text muted>
+                                                            *At least one color
+                                                        </Form.Text>
+                                                    </div>
+                                                </div>
+
+                                            )
                                         :
                                         <>
 

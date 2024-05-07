@@ -125,22 +125,39 @@ export default function ShoppingBasket() {
             .then(data => {
                 console.log(data)
                 console.log(user.orders)
-                // alert("Succeeded")
                 console.log(user);
-                // stockChanged();
+                stockChanged();
                 snackbarOn("Order received! Thank U");
                 sessionStorage.removeItem('basketDate');
                 navigate("/succeeded");
-                setBasket([]);
-                // setNext(false);
+                // setBasket([]);
             });
     }
 
-    // const stockChanged = () => {
-    //     // let sumIdItem = basket.filter(b => b.item._id === )
-    //     const indexItem = basket.filter(b => b == basket.item._id);
-    //     console.log(indexItem);
-    // }
+    const stockChanged = () => {
+        let arrayIdItem = [];
+        basket.map(b => arrayIdItem.push(b.item._id))
+        console.log(arrayIdItem);
+        arrayIdItem.map(a => {
+            fetch(`http://localhost:2222/products/update-stock/${a}`, {
+                credentials: 'include',
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': localStorage.token
+                },
+            })
+                .then(() => {
+                    // הסרה מההתחלה
+                    arrayIdItem.shift();
+                    console.log(arrayIdItem)
+                    setBasket([]);
+                });
+        })
+
+        // const indexItem = basket.filter(b => b == basket.item._id);
+        // console.log(indexItem);
+    }
     return (
         <section id="basket" className='basket-page'>
             <Container fluid>

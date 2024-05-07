@@ -11,6 +11,9 @@ const productSchema = new mongoose.Schema({
     category: String,
     stock: Number,
     likes: Array,
+    gender: Array,
+    fabricType: String,
+    collectionP: String,
     // publishDate: String,
 });
 
@@ -28,6 +31,9 @@ exports.validProduct = (_bodyData) => {
         category: Joi.string().min(1).required(),
         stock: Joi.number().min(0).max(600).required(),
         likes: Joi.array().items(Joi.string()),
+        gender: Joi.array().items(Joi.string()).required(),
+        fabricType: Joi.string().min(1).max(10).required(),
+        collectionP: Joi.string().min(1).max(15).required(),
         // publishDate: Joi.date().format('YYYY-MM-DD HH:mm'),
     })
 

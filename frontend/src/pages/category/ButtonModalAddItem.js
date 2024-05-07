@@ -13,7 +13,7 @@ import { GeneralContext } from '../../App';
 
 // דף של מודל - הוספה של מוצר לרשימה
 
-function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, itemPrice, itemSizes, size, itemId }) {
+function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, itemPrice, itemSizes, size, itemId, itemStock }) {
     const [userChoiceSize, setUserChoiceSize] = useState("");
     const [userChoiceColor, setUserChoiceColor] = useState("");
     const [show, setShow] = useState(false);
@@ -70,9 +70,9 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, i
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                + add item
-            </Button>
+            <Button variant="primary" onClick={handleShow} disabled={itemStock == 0 ? true : false} >
+                {itemStock == 0 ? "Out Of Stock " : " + add item"}
+            </Button >
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
