@@ -1,4 +1,10 @@
+.item-page-body .button-back{
+    margin: 15px;
+}
 
+.item-page-body .button-back a{
+    color:white;
+}
 .item-page-body .item-page-header{
     margin: 50px 5px;
 }
@@ -65,6 +71,10 @@
     font-size: 18px;
     /* border: 2px solid rgba(128, 128, 128, 0.76); */
     border-radius: 5px;
+}
+
+.footer-item-page .accordion-item .accordion-row-info{
+    font-size: 19px;
 }
 
 @media (max-width : 768px) {

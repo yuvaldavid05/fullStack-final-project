@@ -25,6 +25,9 @@ function AdminProducts() {
         { name: 'img', type: 'text', label: 'Img URL', required: true, sm: '4' },
         { name: 'category', type: 'text', label: 'Category', required: true, sm: '4' },
         { name: 'stock', type: 'number', label: 'Stock', required: true, sm: '4' },
+        { name: 'gender', type: 'array', label: 'Gender', required: true, sm: '4' },
+        { name: 'fabricType', type: 'select', label: 'Fabric Type', required: true, sm: '4' },
+        { name: 'collectionP', type: 'select', label: 'Collection', required: true, sm: '4' },
     ]
 
     useEffect(() => {

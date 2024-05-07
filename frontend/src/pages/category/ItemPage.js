@@ -9,7 +9,7 @@ import { IoHeartOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import Accordion from 'react-bootstrap/Accordion';
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useResolvedPath } from 'react-router-dom';
 import { GeneralContext } from '../../App';
 
 
@@ -21,6 +21,7 @@ export default function ItemPage() {
     const [sizeChosenItemPage, setSizeChosenItemPage] = useState("");
     const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, snackbarOn } = useContext(GeneralContext);
     const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -95,6 +96,10 @@ export default function ItemPage() {
 
     return (
         <section id="item-page" className='item-page-body'>
+            <Button className='button-back'>
+                <Link to="/products">Back To "All Categories"</Link>
+
+            </Button>
             {
                 oneCard.map((oneC, index) => (
 
@@ -153,19 +158,29 @@ export default function ItemPage() {
                                     <Accordion.Item eventKey="0">
                                         <Accordion.Header>Product information</Accordion.Header>
                                         <Accordion.Body>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                            aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                            culpa qui officia deserunt mollit anim id est laborum.
+                                            <Row className='accordion-row-info'>
+                                                <Col> <b> Gender :</b>  {oneC.gender.join(', ')}</Col>|
+                                                <Col><b>Fabric Type : </b>{oneC.fabricType}</Col>|
+                                                <Col> <b>collection :</b>  {oneC.collectionP}</Col>
+                                            </Row>
+
+                                            <br></br>
+
+                                            <br></br>
+
                                         </Accordion.Body>
                                     </Accordion.Item>
                                     <Accordion.Item eventKey="1">
-                                        <Accordion.Header>Accordion Item #2</Accordion.Header>
+                                        <Accordion.Header>Size Chart By Item</Accordion.Header>
                                         <Accordion.Body>
-                                            <Image src="https://bodyandsoul.mu/media/size_chart/menwebcom.jpg" fluid />
+                                            {oneC.gender.includes("men") ?
+                                                <Image src="https://cdn.sportdirect.com/files/website-images/Stanno/Stanno-Size-chart-2024-2.webp" fluid />
+                                                : oneC.gender.includes("women") ?
+                                                    <Image src="https://cdn.sportdirect.com/files/website-images/Stanno/Stanno-Size-chart-2024-3.webp" fluid /> :
+
+                                                    ""
+
+                                            }
                                         </Accordion.Body>
                                     </Accordion.Item>
                                 </Accordion>

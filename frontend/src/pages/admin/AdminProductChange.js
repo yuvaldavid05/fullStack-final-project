@@ -77,13 +77,14 @@ export default function AdminProductChange() {
         { name: 'stock', type: 'number', label: 'Stock', required: true, sm: '4' },
         { name: 'gender', type: 'array', label: 'Gender', required: true, sm: '4' },
         { name: 'fabricType', type: 'select', label: 'Fabric Type', required: true, sm: '4' },
-        { name: 'collectionP', type: 'select', label: 'collection', required: true, sm: '4' },
+        { name: 'collectionP', type: 'select', label: 'Collection', required: true, sm: '4' },
     ]
 
     const sizesStr = ["S", "M", "L", "XL"];
     const colorsStr = ["red", "gray", "pink", "brown", "green", "blue", "orange", "white", "black"];
-    const genderStr = ["men", "women", "kids"];
+    const genderStr = ["men", "women"];
     const fabricTypeStr = ["Linen", "silk", "wool", "leather"];
+    const collectionStr = ["New", "Sale", "Best Sellers", "Current", "Previous Season"];
 
 
 
@@ -163,7 +164,10 @@ export default function AdminProductChange() {
                 ...formData,
                 [id]: value,
             };
+            console.log(obj)
+
         }
+
 
 
 
@@ -249,7 +253,7 @@ export default function AdminProductChange() {
         // setLoading(true);
 
         if (!formData.sizes.length || !formData.color.length || !formData.gender.length) {
-            alert("have to choose size and color")
+            alert("have to choose size, color and gender")
         } else {
 
 
@@ -361,7 +365,7 @@ export default function AdminProductChange() {
                                                                 name="gender"
                                                                 value={g}
                                                                 type="checkbox"
-                                                                checked={formData._id && formData.color.includes(g)}
+                                                                checked={formData._id && formData.gender.includes(g)}
                                                                 id={`inline-'checkbox'-${i}`}
                                                                 onChange={handleInputChange}
                                                             />
@@ -380,12 +384,12 @@ export default function AdminProductChange() {
                                             (s.name === "fabricType" ?
 
                                                 <>
-                                                    <Form.Select aria-label="Default select example">
+                                                    <Form.Select aria-label="Default select" onChange={handleInputChange} id="fabricType">
                                                         <option>choose Fabric Type</option>
                                                         {fabricTypeStr.map((f, i) => (
                                                             <React.Fragment key={i}>
 
-                                                                <option value={f} name="fabricType">{f}</option>
+                                                                <option value={f}>{f}</option>
                                                             </React.Fragment>
                                                         ))
                                                         }
@@ -393,7 +397,24 @@ export default function AdminProductChange() {
 
 
                                                 </>
-                                                : "")
+                                                : s.name === "collectionP" &&
+
+                                                <>
+                                                    <Form.Select aria-label="Default select" onChange={handleInputChange} id="collectionP">
+                                                        <option>collection</option>
+                                                        {collectionStr.map((t, i) => (
+                                                            <React.Fragment key={i}>
+
+                                                                <option value={t} >{t}</option>
+                                                            </React.Fragment>
+                                                        ))
+                                                        }
+                                                    </Form.Select>
+
+
+                                                </>
+
+                                            )
 
                                             :
                                             <>

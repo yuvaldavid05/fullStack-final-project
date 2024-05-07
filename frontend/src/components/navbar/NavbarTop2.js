@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link } from 'react-router-dom';
+import { useResolvedPath, Link } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { GeneralContext } from '../../App';
 import Searchbar from '../searchbar/Searchbar';
@@ -43,6 +43,9 @@ const pages2 = [
 export default function NavbarTop2() {
     const { user, roleType, setUser, setRoleType, searchWord, setSearchWord } = useContext(GeneralContext);
     const [products, setProducts] = useState([]);
+    const path = useResolvedPath().pathname;
+    console.log(path);
+
 
     // פילטור של מוצר אחד(ראשון) מכל קטגוריה
     // pageCategory = products.filter((p, i) => products.findIndex(x => x.category == p.category) === i);
@@ -69,7 +72,7 @@ export default function NavbarTop2() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         {pages.filter(p => !p.permissions || checkPermissions(p.permissions, roleType)).map((page) => (
-                            <Nav.Link key={page.route}>
+                            <Nav.Link key={page.route} className={page.route === path ? 'activeColor' : ''}>
                                 <Link to={page.route}>
                                     {page.title}
                                 </Link>
