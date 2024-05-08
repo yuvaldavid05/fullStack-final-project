@@ -13,7 +13,7 @@ import { GeneralContext } from '../../App';
 
 
 export default function ContactUs() {
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, comment, setComment, snackbarOn } = useContext(GeneralContext);
+    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, comment, setComment, snackbarOn, accColorBackground, setAccColorBackground } = useContext(GeneralContext);
     const [commentData, setCommentData] = useState({
         firstName: "",
         lastName: "",
@@ -88,6 +88,7 @@ export default function ContactUs() {
     };
 
 
+    // אפשר למחוק
     // לנסות בסוף לחבדוק גם אם יוזר לא מחובר אם הוא שולח אפשר לסווג
     const sendComment = ev => {
         ev.preventDefault();
@@ -108,31 +109,13 @@ export default function ContactUs() {
                 setCommentData(objComment);
                 // setSubmit(true);
                 setComment(objComment);
-                snackbarOn("This form has been successfully submitted - user")
-                // alert("This form has been successfully submitted - user")
+                snackbarOn("This form has been successfully submitted")
                 console.log(commentData)
                 console.log(comment)
                 // console.log(comments)
 
 
             } else {
-                // חיפוש אם קיים יוזר
-                // fetch(`http://localhost:2222/users`, {
-                //     credentials: 'include',
-                // })
-                //     .then(res => res.json())
-                //     .then(data => {
-                //         setClients(data);
-
-                //     });
-
-                // const client = clients.find(x => x.email == objComment.email);
-                // if (client) {
-                //     alert("found")
-                // } else {
-                //     alert("Not found")
-                // }
-
                 // הכנסה של הפרטים ל-OBJ
                 objComment = {
                     ...commentData,
@@ -141,8 +124,7 @@ export default function ContactUs() {
                 setCommentData(objComment);
                 // setSubmit(true);
                 // לזכור להוריד את היוזר
-                snackbarOn("This form has been successfully submitted -Not user")
-                // alert("This form has been successfully submitted - Not user");
+                snackbarOn("This form has been successfully submitted")
                 setComment(objComment);
                 console.log(comment)
             }
@@ -153,7 +135,7 @@ export default function ContactUs() {
     }
 
     return (
-        <section id="contact-us-page" className='contact-page-body'>
+        <section id="contact-us-page" className={accColorBackground ? 'text-light contact-page-body' : 'contact-page-body'} >
             <Container fluid>
                 <Row>
                     <b><h2>CONTACT US</h2></b>
@@ -162,7 +144,7 @@ export default function ContactUs() {
                 <Form onSubmit={sendComment}>
 
 
-                    <Row className='contact-form'>
+                    <Row className={accColorBackground ? 'text-light contact-form' : 'contact-form'}>
                         <h4>Contact Form</h4>
                         <div className='costumer-details'>
                             <Row>
@@ -199,15 +181,7 @@ export default function ContactUs() {
                                                     {s.required ? (errors[s.name] ? <div>{errors[s.name]}</div> : '') : ''}
                                                 </>
                                             }
-                                            {/* <Form.Label htmlFor={s.name} name={s.name}>{s.required ? s.label + ' *' : s.label}</Form.Label>
-                                            <Form.Control
-                                                id={s.name}
-                                                type={s.type}
-                                                aria-describedby={s.name}
-                                                className={s.required ? (errors[s.name] ? 'fieldError' : '') : ''}
-                                                onChange={handleInputChange}
-                                            />
-                                            {s.required ? (errors[s.name] ? <div>{errors[s.name]}</div> : '') : ''} */}
+
                                         </Col>
                                         :
                                         <Col>
@@ -239,6 +213,6 @@ export default function ContactUs() {
                     </Row>
                 </Form>
             </Container>
-        </section >
+        </ section >
     );
 }

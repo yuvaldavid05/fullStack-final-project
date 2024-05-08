@@ -35,22 +35,7 @@ nav.navbar-frame .nav-link.activeColor{
 .navbar-frame .changeBackground{
     background-color: rgb(96, 95, 95);
 }
-/* 
-.navbar-frame .dropdown-item a.changeBackground-navDrop,
-.navbar-frame .navbar-nav a.changeBackground-nav,
-.navbar-frame a.changeBackground-nav,
-.navbar-frame a.changeBackground-navDrop
-{
-    color: white;
-}
 
-.navbar-frame .changeBackground:hover{
-    background-color: black;
-}
-.changeBackground-navDrop:hover,
-.navbar-frame .navbar-nav a.changeBackground-nav:hover{
-    color: white;
-} */
 
 .navbar-frame .dropdown-item a:hover,
 .navbar-frame .navbar-nav a:hover{
@@ -66,9 +51,12 @@ nav.navbar-frame .nav-link.activeColor{
     margin: 0 15px;
 }
 
-/* .navbar-frame .accessibility.acc-font{
+.navbar-frame .accessibility div .form-check {
     margin: 0 15px;
-} */
+}
+.navbar-frame .accessibility div .font{
+margin: 0 5px;
+}
 
 .navbar-frame .accessibility.acc-font button{
    background-color: initial;

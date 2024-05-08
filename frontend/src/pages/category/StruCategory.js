@@ -2,8 +2,6 @@ import './StruCategory.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// import Card from 'react-bootstrap/Card';
-// import Button from 'react-bootstrap/Button';
 import Item from './Item';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -12,13 +10,12 @@ import { search } from "../../components/searchbar/Searchbar";
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
-import { IoMdHeartEmpty } from "react-icons/io";
 import ButtonModalAddItem from './ButtonModalAddItem';
 // דף של מבנה קטגוריה
 
 export default function StruCategory() {
     const { cat } = useParams();
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, searchWord } = useContext(GeneralContext);
+    const { productCat, setProductCat, loader, setLoader, searchWord } = useContext(GeneralContext);
     const myRef = useRef();
     const colorsStr = ["red", "gray", "pink", "brown", "green", "blue", "orange", "white", "black"];
     const [changeView, setChangeView] = useState(false);

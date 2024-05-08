@@ -301,77 +301,7 @@ export default function ShoppingBasket() {
 
                         : ""
                 }
-                {/* <hr></hr>
-                <Row>
-                    <Col>
-                        <h3>Order summary : </h3>
-                        <div className='basketUserData'>
 
-                            <div>Items Total : ({basket.length}) </div>
-                            <div>Total : {sum} nis </div>
-                        </div>
-                        <div>
-
-                            {user ?
-                                <>
-                                    <h5><u>Customer Details:</u></h5>
-                                    <Row className='formUserData'>
-                                        {structureFormOrder.filter(str => str.sm).map(s => (
-                                            <Col sm={s.sm} key={s.name} >
-                                                <Form.Label name={s.name}>{s.required ? s.label + ' *' : s.label}</Form.Label>
-                                                <Form.Control
-                                                    disabled
-                                                    id={s.name}
-                                                    type={s.type}
-                                                    aria-describedby={s.name}
-                                                    value={user[s.name]}
-
-                                                />
-                                            </Col>
-                                        ))}
-                                    </Row>
-                                </>
-                                : ""
-                            }
-
-
-                        </div>
-                        <div className='paymentUser'>
-                            <h5><u>Payment Options</u></h5>
-                            <Col>
-                                {payment.map((p, i) => (
-                                    <Form.Check key={i}
-                                        inline
-                                        label={p}
-                                        value={p}
-                                        name="payment"
-                                        type="radio"
-                                        id={`inline-'radio'-${i}`}
-                                        onChange={handleInputChange}
-                                    />
-                                ))}
-                            </Col>
-                        </div>
-                        <div className='deliveryUser'>
-                            <h5><u>Delivery Options</u></h5>
-                            <Col>
-
-                                {delivery.map((d, i) => (
-                                    <Form.Check key={i}
-                                        inline
-                                        label={d}
-                                        value={d}
-                                        name="delivery"
-                                        type="radio"
-                                        id={`inline-'radio'-${i}`}
-                                        onChange={handleInputChange}
-                                    />
-                                ))}
-                            </Col>
-                        </div>
-                        <Button variant="primary" onClick={sendOrder}>finish</Button>
-                    </Col>
-                </Row> */}
             </Container>
         </section >
     );

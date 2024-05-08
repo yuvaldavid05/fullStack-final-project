@@ -16,7 +16,7 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
     const navigate = useNavigate();
     const [favorite, setFavorite] = useState(false);
 
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, snackbarOn } = useContext(GeneralContext);
+    const { user, setLoader, snackbarOn } = useContext(GeneralContext);
     const [u, setU] = useState({});
 
 
@@ -93,14 +93,13 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                 .then(data => {
                     console.log(data)
                     snackbarOn("Removed from favorites");
-                    // alert("succsed unlike")
                 })
                 .finally(() => setLoader(false));
         }
     }
 
     return (
-        <>
+        <div className='holder'>
             <Card>
                 <Card.Img variant="top" src={itemImage} />
                 {user ?
@@ -147,6 +146,6 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                     </div>
                 </Card.Body>
             </Card >
-        </>
+        </div>
     )
 }

@@ -36,13 +36,13 @@ const pages = [
 ];
 
 const pages2 = [
-    { route: '/wish-list', title: 'WistList', permissions: [RoleTypes.user] },
+    { route: '/wish-list', title: 'WistList', permissions: [RoleTypes.user, RoleTypes.admin] },
     { route: '/shopping-basket', title: 'Shopping-basket', permissions: [RoleTypes.none, RoleTypes.user, RoleTypes.admin] },
 ];
 
 
 export default function NavbarTop2() {
-    const { user, roleType, setUser, setRoleType, searchWord, setSearchWord, accFontSize, setAccFontSize, accColorBackground, setAccColorBackground } = useContext(GeneralContext);
+    const { roleType, setAccFontSize, accColorBackground, setAccColorBackground } = useContext(GeneralContext);
     const [products, setProducts] = useState([]);
     const path = useResolvedPath().pathname;
 
@@ -69,14 +69,16 @@ export default function NavbarTop2() {
         setAccFontSize(false)
     }
     const changeBackground = (ev) => {
+
         if (ev.target.value) {
             setAccColorBackground(!accColorBackground)
         }
+
     }
 
     return (
 
-        <Navbar collapseOnSelect expand="lg" sticky="top" id="navbar-section" className={accColorBackground ? 'navbar-frame bg-dark' : 'navbar-frame'} >
+        <Navbar collapseOnSelect expand="lg" sticky="top" id="navbar-section" className={accColorBackground ? 'navbar-frame text-light bg-dark' : 'navbar-frame'} >
             <Container>
                 <Navbar.Brand href="/" className={accColorBackground ? 'text-light' : ''} style={{ fontSize: "larger" }}>Amour</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -91,10 +93,10 @@ export default function NavbarTop2() {
                         ))}
 
 
-                        <NavDropdown title="Categories" id="collapsible-nav-dropdown" className={accColorBackground && "text-light"} >
+                        <NavDropdown title="Categories" id="collapsible-nav-dropdown" className={accColorBackground ? "ndrop" : ""} >
                             {
                                 products.filter((p, i) => products.findIndex(x => x.category == p.category) === i).map((t) => (
-                                    <NavDropdown.Item key={t._id} className={accColorBackground && "changeBackground"}>
+                                    <NavDropdown.Item key={t._id} className={accColorBackground && "bg-dark"}>
                                         <Link to={`/products/category/${t.category}`} className={accColorBackground ? "text-light" : ""}>
                                             {t.category}
                                         </Link>
@@ -103,19 +105,23 @@ export default function NavbarTop2() {
                             }
                         </NavDropdown>
                     </Nav>
+
                     <NavDropdown title={<IoAccessibilityOutline />} id="collapsible-nav-dropdown" className='accessibility acc-font'>
-                        <div>
+                        <div className='font'>
                             <Button className='x-large' onClick={changeFontSizeLarge}>Aa</Button>
                             <Button className='small' onClick={changeFontSizeBack}>Aa</Button>
                         </div>
-                        <NavDropdown.Item >
-                            <Form.Check // prettier-ignore
+                        <div>
+
+                            <Form.Check
                                 type="switch"
                                 id="custom-switch"
-                                label="Check this switch"
+                                label="Dark Mode"
                                 onChange={changeBackground}
                             />
-                        </NavDropdown.Item>
+                        </div>
+
+
                     </NavDropdown>
                     <Searchbar />
                     <Nav>

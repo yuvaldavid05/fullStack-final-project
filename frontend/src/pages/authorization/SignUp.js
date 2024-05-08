@@ -26,7 +26,7 @@ export default function SignUp() {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     const [isValid, setIsValid] = useState(false);
-    const { loader, setLoader, snackbarOn } = useContext(GeneralContext);
+    const { loader, setLoader, snackbarOn, accColorBackground, setAccColorBackground } = useContext(GeneralContext);
 
 
 
@@ -124,7 +124,7 @@ export default function SignUp() {
         <section id="sign-up-page" className='sign-up-page-body'>
             <Container fluid>
                 <Form onSubmit={signup}>
-                    <Row className='frame-form-sign-up'>
+                    <Row className={accColorBackground ? 'frame-form-sign-up text-white' : 'frame-form-sign-up'}>
                         <h2><u>Sign Up Here</u></h2>
                         {structureForm.filter(str => str.sm).map(s => (
 
@@ -147,14 +147,14 @@ export default function SignUp() {
                                             <Form.Text className='fieldErrorSignup' muted>
                                                 {errors[s.name]}
                                             </Form.Text> :
-                                            <Form.Text muted>
+                                            <Form.Text className={accColorBackground ? "text-white" : "text-muted"}>
                                                 The password must include at least one uppercase letter and one lowercase letter, at least four numbers and a special character from the following characters (!@%$#^&*-_*)
                                             </Form.Text>)
                                         : "")
 
                                     :
                                     (s.required ? (errors[s.name] ?
-                                        <Form.Text className='fieldErrorSignup' muted>
+                                        <Form.Text className={accColorBackground ? 'fieldErrorSignup text-white' : 'fieldErrorSignup text-muted'}>
                                             {errors[s.name]}
                                         </Form.Text> : "") : "")
                                 }

@@ -1,4 +1,4 @@
-.body-category .holder .card{
+ .holder .card{
     font-size: 15px;
     max-width: 250px;
     /* לבדוק!!! */
@@ -12,13 +12,13 @@
     font-size: 14px;
 }
 
-.body-category .holder .card .like{
+ .holder .card .like{
     position:absolute;
     right: 10px;
     font-size: 27px;
 }
 
-.body-category .holder .card img{
+ .holder .card img{
     max-width: 250px;
     max-height:200px;
     /* max-height:150px; */
@@ -26,21 +26,21 @@
     padding:0;
 }
 
-.body-category .holder .card p.card-text{
+.holder .card p.card-text{
     margin: 5px;
 }
 
-.body-category .holder .card p.itemColors{
+ .holder .card p.itemColors{
     display: flex;
     justify-content: center;
 }
 
-.body-category .holder .card p.itemColors .divColor{
+.holder .card p.itemColors .divColor{
     display: inline-block;
     padding: 5px;
     font-weight: bold;
 }
-.body-category .holder .card p.itemColors .divColor .color{
+ .holder .card p.itemColors .divColor .color{
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -48,32 +48,32 @@
 }
 
 
-.body-category .holder .card .footerCard{
+.holder .card .footerCard{
     display: flex;
     justify-content: center;
     align-items: center;
 } 
 
-.body-category .holder .card .footerCard div{
+.holder .card .footerCard div{
     color:rgb(97, 92, 92) ;
     cursor: pointer;
 }
 
-.body-category .holder .card .footerCard button{
+.holder .card .footerCard button{
     font-size: 12px;  
 }
 
-.body-category .holder .card .footerCard a, 
-.body-category .holder .card .footerCard button{
+ .holder .card .footerCard a, 
+ .holder .card .footerCard button{
     margin: 12px;
 }
 
 @media (max-width: 768px) {
-    .body-category .holder .card img{
+     .holder .card img{
     max-height:150px;
     }
 
-    .body-category .holder .card .footerCard button{
+    .holder .card .footerCard button{
         font-size: 10px;
     }
 }

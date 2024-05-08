@@ -9,7 +9,6 @@ import ContactUs from "./pages/contact-us/ContactUs";
 import Login from "./pages/authorization/Login";
 import SignUp from "./pages/authorization/SignUp";
 import Admin from "./pages/admin/Admin";
-import AdminUsers from "./pages/admin/AdminUsers";
 import AdminProductChange from "./pages/admin/AdminProductChange";
 import OrderReceived from "./pages/shopping-basket/OrderReceived";
 
@@ -31,7 +30,6 @@ export default function Router() {
             <Route path="/admin/products/:id" element={<AdminProductChange />} />
             <Route path="/succeeded" element={<OrderReceived />} />
 
-            {/* <Route path="/admin/users" element={<AdminUsers />} /> */}
 
 
         </Routes>

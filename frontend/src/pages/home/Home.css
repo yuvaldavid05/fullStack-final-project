@@ -1,21 +1,26 @@
 .home-page-body .homeDiv{
     height: 65vh;
-    /* border: 1px red solid; */
-    /* background-image:linear-gradient(rgba(172, 124, 124, 0.549) , rgba(255, 255, 255, 0.79)), url("https://i.pinimg.com/564x/83/56/f1/8356f10495c8ff75d1f8989b8fd625c7.jpg")
-    */
     background-color: inherit;
     align-items: center;
-
 }
 
-/* .home-page-body .homeDiv img{
-   width: inherit;
-   height: inherit;
-} */
+.home-page-body .homeDiv div{
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.home-page-body .homeDiv span{
+    font-family: "Solitreo", cursive;
+  font-weight: 400;
+  font-style: normal;
+  border: 1px ;
+}
+
+
 
 .home-page-body .homePageIcons{
     height:80px;
-    /* background-color: aliceblue; */
     background-color: rgba(70, 70, 70, 0.284);
     align-items: center;
 }
@@ -34,9 +39,35 @@
     align-items: center;
 }
 
-.home-page-body .homePageContactUs{
+.home-page-body .homePageNewCol  img{
+    width:180px;
+    border-radius: 12px;
+}
+.home-page-body .homePageNewCol button{
+    margin: 15px;
+}
+
+.home-page-body .homePageNewCol button a{
+    color:white;
+    text-decoration: none;
+}
+
+.home-page-body .homePageSaleCol{
     height:300px;  
     align-items: center;
-    /* background-color: rgba(128, 128, 128, 0.615); */
     background-color: rgba(163, 225, 204, 0.768);
+}
+
+.home-page-body .homePageSaleCol  img{
+    width:180px;
+    border-radius: 12px;
+}
+
+.home-page-body .homePageSaleCol button{
+    margin: 15px;
+}
+
+.home-page-body .homePageSaleCol button a{
+    text-decoration: none;
+    color: white;
 }

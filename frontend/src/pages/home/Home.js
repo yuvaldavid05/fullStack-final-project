@@ -11,15 +11,20 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { TiPhoneOutline } from "react-icons/ti";
-
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
+import { FaRegHandPointRight } from "react-icons/fa";
+import Card from 'react-bootstrap/Card';
+import { FaRegHandPointLeft } from "react-icons/fa";
 
 export default function Home() {
     return (
         <section id="home-page" className='home-page-body'>
             <Container fluid>
                 <Row className='homeDiv' >
-                    {/* <Image src="https://i.pinimg.com/564x/83/56/f1/8356f10495c8ff75d1f8989b8fd625c7.jpg" /> */}
-                    <p>start here!</p>
+                    <h1>Welcome To Our Wedsite <br></br><span>Amour</span></h1>
+                    <p>We are a new clothing company that offers many collections...</p>
+
                 </Row>
 
                 <Row className='homePageIcons'>
@@ -33,22 +38,33 @@ export default function Home() {
                 </Row>
 
                 <Row className='homePageNewCol'>
-                    <div>for our new collection click here!</div>
-                </Row>
-                <Row className='homePageContactUs'>
-                    <Row>
-                        <Col>for more info u can contact us and get 15% off! <TiPhoneOutline /></Col>
-                    </Row>
+                    <Col xs={4}>
+                        <Image src="https://i.pinimg.com/564x/a3/a4/41/a3a441cfcb766953430410527e6edf12.jpg" />
+                    </Col>
+                    <Col xs={8}>
+                        You Can Start Now!
+                        <div>Just sign-in, Pick Your Clothes And Order!</div>
+                        <Button variant="secondary">
+                            <Link to="/products">Click here for all categories <span><FaRegHandPointRight /></span></Link>
+                        </Button>
+                    </Col>
+                    {/* <Col></Col> */}
 
-                    <Row>
-                        <Col></Col>
-                        <Col xs={5}>
-                            fasdasdasd
-                        </Col>
-                        <Col></Col>
-                    </Row>
+                </Row>
+                <Row className='homePageSaleCol'>
+
+                    <Col xs={8}>
+
+                        <div>For our sale collection you can click...</div>
+                        <Button variant="secondary">
+                            <Link to="/products/category/sale">Click here  <span><FaRegHandPointLeft /></span></Link>
+                        </Button>
+                    </Col>
+                    <Col xs={4}>
+                        <Image src="https://i.pinimg.com/564x/5b/3a/12/5b3a12fe0a34f9123c6b85b1a8ac3143.jpg" />
+                    </Col>
                 </Row>
             </Container>
-        </section>
+        </section >
     )
 }
