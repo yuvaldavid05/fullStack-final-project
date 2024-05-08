@@ -118,7 +118,6 @@ function App() {
           <Router />
         </header>
 
-        {/* {user.firstName + " " + user.lastName} */}
 
         {user ?
           <body>
