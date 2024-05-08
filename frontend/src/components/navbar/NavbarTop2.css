@@ -1,8 +1,21 @@
 .navbar-frame{
-    /* margin: 0;
-    padding: 0; */
+    /* margin: 0; */
+    padding: 15px;
     z-index: 2;
+    font-size: smaller;
+    width: 100vw;
 }
+
+.navbar-frame.changeBackground{
+    background-color: black;
+    color: white;
+}
+
+.navbar-frame .containar{
+    width: 100%;
+}
+
+
 
 nav.navbar-frame{
     background-color: rgb(255, 255, 255); 
@@ -19,6 +32,26 @@ nav.navbar-frame .nav-link.activeColor{
     color: rgb(72, 71, 71);
 }
 
+.navbar-frame .changeBackground{
+    background-color: rgb(96, 95, 95);
+}
+/* 
+.navbar-frame .dropdown-item a.changeBackground-navDrop,
+.navbar-frame .navbar-nav a.changeBackground-nav,
+.navbar-frame a.changeBackground-nav,
+.navbar-frame a.changeBackground-navDrop
+{
+    color: white;
+}
+
+.navbar-frame .changeBackground:hover{
+    background-color: black;
+}
+.changeBackground-navDrop:hover,
+.navbar-frame .navbar-nav a.changeBackground-nav:hover{
+    color: white;
+} */
+
 .navbar-frame .dropdown-item a:hover,
 .navbar-frame .navbar-nav a:hover{
     color: black;
@@ -27,4 +60,27 @@ nav.navbar-frame .nav-link.activeColor{
 
 .navbar-frame .dropdown-item:hover{
     background-color: rgba(178, 173, 173, 0.344);
+}
+
+.navbar-frame .accessibility{
+    margin: 0 15px;
+}
+
+/* .navbar-frame .accessibility.acc-font{
+    margin: 0 15px;
+} */
+
+.navbar-frame .accessibility.acc-font button{
+   background-color: initial;
+   color: black;
+   border: none;
+}
+
+.navbar-frame .accessibility.acc-font button.x-large{
+    margin: 0 0 0 10px;
+   font-size: x-large;
+}
+
+.navbar-frame .accessibility.acc-font button.small{
+    padding-bottom: 0;
 }

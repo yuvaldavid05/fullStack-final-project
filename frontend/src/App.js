@@ -29,6 +29,8 @@ function App() {
   const [snackbar, setSnackbar] = useState('');
   const [admin, setAdmin] = useState(false);
   const [searchWord, setSearchWord] = useState('')
+  const [accFontSize, setAccFontSize] = useState(false);
+  const [accColorBackground, setAccColorBackground] = useState(false);
 
 
   const snackbarOn = text => {
@@ -94,11 +96,11 @@ function App() {
 
   return (
     <GeneralContext.Provider value={{
-      user, setUser, roleType, setRoleType, basket, setBasket, productCat, setProductCat, admin, setAdmin, comment, setComment, loader, setLoader, snackbarOn, searchWord, setSearchWord
+      user, setUser, roleType, setRoleType, basket, setBasket, productCat, setProductCat, admin, setAdmin, comment, setComment, loader, setLoader, snackbarOn, searchWord, setSearchWord, accFontSize, setAccFontSize, accColorBackground, setAccColorBackground
     }}>
 
 
-      <div className="App">
+      <div className={accFontSize ? "App change" : (accColorBackground ? "App background" : "App")} >
         {loader && <Loader />}
         {snackbar && <Snackbar text={snackbar} />}
 
@@ -111,7 +113,7 @@ function App() {
           </div> : ""
         }
 
-        <header className="App-header">
+        <header className={accColorBackground ? "App-header bg-dark text-light" : "App-header"}>
           <NavbarTop2 />
           <Router />
         </header>

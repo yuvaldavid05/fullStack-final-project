@@ -232,9 +232,9 @@ export default function ContactUs() {
                                 <a href="mailto:yuvedavid@gmail.com" style={{ color: "white" }}>submit</a></Button>
                         </div>
                         <Row className='Web-details'>
-                            <Col>our address: <br></br>hsuhshsdha 54</Col>
-                            <Col>our phone: <br></br>054-8882645</Col>
-                            <Col> our email:<br></br> sdfhud@asjnjsadnd</Col>
+                            <Col>Our Address: <br></br>Shoham St 5, Ramat Gan</Col>
+                            <Col>Our Phone: <br></br>050-8695656</Col>
+                            <Col> Our Email:<br></br> Yuvedavid@gmail.com</Col>
                         </Row>
                     </Row>
                 </Form>

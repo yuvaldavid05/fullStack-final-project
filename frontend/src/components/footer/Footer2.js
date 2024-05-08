@@ -3,6 +3,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import { Link } from 'react-router-dom';
+import Image from 'react-bootstrap/Image';
+import { FiPhone } from "react-icons/fi";
+import { MdOutlineMail } from "react-icons/md";
 
 export default function Footer2() {
     return (
@@ -32,7 +35,17 @@ export default function Footer2() {
                 </Row>
 
                 <hr></hr>
-                <div>Copyright Yuval David</div>
+                <Col className='footer-copyright'>
+                    <MdOutlineMail /><span>Yuvedavid@gmail.com</span> |
+                    Copyright Yuval David
+
+                    <Image src="https://i.pinimg.com/564x/5f/ca/ef/5fcaef10f68b851551429e32183dd955.jpg" className="img-footer" rounded />
+                    |
+
+                    <FiPhone /><span>050-8695665</span>
+
+
+                </Col>
             </Container>
         </section>
     );

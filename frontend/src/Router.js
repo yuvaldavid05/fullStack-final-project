@@ -12,7 +12,6 @@ import Admin from "./pages/admin/Admin";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminProductChange from "./pages/admin/AdminProductChange";
 import OrderReceived from "./pages/shopping-basket/OrderReceived";
-import ErrorPage from "./pages/error-page/ErrorPage";
 
 
 export default function Router() {
@@ -31,7 +30,6 @@ export default function Router() {
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/products/:id" element={<AdminProductChange />} />
             <Route path="/succeeded" element={<OrderReceived />} />
-            {/* <Route path="/*" element={<ErrorPage />} /> */}
 
             {/* <Route path="/admin/users" element={<AdminUsers />} /> */}
 

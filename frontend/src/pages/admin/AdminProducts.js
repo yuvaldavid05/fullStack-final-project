@@ -8,6 +8,9 @@ import Button from "react-bootstrap/esm/Button";
 import { CiEdit } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { GeneralContext } from '../../App';
+import Image from 'react-bootstrap/Image';
+
+// שיניתי את הקישורים של התמונות לתמונות - לבדוק איך זה עובד בשינוי ועריכה והוספה
 // לסדר שירנדר בכל שינוי 
 
 function AdminProducts() {
@@ -22,7 +25,7 @@ function AdminProducts() {
         { name: 'price', type: 'number', label: 'Price', required: true, sm: '12' },
         { name: 'sizes', type: 'array', label: 'Sizes', required: true, sm: '12' },
         { name: 'color', type: 'array', label: 'Color', required: true, sm: '4' },
-        { name: 'img', type: 'text', label: 'Img URL', required: true, sm: '4' },
+        { name: 'img', type: 'image', label: 'Img URL', required: true, sm: '4' },
         { name: 'category', type: 'text', label: 'Category', required: true, sm: '4' },
         { name: 'stock', type: 'number', label: 'Stock', required: true, sm: '4' },
         { name: 'gender', type: 'array', label: 'Gender', required: true, sm: '4' },
@@ -95,10 +98,13 @@ function AdminProducts() {
                                     <td key={index} >
                                         {items[str2.name].join(", ")}
                                     </td>
-                                    :
-                                    str2.name === "stock" ?
-                                        <td key={index} > {items[str2.name] || 'out of stock'}</td>
-                                        : <td key={index}  > {items[str2.name] || '-'}</td>
+                                    : str2.type === "image" ?
+                                        <td>
+                                            <Image src={items[str2.name]} rounded />
+                                        </td> :
+                                        str2.name === "stock" ?
+                                            <td key={index} > {items[str2.name] || 'out of stock'}</td>
+                                            : <td key={index}  > {items[str2.name] || '-'}</td>
                             ))}
                             <>
                                 <td className="delete-icon" onClick={() => removeItem(items._id)}>

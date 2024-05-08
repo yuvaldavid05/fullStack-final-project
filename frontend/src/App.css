@@ -3,6 +3,15 @@
   font-size: 20px;
 }
 
+.App.change{
+  font-size: x-large;
+}
+
+.App.background{
+  background-color: black;
+  /* color:white; */
+}
+
 .admin{
   width:70px;
   height: 70px;
@@ -29,7 +38,7 @@
   background-color: #d5e1fa;
   background-color: whitesmoke;
   background-color: white;
-  
+ 
   /* background-color: rgba(82, 58, 30, 0.84); */
   min-height: 100vh;
   /* display: flex;
@@ -38,6 +47,11 @@
   justify-content: center; */
   /* font-size: calc(10px + 2vmin); */
 }
+
+/* .App-header.background{
+  background-color: black;
+  color: white;
+} */
 
 .App body .userName{
   width:100px ;

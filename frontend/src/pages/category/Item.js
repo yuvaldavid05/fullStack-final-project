@@ -114,7 +114,7 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                     <Card.Text> {itemDescription}</Card.Text>
                     <Card.Text> {itemPrice} nis</Card.Text>
                     <Card.Text>
-                        <Form.Select aria-label="select-sizes" onChange={(choice) => setUserSize(choice.target.value == "sizes" ? "" : choice.target.value)}>
+                        <Form.Select aria-label="select-size" onChange={(choice) => setUserSize(choice.target.value == "sizes" ? "" : choice.target.value)}>
                             <option>sizes</option>
                             {
                                 itemSizes.map((s, i) => (

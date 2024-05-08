@@ -7,8 +7,9 @@ import { useResolvedPath, Link } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { GeneralContext } from '../../App';
 import Searchbar from '../searchbar/Searchbar';
-
-
+import { IoAccessibilityOutline } from "react-icons/io5";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/esm/Button';
 
 // משתמש רגיל - יכוללבצע הכל מלבד לעשות לייק על מוצרים
 // משתמש רשום - יכול לעשות לייק - וישנט ליסט
@@ -41,10 +42,9 @@ const pages2 = [
 
 
 export default function NavbarTop2() {
-    const { user, roleType, setUser, setRoleType, searchWord, setSearchWord } = useContext(GeneralContext);
+    const { user, roleType, setUser, setRoleType, searchWord, setSearchWord, accFontSize, setAccFontSize, accColorBackground, setAccColorBackground } = useContext(GeneralContext);
     const [products, setProducts] = useState([]);
     const path = useResolvedPath().pathname;
-    console.log(path);
 
 
     // פילטור של מוצר אחד(ראשון) מכל קטגוריה
@@ -62,29 +62,40 @@ export default function NavbarTop2() {
             });
     }, []);
 
+    const changeFontSizeLarge = () => {
+        setAccFontSize(true)
+    }
+    const changeFontSizeBack = () => {
+        setAccFontSize(false)
+    }
+    const changeBackground = (ev) => {
+        if (ev.target.value) {
+            setAccColorBackground(!accColorBackground)
+        }
+    }
 
     return (
 
-        <Navbar collapseOnSelect expand="lg" sticky="top" id="navbar-section" className='navbar-frame'>
+        <Navbar collapseOnSelect expand="lg" sticky="top" id="navbar-section" className={accColorBackground ? 'navbar-frame bg-dark' : 'navbar-frame'} >
             <Container>
-                <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+                <Navbar.Brand href="/" className={accColorBackground ? 'text-light' : ''} style={{ fontSize: "larger" }}>Amour</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         {pages.filter(p => !p.permissions || checkPermissions(p.permissions, roleType)).map((page) => (
                             <Nav.Link key={page.route} className={page.route === path ? 'activeColor' : ''}>
-                                <Link to={page.route}>
+                                <Link to={page.route} className={accColorBackground ? "text-light" : ""}>
                                     {page.title}
                                 </Link>
                             </Nav.Link>
                         ))}
 
 
-                        <NavDropdown title="Categories" id="collapsible-nav-dropdown">
+                        <NavDropdown title="Categories" id="collapsible-nav-dropdown" className={accColorBackground && "text-light"} >
                             {
                                 products.filter((p, i) => products.findIndex(x => x.category == p.category) === i).map((t) => (
-                                    <NavDropdown.Item key={t._id}>
-                                        <Link to={`/products/category/${t.category}`}>
+                                    <NavDropdown.Item key={t._id} className={accColorBackground && "changeBackground"}>
+                                        <Link to={`/products/category/${t.category}`} className={accColorBackground ? "text-light" : ""}>
                                             {t.category}
                                         </Link>
                                     </NavDropdown.Item>
@@ -92,16 +103,31 @@ export default function NavbarTop2() {
                             }
                         </NavDropdown>
                     </Nav>
+                    <NavDropdown title={<IoAccessibilityOutline />} id="collapsible-nav-dropdown" className='accessibility acc-font'>
+                        <div>
+                            <Button className='x-large' onClick={changeFontSizeLarge}>Aa</Button>
+                            <Button className='small' onClick={changeFontSizeBack}>Aa</Button>
+                        </div>
+                        <NavDropdown.Item >
+                            <Form.Check // prettier-ignore
+                                type="switch"
+                                id="custom-switch"
+                                label="Check this switch"
+                                onChange={changeBackground}
+                            />
+                        </NavDropdown.Item>
+                    </NavDropdown>
                     <Searchbar />
                     <Nav>
                         {pages2.filter(p => !p.permissions || checkPermissions(p.permissions, roleType)).map((page) => (
                             <Nav.Link key={page.route}>
-                                <Link to={page.route} >
+                                <Link to={page.route} className={accColorBackground ? "text-light" : ""}>
                                     {page.title}
                                 </Link>
                             </Nav.Link>
                         ))}
                     </Nav>
+
                 </Navbar.Collapse>
             </Container>
         </Navbar>

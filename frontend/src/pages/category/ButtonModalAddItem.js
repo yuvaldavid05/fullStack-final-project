@@ -89,7 +89,7 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, i
                             <p>{itemPrice} nis</p>
                             <Row>
                                 <Col><b>size : </b>
-                                    <Form.Select aria-label="Default select" onChange={(choice) => setUserChoiceSize(choice.target.value)}>
+                                    <Form.Select aria-label="select size for item" onChange={(choice) => setUserChoiceSize(choice.target.value)}>
                                         {size === "" ? <option>choose size</option> : <option> {size}</option>}
                                         {
                                             itemSizes.map((sItem, ind) => (
@@ -101,7 +101,7 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, i
                                     </Form.Select>
                                 </Col>
                                 <Col> <b>color :  </b>
-                                    <Form.Select aria-label="Default select " onChange={(choice) => setUserChoiceColor(choice.target.value == "choose color" ? "" : choice.target.value)}>
+                                    <Form.Select aria-label="select color for item " onChange={(choice) => setUserChoiceColor(choice.target.value == "choose color" ? "" : choice.target.value)}>
                                         <option>choose color</option>
                                         {
                                             itemColor.map((cItem, i) => (
