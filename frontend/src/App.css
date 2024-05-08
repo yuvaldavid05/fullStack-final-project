@@ -66,8 +66,8 @@
   border-radius: 0 25px 25px 0;
   position: fixed;
   /* top:20%; */
-  /* top:10%; */
-  bottom:10%;
+  top:10%;
+  /* bottom:10%; */
   z-index: inherit;
 }
 

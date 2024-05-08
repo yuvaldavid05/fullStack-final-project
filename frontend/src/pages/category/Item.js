@@ -24,15 +24,31 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
     // let u = {};
 
     useEffect(() => {
-        if (itemLikesUsers.length && user) {
-            const array = itemLikesUsers.filter(x => x === user._id);
-            console.log(array)
-            if (array.length && array[0] == user._id) {
+        // if (itemLikesUsers.length && user && !cat) {
+        //     const array = itemLikesUsers.filter(x => x === user._id);
+        //     console.log(array)
+        //     if (array.length && array[0] == user._id) {
+        //         setFavorite(true);
+        //     } else {
+        //         setFavorite(false);
+        //     }
+        // } else if (user && cat) {
+        //     if (itemLikesUsers.includes(user._id)) {
+        //         console.log(itemLikesUsers)
+        //         setFavorite(true);
+        //     } else {
+        //         setFavorite(false);
+        //     }
+        // }
+        if (user) {
+            if (itemLikesUsers.includes(user._id)) {
+                console.log(itemLikesUsers)
                 setFavorite(true);
             } else {
                 setFavorite(false);
             }
         }
+
         console.log(favorite);
 
         // if (user) {

@@ -43,7 +43,7 @@ function AdminProducts() {
                 myRef.current = data;
                 // setItems(myRef.current);
                 setItems(data);
-                console.log(data);
+                console.log(items);
                 console.log(myRef);
             })
             .finally(() => setLoader(false));

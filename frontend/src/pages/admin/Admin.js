@@ -35,9 +35,9 @@ export default function About() {
                     <Tab eventKey="profile" title="Products">
                         <AdminProducts />
                     </Tab>
-                    <Tab eventKey="comment" title="Comments">
+                    {/* <Tab eventKey="comment" title="Comments">
                         <AdminComments />
-                    </Tab>
+                    </Tab> */}
                     <Tab eventKey="contact" title="Contact" disabled>
                         Tab content for Contact
                     </Tab>

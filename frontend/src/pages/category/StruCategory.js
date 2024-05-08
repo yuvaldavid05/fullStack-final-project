@@ -19,6 +19,7 @@ export default function StruCategory() {
     const myRef = useRef();
     const colorsStr = ["red", "gray", "pink", "brown", "green", "blue", "orange", "white", "black"];
     const [changeView, setChangeView] = useState(false);
+    let col = "";
 
     useEffect(() => {
         // setLoader(true);
@@ -32,26 +33,28 @@ export default function StruCategory() {
                 console.log(data)
             })
         // .finally(() => setLoader(false));
-    }, [cat]);
+    }, [cat, col]);
 
-    const array = [];
-    // let c = "";
-    const handleInputChange = (ev) => {
-        const { value } = ev.target;
+    // const array = [];
+    // const handleInputChange = (ev) => {
+    //     const { value } = ev.target;
 
-        if (ev.target.checked) {
-            array.push(value);
-            console.log(array)
-            // c = value;
+    //     if (ev.target.checked) {
+    //         // array.push(value);
+    //         // console.log(array)
+    //         col = value;
+    //         console.log(col)
 
-        } else if (!ev.target.checked) {
-            const i = array.findIndex(x => x === value);
-            array.splice(i, 1);
-            console.log(array)
-            console.log(i)
-            // c = "";
-        }
-    }
+    //     } else if (!ev.target.checked) {
+    //         // const i = array.findIndex(x => x === value);
+    //         // array.splice(i, 1);
+    //         // console.log(array)
+    //         // console.log(i)
+    //         col = "";
+    //         console.log(col)
+
+    //     }
+    // }
 
     const handleInputChangeView = (ev) => {
         console.log(ev.target.value)
@@ -70,6 +73,8 @@ export default function StruCategory() {
         { name: 'category', type: 'text', label: 'Category', required: true, sm: '4' },
     ]
 
+
+
     return (
         <section id="category" className='body-category'>
             <Container fluid>
@@ -78,17 +83,19 @@ export default function StruCategory() {
                     <div>{cat ? `Our  ${cat} collection` : ""}</div>
                     <hr></hr>
 
-                    <Form className="change-view">
-                        <Form.Check
-                            type="switch"
-                            id="custom-switch"
-                            label="Table"
-                            onChange={handleInputChangeView}
-                        />
-                    </Form>
+                    <div>
+                        <Form className="change-view">
+                            <Form.Check
+                                type="switch"
+                                id="custom-switch"
+                                label="Table"
+                                onChange={handleInputChangeView}
+                            />
+                        </Form>
+                    </div>
 
-
-                    <div key={`inline-'checkbox'`} className="mb-3">
+                    {/* 
+                    <div key={`inline-'radio'`} className="mb-3">
                         <h5>color:</h5>
                         {colorsStr.map((g, i) => (
 
@@ -97,18 +104,20 @@ export default function StruCategory() {
                                 label={g}
                                 name="color"
                                 value={g}
-                                type='checkbox'
-                                id={`inline-'checkbox'-${i}`}
+                                type='radio'
+                                id={`inline-'radio'-${i}`}
                                 onChange={handleInputChange}
                             />
                         ))}
-                    </div>
+                    </div> */}
                 </div>
                 {!changeView ?
 
 
                     <Row xs={2} md={5}>
                         {/* filter((y, i) => y.color.find(x => x == c)) */}
+                        {/* filter((y, i) => array.filter(a => y.color.includes("red"))) */}
+                        {/* x === "red" || "gray" */}
                         {
                             productCat.filter(c => search(searchWord, c.productName, c.description)).map((p, i) =>
                             (

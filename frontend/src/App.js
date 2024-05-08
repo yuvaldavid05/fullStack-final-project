@@ -113,7 +113,7 @@ function App() {
           </div> : ""
         }
 
-        <header className={accColorBackground ? "App-header bg-dark text-light" : "App-header"}>
+        <header className={accFontSize ? "App-header change" : (accColorBackground ? "App-header bg-dark text-light" : "App-header")}>
           <NavbarTop2 />
           <Router />
         </header>
