@@ -11,7 +11,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { GeneralContext } from '../../App';
 
 
-
+// דף של עמוד מוצר פרטי
 export default function ItemPage() {
     const { id } = useParams();
     const [oneCard, setOneCard] = useState([]);

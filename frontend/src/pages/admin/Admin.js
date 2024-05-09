@@ -4,7 +4,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import AdminUsers from "./AdminUsers";
 import AdminProducts from "./AdminProducts";
 
-
+// דף של התגים שמושכים לתוכם את הפרוייקטים ואת היוזרים
 export default function Admin() {
     return (
         <>
