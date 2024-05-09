@@ -28,6 +28,9 @@ function AdminUsers() {
         setLoader(true);
         fetch("http://localhost:2222/admin/users", {
             credentials: 'include',
+            headers: {
+                'Authorization': localStorage.token
+            },
         })
             .then(res => res.json())
             .then(data => {
@@ -46,6 +49,9 @@ function AdminUsers() {
         fetch(`http://localhost:2222/admin/users/delete/${clientdId}`, {
             credentials: 'include',
             method: 'DELETE',
+            headers: {
+                'Authorization': localStorage.token
+            },
         })
             .then(() => {
                 setClients(clients.filter(c => c.id !== clientdId));
@@ -62,6 +68,9 @@ function AdminUsers() {
         fetch(`http://localhost:2222/admin/users/update-admin/${clientdId}`, {
             credentials: 'include',
             method: 'PUT',
+            headers: {
+                'Authorization': localStorage.token
+            },
         })
             .then(() => {
                 // setClients();

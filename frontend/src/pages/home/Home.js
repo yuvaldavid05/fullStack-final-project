@@ -55,9 +55,9 @@ export default function Home() {
 
                     <Col xs={8}>
 
-                        <div>For our sale collection you can click...</div>
+                        <div>For our Basic collection you can click...</div>
                         <Button variant="secondary">
-                            <Link to="/products/category/sale">Click here  <span><FaRegHandPointLeft /></span></Link>
+                            <Link to="/products/category/basic">Click here  <span><FaRegHandPointLeft /></span></Link>
                         </Button>
                     </Col>
                     <Col xs={4}>

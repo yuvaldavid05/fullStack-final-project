@@ -5,8 +5,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET, getUser } = require("../config");
 const authGuard = require('../auth-guard');
-// const moment = require("moment");
-
 
 // לחבר את הגראד לכל הפונקציות - בדיקה אם הוא מורשה
 // לייבא את מומנט לבדוק אם עובד - זמן שבוא היוזר נוצר

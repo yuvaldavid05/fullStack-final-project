@@ -37,6 +37,9 @@ function AdminProducts() {
         setLoader(true);
         fetch("http://localhost:2222/products", {
             credentials: 'include',
+            headers: {
+                'Authorization': localStorage.token
+            },
         })
             .then(res => res.json())
             .then(data => {
@@ -59,6 +62,9 @@ function AdminProducts() {
         fetch(`http://localhost:2222/admin/products/${itemId}`, {
             credentials: 'include',
             method: 'DELETE',
+            headers: {
+                'Authorization': localStorage.token
+            },
         })
             .then(() => {
                 setItems(items.filter(c => c.id !== itemId));

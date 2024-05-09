@@ -20,12 +20,11 @@ export default function AdminProductChange() {
     const [formData, setFormData] = useState({});
     const [isValid, setIsValid] = useState(false);
     const { loader, setLoader } = useContext(GeneralContext);
-
+    const [colorChange, setColorChange] = useState(false)
 
     useEffect(() => {
         if (id === 'new-product') {
             setFormData({
-                // publishDate: moment().format("YYYY-MM-DD"),
                 productName: "",
                 description: "",
                 price: "",
@@ -43,6 +42,9 @@ export default function AdminProductChange() {
 
             fetch(`http://localhost:2222/admin/products/${id}`, {
                 credentials: 'include',
+                headers: {
+                    'Authorization': localStorage.token
+                },
             })
                 .then(res => res.json())
                 .then(data => {
@@ -83,7 +85,7 @@ export default function AdminProductChange() {
     const sizesStr = ["S", "M", "L", "XL"];
     const colorsStr = ["red", "gray", "pink", "brown", "green", "blue", "orange", "white", "black"];
     const genderStr = ["men", "women"];
-    const fabricTypeStr = ["Linen", "silk", "wool", "leather"];
+    const fabricTypeStr = ["Linen", "silk", "wool", "leather", "cotton", "denim"];
     const collectionStr = ["New", "Sale", "Best Sellers", "Current", "Previous Season"];
 
 
@@ -260,8 +262,14 @@ export default function AdminProductChange() {
 
             fetch("http://localhost:2222/admin/products" + (formData._id ? `/update/${id}` : '/new-product'), {
                 credentials: 'include',
+                headers: {
+                    'Authorization': localStorage.token
+                },
                 method: formData._id ? "PUT" : "POST",
-                headers: { 'Content-type': 'application/json' },
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': localStorage.token
+                },
                 body: JSON.stringify(formData),
             })
                 .then(data => {
@@ -323,11 +331,15 @@ export default function AdminProductChange() {
                                                 </div>
                                             </div>
                                             : (s.name === "color" ?
-                                                <div key={"inline-checkbox"} className="mb-3">
-                                                    {colorsStr.map((c, i) => (
-                                                        <>
+                                                <>
 
-                                                            {/* <Form.Check key={i}
+                                                    {/* <Button onClick={() => setColorChange(true)}>change</Button> */}
+
+                                                    <div key={"inline-checkbox"} className="mb-3">
+                                                        {colorsStr.map((c, i) => (
+                                                            <>
+
+                                                                {/* <Form.Check key={i}
                                                             inline
                                                             label={a}
                                                             name={a}
@@ -336,25 +348,26 @@ export default function AdminProductChange() {
                                                             id={s.name}
                                                             onChange={handleInputChange}
                                                         /> */}
-
-                                                            <Form.Check
-                                                                inline
-                                                                label={c}
-                                                                name="color"
-                                                                value={c}
-                                                                type="checkbox"
-                                                                checked={formData._id && formData.color.includes(c)}
-                                                                id={`inline-'checkbox'-${i}`}
-                                                                onChange={handleInputChange}
-                                                            />
-                                                        </>
-                                                    ))}
-                                                    <div>
-                                                        <Form.Text muted>
-                                                            *At least one color
-                                                        </Form.Text>
+                                                                <Form.Check
+                                                                    // disabled={formData._id && !colorChange ? (formData.color.length >= 5 ? true : false) : colorChange ? false && setColorChange(true) : ""}
+                                                                    inline
+                                                                    label={c}
+                                                                    name="color"
+                                                                    value={c}
+                                                                    type="checkbox"
+                                                                    checked={formData._id && formData.color.includes(c)}
+                                                                    id={`inline-'checkbox'-${i}`}
+                                                                    onChange={handleInputChange}
+                                                                />
+                                                            </>
+                                                        ))}
+                                                        <div>
+                                                            <Form.Text muted>
+                                                                *At least one color
+                                                            </Form.Text>
+                                                        </div>
                                                     </div>
-                                                </div> :
+                                                </> :
                                                 s.name === "gender" &&
                                                 <div key={"inline-checkbox"} className="mb-3">
                                                     {genderStr.map((g, i) => (
@@ -385,11 +398,17 @@ export default function AdminProductChange() {
 
                                                 <>
                                                     <Form.Select aria-label="Default select" onChange={handleInputChange} id="fabricType">
-                                                        <option>choose Fabric Type</option>
+                                                        {formData._id ?
+                                                            <option>{formData.fabricType}</option> :
+                                                            <option>choose Fabric Type</option>
+                                                        }
+                                                        {/* <option>choose Fabric Type</option> */}
                                                         {fabricTypeStr.map((f, i) => (
                                                             <React.Fragment key={i}>
-
-                                                                <option value={f}>{f}</option>
+                                                                {formData._id && f == formData.fabricType ?
+                                                                    "" :
+                                                                    <option value={f}>{f}</option>
+                                                                }
                                                             </React.Fragment>
                                                         ))
                                                         }
@@ -401,11 +420,17 @@ export default function AdminProductChange() {
 
                                                 <>
                                                     <Form.Select aria-label="Default select" onChange={handleInputChange} id="collectionP">
-                                                        <option>collection</option>
+                                                        {formData._id ?
+                                                            <option>{formData.collectionP}</option> :
+                                                            <option>choose Collection</option>
+                                                        }
+                                                        {/* <option>choose Collection</option> */}
                                                         {collectionStr.map((t, i) => (
                                                             <React.Fragment key={i}>
-
-                                                                <option value={t} >{t}</option>
+                                                                {formData._id && t == formData.collectionP ?
+                                                                    "" :
+                                                                    <option value={t} >{t}</option>
+                                                                }
                                                             </React.Fragment>
                                                         ))
                                                         }

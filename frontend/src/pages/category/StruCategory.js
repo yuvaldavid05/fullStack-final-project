@@ -11,15 +11,19 @@ import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
 import ButtonModalAddItem from './ButtonModalAddItem';
+import { IoMdHeart } from "react-icons/io";
+import { IoMdHeartEmpty } from "react-icons/io";
 // דף של מבנה קטגוריה
 
 export default function StruCategory() {
     const { cat } = useParams();
     const { productCat, setProductCat, loader, setLoader, searchWord } = useContext(GeneralContext);
     const myRef = useRef();
-    const colorsStr = ["red", "gray", "pink", "brown", "green", "blue", "orange", "white", "black"];
     const [changeView, setChangeView] = useState(false);
     let col = "";
+
+    const genderStr = ["men", "women", "all"];
+    const colorsStr = ["red", "gray", "pink", "brown", "green", "blue", "orange", "white", "black"];
 
     useEffect(() => {
         // setLoader(true);
@@ -31,30 +35,33 @@ export default function StruCategory() {
                 // myRef.current = data;
                 setProductCat(data);
                 console.log(data)
+            }).then(() => {
+                productCat.map(x => console.log(x.likes))
             })
         // .finally(() => setLoader(false));
     }, [cat, col]);
 
     // const array = [];
-    // const handleInputChange = (ev) => {
-    //     const { value } = ev.target;
+    const handleInputChange = (ev) => {
+        const { value } = ev.target;
 
-    //     if (ev.target.checked) {
-    //         // array.push(value);
-    //         // console.log(array)
-    //         col = value;
-    //         console.log(col)
+        if (ev.target.checked) {
+            // array.push(value);
+            // console.log(array)
+            col = value;
+            console.log(col)
 
-    //     } else if (!ev.target.checked) {
-    //         // const i = array.findIndex(x => x === value);
-    //         // array.splice(i, 1);
-    //         // console.log(array)
-    //         // console.log(i)
-    //         col = "";
-    //         console.log(col)
+            // } else if (!ev.target.checked) {
+            //     // const i = array.findIndex(x => x === value);
+            //     // array.splice(i, 1);
+            //     // console.log(array)
+            //     // console.log(i)
+            //     col = "";
+            //     console.log(col)
 
-    //     }
-    // }
+            // }
+        }
+    }
 
     const handleInputChangeView = (ev) => {
         console.log(ev.target.value)
@@ -94,10 +101,11 @@ export default function StruCategory() {
                         </Form>
                     </div>
 
-                    {/* 
+
                     <div key={`inline-'radio'`} className="mb-3">
                         <h5>color:</h5>
-                        {colorsStr.map((g, i) => (
+
+                        {genderStr.map((g, i) => (
 
                             <Form.Check
                                 inline
@@ -109,7 +117,20 @@ export default function StruCategory() {
                                 onChange={handleInputChange}
                             />
                         ))}
-                    </div> */}
+
+                        {/* {colorsStr.map((g, i) => (
+
+                            <Form.Check
+                                inline
+                                label={g}
+                                name="color"
+                                value={g}
+                                type='radio'
+                                id={`inline-'radio'-${i}`}
+                                onChange={handleInputChange}
+                            />
+                        ))} */}
+                    </div>
                 </div>
                 {!changeView ?
 
@@ -145,7 +166,7 @@ export default function StruCategory() {
 
                                         <th key={i} className="align-middle">{st.name}</th>
                                     ))}
-                                    {/* <th className="align-middle">Like</th> */}
+                                    <th className="align-middle"> favorite</th>
                                     <th className="align-middle">add</th>
 
                                 </tr>
@@ -165,9 +186,10 @@ export default function StruCategory() {
                                             <Image src={t.img} rounded />
                                         </td>
                                         <td>{t.category}</td>
-                                        {/* <td>
-                                        <IoMdHeartEmpty />
-                                    </td> */}
+                                        <td>
+                                            {t.likes.length ? <IoMdHeart /> : <IoMdHeartEmpty />}
+
+                                        </td>
                                         <td>
                                             <ButtonModalAddItem itemImage={t.img} itemName={t.productName} itemDescription={t.description} itemPrice={t.price} itemSizes={t.sizes} itemColor={t.color} size={""} itemId={t._id} itemStock={t.stock} />
                                         </td>

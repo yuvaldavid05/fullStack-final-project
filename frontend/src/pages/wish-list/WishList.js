@@ -4,6 +4,7 @@ import Item from '../category/Item';
 import Col from "react-bootstrap/esm/Col";
 import Row from 'react-bootstrap/Row';
 import { GeneralContext } from '../../App';
+import { search } from "../../components/searchbar/Searchbar";
 
 
 export default function WishList() {
@@ -51,16 +52,17 @@ export default function WishList() {
 
 
 
-                    {cards.filter(c => c.likes.includes(user._id)).map(x => (
-                        <Col>
+                    {cards.filter(c => c.likes.includes(user._id)).filter(c => search(searchWord, c.productName, c.description)).map(x => (
 
+                        <Col>
                             <>
                                 <Item itemImage={x.img} itemName={x.productName} itemDescription={x.description} itemPrice={x.price} itemSizes={x.sizes} itemColor={x.color} itemId={x._id} itemLikesUsers={x.likes} cat={""} itemStock={x.stock} />
                             </>
                         </Col>
+
                     ))}
                 </Row>
-                : <h4 style={{ fontWeight: "lighter" }}>There are no favorite products...</h4>
+                : ""
             }
 
 

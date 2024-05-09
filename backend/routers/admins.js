@@ -2,17 +2,18 @@ const express = require("express");
 const router = express.Router();
 const { UserModel, validUser } = require("../models/userModel");
 const { ProductModel, validProduct } = require("../models/productModel");
+const authGuard = require('../auth-guard');
 
 
 // להוסיף את authGuard
 
 //  משיכה של כל היוזרים -עובד
-router.get("/users", async (req, res) => {
+router.get("/users", authGuard, async (req, res) => {
     res.send(await UserModel.find());
 });
 
 // משיכה של יוזר ספציפי - עובד
-router.get("/users/:id", async (req, res) => {
+router.get("/users/:id", authGuard, async (req, res) => {
     res.send(await UserModel.findOne({ _id: req.params.id }));
 });
 
@@ -41,7 +42,7 @@ router.get("/users/:id", async (req, res) => {
 // });
 
 // שינוי הרשאות ADMIN - עובד
-router.put("/users/update-admin/:id", async (req, res) => {
+router.put("/users/update-admin/:id", authGuard, async (req, res) => {
 
     const userFind = await UserModel.findOne({ _id: req.params.id });
 
@@ -57,23 +58,23 @@ router.put("/users/update-admin/:id", async (req, res) => {
 });
 
 // מחיקה של יוזר ע"י אדמין - עובד
-router.delete("/users/delete/:userId", async (req, res) => {
+router.delete("/users/delete/:userId", authGuard, async (req, res) => {
     await UserModel.deleteOne({ _id: req.params.userId });
     res.send();
 });
 
 // משיכה של כל המוצרים
-router.get("/products", async (req, res) => {
+router.get("/products", authGuard, async (req, res) => {
     res.send(await ProductModel.find({}));
 });
 
 // משיכה של מוצר ספציפי
-router.get("/products/:id", async (req, res) => {
+router.get("/products/:id", authGuard, async (req, res) => {
     res.send(await ProductModel.findOne({ _id: req.params.id }));
 });
 
 // הוספה של מוצר אחד - עובד
-router.post("/products/new-product", async (req, res) => {
+router.post("/products/new-product", authGuard, async (req, res) => {
     let validBody = validProduct(req.body);
     if (validBody.error) {
         return res.status(400).json(validBody.error.details);
@@ -103,7 +104,7 @@ router.post("/products/new-product", async (req, res) => {
 });
 
 // // לעדכן מוצר - עובד
-router.put("/products/update/:id", async (req, res) => {
+router.put("/products/update/:id", authGuard, async (req, res) => {
     const { productName, description, price, sizes, color, img, category, stock, gender, fabricType, collectionP } = req.body;
 
 
@@ -132,7 +133,7 @@ router.put("/products/update/:id", async (req, res) => {
 });
 
 // מחיקה של מוצר ע"י האדמין - עובד
-router.delete("/products/:productId", async (req, res) => {
+router.delete("/products/:productId", authGuard, async (req, res) => {
     await ProductModel.deleteOne({ _id: req.params.productId });
     res.send();
 });
