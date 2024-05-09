@@ -23,23 +23,13 @@ router.get("/category/:cat", async (req, res) => {
 });
 
 // מחזירה את כל הכרטיסים שיש להם ערכים ב LIKES
-// router.get("/favorite-items", async (req, res) => {
-//     // const UserFind = await UserModel.findOne({ _id: req.params.idUser });
+// router.get("/fav", async (req, res) => {
 
+//     // const array = await ProductModel.find({ likes: "662cf90f860ea0b907f864b9" })
 
-//     // if (!UserFind) {
-//     //     return res.status(403).send("User does not exist");
-//     // }
-
-//     // let arrayUserLikes = [];
-
-//     // await ProductModel.map(x => x.like.find(y => y == idUser ? arrayUserLikes.push(x._id) : ""));
-
-//     const arrayUserLikes = await ProductModel.filter(x => x.likes.length);
-
-//     read.send([arrayUserLikes]);
-
+//     res.send(await ProductModel.find({ likes: { $in: ["662cf90f860ea0b907f864b9"] } }));
 // });
+
 
 // הוספה של מוצר למועדפים
 router.put("/:productId/favorite", async (req, res) => {

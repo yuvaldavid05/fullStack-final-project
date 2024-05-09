@@ -32,12 +32,10 @@ exports.validUser = (_bodyData) => {
         city: Joi.string().min(1).required(),
         street: Joi.string().min(1).required(),
         houseNumber: Joi.number().min(1).required(),
-        zip: Joi.number().min(0),
+        zip: Joi.number().min(0).required(),
         admin: Joi.boolean().default(false),
-        admin: Joi.array().items(Joi.string()),
-        // role: Joi.array().items(Joi.string()).default("user"),
-        // createdTime: Joi.date().greater('now').iso(),
-        // regex
+        orders: Joi.array().items(Joi.string()),
+
     })
 
     return joiSchema.validate(_bodyData);

@@ -139,10 +139,10 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                             }
                         </Form.Select>
                     </Card.Text>
-                    <Card.Text className='itemColors row' >
+                    <Card.Text className='itemColors' >
                         {
                             itemColor.map((c, index) => (
-                                <div className="divColor col" key={index} >
+                                <div className="divColor" key={index} >
                                     <div className="color" style={{ backgroundColor: c }}></div>
                                     {itemColor.length >= 5 ? "" : <span>{c}</span>}
                                     {/* <span>{c}</span> */}

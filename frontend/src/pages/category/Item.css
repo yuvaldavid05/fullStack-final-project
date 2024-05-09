@@ -1,9 +1,10 @@
  .holder .card{
     font-size: 15px;
-    max-width: 250px;
+    /* max-width: 250px; */
+    max-width: 260px;
     /* לבדוק!!! */
-    /* max-height: 500px; */
-    height: 480px;
+    height: 510px;
+    /* height: 480px; */
     border: none;
     position: relative;
     margin: 10px 0;
@@ -71,7 +72,10 @@
     margin: 12px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
+    .holder .card{
+    height: 480px;
+    }
      .holder .card img{
     max-height:150px;
     }

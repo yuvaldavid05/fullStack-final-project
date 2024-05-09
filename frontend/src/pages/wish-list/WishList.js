@@ -25,32 +25,12 @@ export default function WishList() {
             })
                 .then(res => res.json())
                 .then(data => {
-                    // myRef.current = data;
-                    // myRef.current = data.map(c => c.likes.includes(user._id));
                     setCards(data);
                     console.log(myRef)
                 }).then(() => {
-                    // if (cards.map(c => c.likes.includes(user._id)) === true) {
-                    //     setlikeArray(true)
-                    // } else {
-                    //     setlikeArray(false)
-                    // }
-                    // setlikeArray(cards.map(c => c.likes.includes(user._id)))
-                    // console.log(likeArray)
+
                 })
         }
-        // if (user) {
-        //     fetch(`http://localhost:2222/products/favorite-items`, {
-        //         credentials: 'include',
-        //     })
-        //         .then(res => res.json())
-        //         .then(data => {
-        //             // setCards();
-        //             console.log(data)
-        //         }).then(() => {
-
-        //         })
-        // }
 
     }, [setCards])
     return (
