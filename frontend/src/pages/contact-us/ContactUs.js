@@ -129,7 +129,7 @@ export default function ContactUs() {
                 console.log(comment)
             }
         } else {
-            alert("f")
+            alert("All fields must be filled in")
         }
 
     }

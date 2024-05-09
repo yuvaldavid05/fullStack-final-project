@@ -20,7 +20,8 @@ export default function StruCategory() {
     const { productCat, setProductCat, loader, setLoader, searchWord } = useContext(GeneralContext);
     const myRef = useRef();
     const [changeView, setChangeView] = useState(false);
-    let col = "";
+    // let col = "";
+    const [col, setCol] = useState("");
 
     const genderStr = ["men", "women", "all"];
     const colorsStr = ["red", "gray", "pink", "brown", "green", "blue", "orange", "white", "black"];
@@ -48,8 +49,14 @@ export default function StruCategory() {
         if (ev.target.checked) {
             // array.push(value);
             // console.log(array)
-            col = value;
-            console.log(col)
+            // col = value;
+            // console.log(col)
+            if (value == "all") {
+                setCol("");
+            } else {
+
+                setCol(value);
+            }
 
             // } else if (!ev.target.checked) {
             //     // const i = array.findIndex(x => x === value);
@@ -62,6 +69,10 @@ export default function StruCategory() {
             // }
         }
     }
+
+    // const checku = (array1 , array2 ) = {
+    //     array2.map(x => array1.includes(x) ?   )
+    // }
 
     const handleInputChangeView = (ev) => {
         console.log(ev.target.value)
@@ -79,6 +90,7 @@ export default function StruCategory() {
         { name: 'img', type: 'text', label: 'Img URL', required: true, sm: '4' },
         { name: 'category', type: 'text', label: 'Category', required: true, sm: '4' },
     ]
+
 
 
 
@@ -103,14 +115,14 @@ export default function StruCategory() {
 
 
                     <div key={`inline-'radio'`} className="mb-3">
-                        <h5>color:</h5>
+                        <h5>gender:</h5>
 
                         {genderStr.map((g, i) => (
 
                             <Form.Check
                                 inline
                                 label={g}
-                                name="color"
+                                name="gender"
                                 value={g}
                                 type='radio'
                                 id={`inline-'radio'-${i}`}
@@ -140,7 +152,8 @@ export default function StruCategory() {
                         {/* filter((y, i) => array.filter(a => y.color.includes("red"))) */}
                         {/* x === "red" || "gray" */}
                         {
-                            productCat.filter(c => search(searchWord, c.productName, c.description)).map((p, i) =>
+                            productCat.filter(c => search(searchWord, c.productName, c.description)).filter(x => col ? x.gender.includes(col) : x.gender.length).map((p, i) =>
+
                             (
                                 <Col key={i}>
                                     <div className='holder'>
@@ -172,7 +185,7 @@ export default function StruCategory() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {productCat.filter(c => search(searchWord, c.productName, c.description)).map((t, i) => (
+                                {productCat.filter(c => search(searchWord, c.productName, c.description)).filter(x => col ? x.gender.includes(col) : x.gender.length).map((t, i) => (
                                     <tr>
                                         <td>{i + 1}</td>
                                         <td>{t.productName}</td>

@@ -6,8 +6,8 @@
     /* padding: 5px; */
 }
 .body-category .change-view{
-    /* float: left; */
-    display: inline-block;
+    float: left;
+    /* display: inline-block; */
     margin:10px 15px;
     position: static;
     right:100px;
