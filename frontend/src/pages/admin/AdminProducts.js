@@ -15,7 +15,7 @@ import Image from 'react-bootstrap/Image';
 
 function AdminProducts() {
     const [items, setItems] = useState([]);
-    const { loader, setLoader } = useContext(GeneralContext);
+    const { loader, setLoader, snackbarOn } = useContext(GeneralContext);
 
     const myRef = useRef(null);
 
@@ -50,7 +50,7 @@ function AdminProducts() {
                 console.log(myRef);
             })
             .finally(() => setLoader(false));
-    }, [myRef]);
+    }, [myRef, setItems]);
 
 
 
@@ -59,6 +59,7 @@ function AdminProducts() {
             return;
         }
 
+        setLoader(true);
         fetch(`http://localhost:2222/admin/products/${itemId}`, {
             credentials: 'include',
             method: 'DELETE',
@@ -67,8 +68,13 @@ function AdminProducts() {
             },
         })
             .then(() => {
-                setItems(items.filter(c => c.id !== itemId));
+                setItems(items.filter(c => c._id !== itemId));
+            })
+            .finally(() => {
+                setLoader(false)
+                snackbarOn("Item deleted successfully");
             });
+
     }
 
 

@@ -84,13 +84,12 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json',
-                    'Authorization': localStorage.token
+                    // 'Authorization': localStorage.token
                 },
                 body: JSON.stringify(u),
             })
                 .then(() => {
                     snackbarOn("Added to favorites");
-                    // alert("succsed")
                 })
                 .finally(() => setLoader(false));
 
@@ -102,12 +101,12 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json',
-                    'Authorization': localStorage.token
+                    // 'Authorization': localStorage.token
                 },
                 body: JSON.stringify(u),
             })
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     snackbarOn("Removed from favorites");
                 })
                 .finally(() => setLoader(false));

@@ -29,7 +29,6 @@ export default function WishList() {
                     // myRef.current = data.map(c => c.likes.includes(user._id));
                     setCards(data);
                     console.log(myRef)
-
                 }).then(() => {
                     // if (cards.map(c => c.likes.includes(user._id)) === true) {
                     //     setlikeArray(true)
@@ -40,8 +39,20 @@ export default function WishList() {
                     // console.log(likeArray)
                 })
         }
+        // if (user) {
+        //     fetch(`http://localhost:2222/products/favorite-items`, {
+        //         credentials: 'include',
+        //     })
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             // setCards();
+        //             console.log(data)
+        //         }).then(() => {
 
-    }, [])
+        //         })
+        // }
+
+    }, [setCards])
     return (
         <section id="wishlist" className='body-wishlist'>
             <h3>welcome to WISHLIST</h3>

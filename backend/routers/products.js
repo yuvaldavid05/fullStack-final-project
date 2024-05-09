@@ -22,19 +22,22 @@ router.get("/category/:cat", async (req, res) => {
     res.send(await ProductModel.find({ category: req.params.cat }));
 });
 
-// router.get("/all-favorite/:idUser", async (req, res) => {
-//     const UserFind = await UserModel.findOne({ _id: req.params.idUser });
+// מחזירה את כל הכרטיסים שיש להם ערכים ב LIKES
+// router.get("/favorite-items", async (req, res) => {
+//     // const UserFind = await UserModel.findOne({ _id: req.params.idUser });
 
 
-//     if (!UserFind) {
-//         return res.status(403).send("User does not exist");
-//     }
+//     // if (!UserFind) {
+//     //     return res.status(403).send("User does not exist");
+//     // }
 
-//     let arrayUserLikes = [];
+//     // let arrayUserLikes = [];
 
-//     await ProductModel.map(x => x.like.find(y => y == idUser ? arrayUserLikes.push(x._id) : ""));
+//     // await ProductModel.map(x => x.like.find(y => y == idUser ? arrayUserLikes.push(x._id) : ""));
 
-//     read.send(arrayUserLikes);
+//     const arrayUserLikes = await ProductModel.filter(x => x.likes.length);
+
+//     read.send([arrayUserLikes]);
 
 // });
 

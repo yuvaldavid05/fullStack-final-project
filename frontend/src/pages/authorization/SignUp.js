@@ -55,7 +55,7 @@ export default function SignUp() {
         { name: 'city', type: 'text', label: 'city', required: true, sm: '4' },
         { name: 'street', type: 'text', label: 'street', required: true, sm: '4' },
         { name: 'houseNumber', type: 'number', label: 'house Number', required: true, sm: '6' },
-        { name: 'zip', type: 'number', label: 'zip', required: false, sm: '6' },
+        { name: 'zip', type: 'number', label: 'zip', required: true, sm: '6' },
         { name: 'password', type: 'password', label: 'Password', required: true, sm: '12' },
     ]
 
@@ -78,8 +78,11 @@ export default function SignUp() {
             if (error) {
                 err[id] = error.message;
             }
+            console.log(err)
             setIsValid(false);
+            console.log(isValid)
         } else {
+            console.log(isValid)
             setIsValid(true);
         }
 

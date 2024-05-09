@@ -9,7 +9,7 @@ import { GeneralContext } from '../../App';
 
 function AdminUsers() {
     const [clients, setClients] = useState([]);
-    const { loader, setLoader } = useContext(GeneralContext);
+    const { loader, setLoader, snackbarOn } = useContext(GeneralContext);
 
     const s = [
         { name: 'firstName', type: 'text', label: 'First Name', required: true, sm: '6' },
@@ -38,7 +38,7 @@ function AdminUsers() {
                 console.log(data)
             })
             .finally(() => setLoader(false));
-    }, []);
+    }, [setClients]);
 
     const removeClient = (clientdId) => {
         if (!window.confirm("Delete This User?")) {
@@ -54,9 +54,12 @@ function AdminUsers() {
             },
         })
             .then(() => {
-                setClients(clients.filter(c => c.id !== clientdId));
+                setClients(clients.filter(c => c._id !== clientdId));
             })
-            .finally(() => setLoader(false));
+            .finally(() => {
+                setLoader(false)
+                snackbarOn("User deleted successfully");
+            });
     }
 
     const changePermission = (clientdId) => {
@@ -73,9 +76,12 @@ function AdminUsers() {
             },
         })
             .then(() => {
-                // setClients();
+                setClients();
             })
-            .finally(() => setLoader(false));
+            .finally(() => {
+                setLoader(false)
+                snackbarOn("Permissions changed successfully");
+            });
     }
 
 
