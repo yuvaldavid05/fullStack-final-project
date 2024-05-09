@@ -46,7 +46,7 @@ export default function Footer2() {
                     <Image src="https://i.pinimg.com/564x/5f/ca/ef/5fcaef10f68b851551429e32183dd955.jpg" className="img-footer" rounded />
                     |
 
-                    <FiPhone /><span>050-8695665</span>
+                    <FiPhone /><span>050-8695656</span>
 
 
                 </Col>

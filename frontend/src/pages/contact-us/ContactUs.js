@@ -121,7 +121,7 @@ export default function ContactUs() {
     }
 
     return (
-        <section id="contact-us-page" className={accColorBackground ? 'text-light contact-page-body' : 'contact-page-body'} >
+        <section id="contact-us-page" className={accColorBackground ? 'text-light bg-dark contact-page-body' : 'contact-page-body'} >
             <Container fluid>
                 <Row>
                     <b><h2>CONTACT US</h2></b>
@@ -130,7 +130,7 @@ export default function ContactUs() {
                 <Form onSubmit={sendComment}>
 
 
-                    <Row className={accColorBackground ? 'text-light contact-form' : 'contact-form'}>
+                    <Row className={accColorBackground ? 'text-light bg-dark contact-form' : 'contact-form'}>
                         <h4>Contact Form</h4>
                         <div className='costumer-details'>
                             <Row>

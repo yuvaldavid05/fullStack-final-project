@@ -90,7 +90,7 @@ function App() {
     }}>
 
 
-      <div className={accFontSize ? "App change" : (accColorBackground ? "App background" : "App")} >
+      <div className={accFontSize ? "App change" : (accColorBackground ? "App background" : (accFontSize && accColorBackground ? "App background change" : "App"))} >
         {loader && <Loader />}
         {snackbar && <Snackbar text={snackbar} />}
 
@@ -103,7 +103,7 @@ function App() {
           </div> : ""
         }
 
-        <header className={accFontSize ? "App-header change" : (accColorBackground ? "App-header bg-dark text-light" : "App-header")}>
+        <header className={accFontSize ? "App-header change" : (accColorBackground ? "App-header bg-dark text-light" : (accFontSize && accColorBackground ? "App-header bg-dark text-light change" : "App-header"))}>
           <NavbarTop2 />
           <Router />
         </header>
@@ -128,7 +128,7 @@ function App() {
         </footer>
 
       </div>
-    </GeneralContext.Provider>
+    </GeneralContext.Provider >
   );
 }
 

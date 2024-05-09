@@ -12,6 +12,12 @@
   /* color:white; */
 }
 
+.App.background.change{
+  font-size: x-large;
+  background-color: black;
+
+}
+
 .admin{
   width:70px;
   height: 70px;
