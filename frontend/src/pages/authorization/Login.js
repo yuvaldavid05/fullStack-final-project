@@ -15,7 +15,7 @@ import { RoleTypes } from '../../components/navbar/NavbarTop2';
 
 
 export default function Login() {
-    const { user, setUser, roleType, setRoleType, loader, setLoader, snackbarOn } = useContext(GeneralContext);
+    const { user, setUser, roleType, setRoleType, loader, setLoader, snackbarOn, accColorBackground } = useContext(GeneralContext);
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -106,7 +106,7 @@ export default function Login() {
 
 
     return (
-        <section id="login-page" className='login-page-body'>
+        <section id="login-page" className='login-page-body' >
             <Container fluid>
                 <Form onSubmit={login}>
                     <Row className='frame-form-login'>
@@ -133,6 +133,6 @@ export default function Login() {
                     </Row>
                 </Form>
             </Container>
-        </section >
+        </ section >
     );
 }

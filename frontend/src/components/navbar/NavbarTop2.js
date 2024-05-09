@@ -42,7 +42,7 @@ const pages2 = [
 
 
 export default function NavbarTop2() {
-    const { roleType, setAccFontSize, accColorBackground, setAccColorBackground } = useContext(GeneralContext);
+    const { roleType, accFontSize, setAccFontSize, accColorBackground, setAccColorBackground } = useContext(GeneralContext);
     const [products, setProducts] = useState([]);
     const path = useResolvedPath().pathname;
 
@@ -54,6 +54,7 @@ export default function NavbarTop2() {
             .then(res => res.json())
             .then(data => {
                 setProducts(data);
+
             });
     }, []);
 
@@ -68,7 +69,6 @@ export default function NavbarTop2() {
         if (ev.target.value) {
             setAccColorBackground(!accColorBackground)
         }
-
     }
 
     return (

@@ -14,7 +14,9 @@ import { Link } from 'react-router-dom';
 import { FaRegHandPointRight } from "react-icons/fa";
 import { FaRegHandPointLeft } from "react-icons/fa";
 
+
 export default function Home() {
+
     return (
         <section id="home-page" className='home-page-body'>
             <Container fluid>
@@ -64,6 +66,6 @@ export default function Home() {
 
                 </Row>
             </Container>
-        </section >
+        </ section >
     )
 }

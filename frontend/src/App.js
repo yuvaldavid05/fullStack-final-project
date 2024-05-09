@@ -61,12 +61,13 @@ function App() {
           }
 
           navigate('/');
-          console.log(data);
+
         })
         .catch(err => {
           setRoleType(RoleTypes.none);
           snackbarOn("User not logged in");
           navigate('/');
+
         })
         .finally(() => setLoader(false));
     } else {
@@ -90,7 +91,7 @@ function App() {
     }}>
 
 
-      <div className={accFontSize ? "App change" : (accColorBackground ? "App background" : (accFontSize && accColorBackground ? "App background change" : "App"))} >
+      <div className={accFontSize ? "App change" : (accColorBackground ? "App  bg-dark text-light" : (accFontSize && accColorBackground ? "App  bg-dark text-light change" : "App"))} >
         {loader && <Loader />}
         {snackbar && <Snackbar text={snackbar} />}
 
@@ -103,7 +104,7 @@ function App() {
           </div> : ""
         }
 
-        <header className={accFontSize ? "App-header change" : (accColorBackground ? "App-header bg-dark text-light" : (accFontSize && accColorBackground ? "App-header bg-dark text-light change" : "App-header"))}>
+        <header className={accFontSize && accColorBackground ? "App-header bg-dark text-light change" : accColorBackground ? "App-header bg-dark text-light" : "App-header"}>
           <NavbarTop2 />
           <Router />
         </header>

@@ -11,12 +11,12 @@
   background-color: black;
   /* color:white; */
 }
-
+/* 
 .App.background.change{
   font-size: x-large;
   background-color: black;
 
-}
+} */
 
 .admin{
   width:70px;
@@ -40,23 +40,19 @@
 
 
 .App-header {
-  /* background-color: #c4d0e9; */
   background-color: #d5e1fa;
   background-color: whitesmoke;
   background-color: white;
- 
-  /* background-color: rgba(82, 58, 30, 0.84); */
   min-height: 100vh;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; */
-  /* font-size: calc(10px + 2vmin); */
 }
 
 /* .App-header.background{
   background-color: black;
   color: white;
+}
+
+.App-header.change{
+
 } */
 
 .App body .userName{
