@@ -5,43 +5,18 @@ const { ProductModel, validProduct } = require("../models/productModel");
 const authGuard = require('../auth-guard');
 
 
-// להוסיף את authGuard
 
-//  משיכה של כל היוזרים -עובד
+//  משיכה של כל היוזרים
 router.get("/users", authGuard, async (req, res) => {
     res.send(await UserModel.find());
 });
 
-// משיכה של יוזר ספציפי - עובד
+// משיכה של יוזר ספציפי
 router.get("/users/:id", authGuard, async (req, res) => {
     res.send(await UserModel.findOne({ _id: req.params.id }));
 });
 
-
-// עריכה של יוזר אחד
-// router.put("/users/update/:id", async (req, res) => {
-//     let validBody = validUser(req.body);
-//     if (validBody.error) {
-//         return res.status(400).json(validBody.error.details);
-//     }
-
-//     const { firstName, lastName, email, phone } = req.body;
-//     const userFind = await UserModel.findOne({ _id: req.params.id });
-
-//     if (!userFind) {
-//         return res.status(403).send("User does not exist");
-//     }
-
-//     userFind.firstName = firstName;
-//     userFind.lastName = lastName;
-//     userFind.email = email;
-//     userFind.phone = phone;
-
-//     await userFind.save();
-//     res.send(userFind);
-// });
-
-// שינוי הרשאות ADMIN - עובד
+// שינוי הרשאות ADMIN 
 router.put("/users/update-admin/:id", authGuard, async (req, res) => {
 
     const userFind = await UserModel.findOne({ _id: req.params.id });
@@ -57,7 +32,7 @@ router.put("/users/update-admin/:id", authGuard, async (req, res) => {
 
 });
 
-// מחיקה של יוזר ע"י אדמין - עובד
+// מחיקה של יוזר ע"י אדמין
 router.delete("/users/delete/:userId", authGuard, async (req, res) => {
     await UserModel.deleteOne({ _id: req.params.userId });
     res.send();
@@ -73,7 +48,7 @@ router.get("/products/:id", authGuard, async (req, res) => {
     res.send(await ProductModel.findOne({ _id: req.params.id }));
 });
 
-// הוספה של מוצר אחד - עובד
+// הוספה של מוצר אחד
 router.post("/products/new-product", authGuard, async (req, res) => {
     let validBody = validProduct(req.body);
     if (validBody.error) {
@@ -83,7 +58,6 @@ router.post("/products/new-product", authGuard, async (req, res) => {
     const { productName, description, price, sizes, color, img, category, stock, gender, fabricType, collectionP } = req.body;
 
 
-    // לבדוק את המערך LIKES איך הוא חוזר
     const product = new ProductModel({
         productName,
         description,
@@ -103,7 +77,7 @@ router.post("/products/new-product", authGuard, async (req, res) => {
     res.send(newProduct);
 });
 
-// // לעדכן מוצר - עובד
+// // לעדכן מוצר 
 router.put("/products/update/:id", authGuard, async (req, res) => {
     const { productName, description, price, sizes, color, img, category, stock, gender, fabricType, collectionP } = req.body;
 
@@ -132,7 +106,7 @@ router.put("/products/update/:id", authGuard, async (req, res) => {
     res.send();
 });
 
-// מחיקה של מוצר ע"י האדמין - עובד
+// מחיקה של מוצר ע"י האדמין 
 router.delete("/products/:productId", authGuard, async (req, res) => {
     await ProductModel.deleteOne({ _id: req.params.productId });
     res.send();

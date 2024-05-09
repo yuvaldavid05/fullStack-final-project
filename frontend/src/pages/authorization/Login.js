@@ -14,8 +14,6 @@ import { RoleTypes } from '../../components/navbar/NavbarTop2';
 
 
 
-
-
 export default function Login() {
     const { user, setUser, roleType, setRoleType, loader, setLoader, snackbarOn } = useContext(GeneralContext);
     const [formData, setFormData] = useState({
@@ -97,7 +95,6 @@ export default function Login() {
                 snackbarOn('User successfully logged in')
                 navigate('/');
 
-                console.log(data);
             })
             .catch(err => {
                 alert(err.message);
@@ -129,8 +126,6 @@ export default function Login() {
                                         onChange={handleInputChange}
                                     />
                                 </InputGroup>
-
-
                             </Col>
                         ))}
                         <Button variant="secondary" type="submit">Login</Button>

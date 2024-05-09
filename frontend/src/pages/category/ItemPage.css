@@ -36,7 +36,6 @@
 .col.item-page-info-right .item-size-div{
     width: 50%;
     margin:20px  auto;
-    /* margin: 20px 0; */
 }
 
 
@@ -69,20 +68,9 @@
 
 .footer-item-page .accordion-item .accordion-header{
     font-size: 18px;
-    /* border: 2px solid rgba(128, 128, 128, 0.76); */
     border-radius: 5px;
 }
 
 .footer-item-page .accordion-item .accordion-row-info{
     font-size: 19px;
-}
-
-@media (max-width : 768px) {
-    /* .col.item-page-info-right .add-item-to{
-        left: 25px;
-    }
-
-    .col.item-page-info-right .add-item-to button{
-        width:50vw;
-    } */
 }

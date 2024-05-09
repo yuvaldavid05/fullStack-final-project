@@ -1,23 +1,11 @@
 import "./Admin.css";
-import { useContext, useEffect } from "react";
-import { GeneralContext } from '../../App';
-import Button from "react-bootstrap/esm/Button";
-import { Link } from "react-router-dom";
-import Nav from 'react-bootstrap/Nav';
-
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import AdminUsers from "./AdminUsers";
-import AdminComments from "./AdminComments";
-
-import { IoAddOutline } from "react-icons/io5";
 import AdminProducts from "./AdminProducts";
 
 
-export default function About() {
-    const { user, roleType, setUser, setRoleType, admin, setAdmin } = useContext(GeneralContext);
-
-
+export default function Admin() {
     return (
         <>
             <section id="admin-page" className='admin-page-body'>
@@ -35,12 +23,7 @@ export default function About() {
                     <Tab eventKey="profile" title="Products">
                         <AdminProducts />
                     </Tab>
-                    {/* <Tab eventKey="comment" title="Comments">
-                        <AdminComments />
-                    </Tab> */}
-                    <Tab eventKey="contact" title="Contact" disabled>
-                        Tab content for Contact
-                    </Tab>
+
                 </Tabs>
             </section>
         </>

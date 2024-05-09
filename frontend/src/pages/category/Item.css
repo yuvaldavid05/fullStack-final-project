@@ -22,7 +22,6 @@
  .holder .card img{
     max-width: 250px;
     max-height:200px;
-    /* max-height:150px; */
     margin: 0;
     padding:0;
 }
@@ -93,7 +92,5 @@
 
     }
 
-    .holder .card p.itemColors .divColor .color{
-        /* margin: 5px 0; */
-    }
+    
 }

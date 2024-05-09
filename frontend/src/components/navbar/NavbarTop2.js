@@ -1,17 +1,17 @@
 import './NavbarTop2.css';
+import { useResolvedPath, Link } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { GeneralContext } from '../../App';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { useResolvedPath, Link } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
-import { GeneralContext } from '../../App';
 import Searchbar from '../searchbar/Searchbar';
 import { IoAccessibilityOutline } from "react-icons/io5";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 
-// משתמש רגיל - יכוללבצע הכל מלבד לעשות לייק על מוצרים
+// משתמש רגיל - יכול לבצע הכל מלבד לעשות לייק על מוצרים
 // משתמש רשום - יכול לעשות לייק - וישנט ליסט
 
 export const RoleTypes = {
@@ -47,11 +47,6 @@ export default function NavbarTop2() {
     const path = useResolvedPath().pathname;
 
 
-    // פילטור של מוצר אחד(ראשון) מכל קטגוריה
-    // pageCategory = products.filter((p, i) => products.findIndex(x => x.category == p.category) === i);
-
-
-    // let arrayOfCategory = [];
     useEffect(() => {
         fetch("http://localhost:2222/products", {
             credentials: 'include',

@@ -1,7 +1,6 @@
 #frameSnackbar .alert-dark{
     width: 35%;
     position: fixed;
-    /* left:50%; */
     right: 25px;
     bottom: 5%;
 }

@@ -1,8 +1,7 @@
 import "./AdminProductChange.css";
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Joi from 'joi';
-
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -13,14 +12,11 @@ import { GeneralContext } from '../../App';
 
 export default function AdminProductChange() {
     const { id } = useParams();
-    // const [item, setItem] = useState({});
     const navigate = useNavigate();
-
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({});
     const [isValid, setIsValid] = useState(false);
     const { loader, setLoader } = useContext(GeneralContext);
-    const [colorChange, setColorChange] = useState(false)
 
     useEffect(() => {
         if (id === 'new-product') {
@@ -111,8 +107,6 @@ export default function AdminProductChange() {
                     ...formData,
                     [name]: NewArray,
                 };
-                console.log(obj)
-                console.log(sizeRemoveIndex)
             }
         } else if (ev.target.name == "color") {
             const { name, value } = ev.target;
@@ -130,14 +124,6 @@ export default function AdminProductChange() {
                     ...formData,
                     [name]: NewArray,
                 };
-
-                // const colorRemoveIndex = formData.color.findIndex(x => x === ev.target.name);
-                // let NewArrayC = formData.color;
-                // NewArrayC.splice(colorRemoveIndex, 1);
-                // obj = {
-                //     ...formData,
-                //     [id]: NewArrayC,
-                // };
             }
 
         } else if (ev.target.name == "gender") {
@@ -147,7 +133,6 @@ export default function AdminProductChange() {
                     ...formData,
                     [name]: [...formData.gender, value],
                 };
-                console.log(obj)
 
             } else if (!ev.target.checked) {
                 const genderRemoveIndex = formData.gender.findIndex(x => x === value);
@@ -157,79 +142,14 @@ export default function AdminProductChange() {
                     ...formData,
                     [name]: NewArray,
                 };
-                console.log(obj)
-                console.log(genderRemoveIndex)
             }
         } else {
-            console.log(ev.target)
             obj = {
                 ...formData,
                 [id]: value,
             };
-            console.log(obj)
-
         }
 
-
-
-
-
-        // if (id === 'sizes') {
-        //     if (ev.target.checked) {
-        //         obj = {
-        //             ...formData,
-        //             [id]: [...formData.sizes, ev.target.name],
-        //         };
-        //         console.log(obj)
-
-        //     } else if (!ev.target.checked) {
-        //         const sizeRemoveIndex = formData.sizes.findIndex(x => x === ev.target.name);
-        //         let NewArray = formData.sizes;
-        //         NewArray.splice(sizeRemoveIndex, 1);
-        //         obj = {
-        //             ...formData,
-        //             [id]: NewArray,
-        //         };
-        //         console.log(obj)
-        //         console.log(sizeRemoveIndex)
-        //     }
-
-        //     console.log(id, value)
-        //     // כותרת הקליק
-        //     console.log(ev.target.name)
-        //     // אם מופעל או לא
-        //     console.log(ev.target.checked)
-
-        // } else if (id === "color") {
-        //     if (ev.target.checked) {
-        //         obj = {
-        //             ...formData,
-        //             [id]: [...formData.color, ev.target.name],
-        //         };
-        //         console.log(obj)
-
-        //     } else if (!ev.target.checked) {
-        //         const colorRemoveIndex = formData.color.findIndex(x => x === ev.target.name);
-        //         let NewArrayC = formData.color;
-        //         NewArrayC.splice(colorRemoveIndex, 1);
-        //         obj = {
-        //             ...formData,
-        //             [id]: NewArrayC,
-        //         };
-        //         console.log(obj)
-        //         console.log(colorRemoveIndex)
-        //     }
-        //     console.log(id, value)
-        //     // כותרת הקליק
-        //     console.log(ev.target.name)
-        //     // אם מופעל או לא
-        //     console.log(ev.target.checked)
-        // } else {
-        //     obj = {
-        //         ...formData,
-        //         [id]: value,
-        //     };
-        // }
 
         const schema = UpdateSchema.validate(obj, { abortEarly: false });
         const err = { ...errors, [id]: undefined };
@@ -252,7 +172,7 @@ export default function AdminProductChange() {
 
     const updateItem = ev => {
         ev.preventDefault();
-        // setLoading(true);
+        setLoader(true);
 
         if (!formData.sizes.length || !formData.color.length || !formData.gender.length) {
             alert("have to choose size, color and gender")
@@ -277,14 +197,13 @@ export default function AdminProductChange() {
                         alert('The product has been updated successfully');
                     } else {
                         alert('The product has been successfully added');
-                        console.log(data)
                     }
                     navigate('/admin');
                 })
                 .catch(err => {
                     alert(err.message);
                 })
-            // .finally(() => setLoading(false));
+                .finally(() => setLoader(false));
 
         }
     }
@@ -333,23 +252,12 @@ export default function AdminProductChange() {
                                             : (s.name === "color" ?
                                                 <>
 
-                                                    {/* <Button onClick={() => setColorChange(true)}>change</Button> */}
-
                                                     <div key={"inline-checkbox"} className="mb-3">
                                                         {colorsStr.map((c, i) => (
                                                             <>
 
-                                                                {/* <Form.Check key={i}
-                                                            inline
-                                                            label={a}
-                                                            name={a}
-                                                            type="checkbox"
-                                                            checked={formData._id && formData.sizes.includes(a)}
-                                                            id={s.name}
-                                                            onChange={handleInputChange}
-                                                        /> */}
+
                                                                 <Form.Check
-                                                                    // disabled={formData._id && !colorChange ? (formData.color.length >= 5 ? true : false) : colorChange ? false && setColorChange(true) : ""}
                                                                     inline
                                                                     label={c}
                                                                     name="color"
@@ -402,7 +310,7 @@ export default function AdminProductChange() {
                                                             <option>{formData.fabricType}</option> :
                                                             <option>choose Fabric Type</option>
                                                         }
-                                                        {/* <option>choose Fabric Type</option> */}
+
                                                         {fabricTypeStr.map((f, i) => (
                                                             <React.Fragment key={i}>
                                                                 {formData._id && f == formData.fabricType ?
@@ -424,7 +332,7 @@ export default function AdminProductChange() {
                                                             <option>{formData.collectionP}</option> :
                                                             <option>choose Collection</option>
                                                         }
-                                                        {/* <option>choose Collection</option> */}
+
                                                         {collectionStr.map((t, i) => (
                                                             <React.Fragment key={i}>
                                                                 {formData._id && t == formData.collectionP ?
@@ -459,19 +367,6 @@ export default function AdminProductChange() {
                                             </>
                                         )
                                     }
-
-
-
-
-                                    {/* <Form.Control
-                                    id={s.name}
-                                    type={s.type}
-                                    required={s.required}
-                                    value={formData[s.name]}
-                                    className={s.required ? (errors[s.name] ? 'fieldError' : '') : ''}
-                                    onChange={handleInputChange}
-                                />
-                                {s.required ? (errors[s.name] ? <div className='fieldErrorUpdate'>{errors[s.name]}</div> : '') : ''} */}
 
                                 </Col>
                             ))}

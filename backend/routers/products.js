@@ -3,9 +3,6 @@ const router = express.Router();
 const { ProductModel, validProduct } = require("../models/productModel");
 const { UserModel, validUser } = require("../models/userModel");
 
-// ולידציה?
-// לבדוק אם הקטגוריה עובד בהוספת מוצר 
-// להוסיף פונקציית גארד
 
 // משיכה של כל המוצרים
 router.get("/", async (req, res) => {
@@ -21,14 +18,6 @@ router.get("/:id", async (req, res) => {
 router.get("/category/:cat", async (req, res) => {
     res.send(await ProductModel.find({ category: req.params.cat }));
 });
-
-// מחזירה את כל הכרטיסים שיש להם ערכים ב LIKES
-// router.get("/fav", async (req, res) => {
-
-//     // const array = await ProductModel.find({ likes: "662cf90f860ea0b907f864b9" })
-
-//     res.send(await ProductModel.find({ likes: { $in: ["662cf90f860ea0b907f864b9"] } }));
-// });
 
 
 // הוספה של מוצר למועדפים
@@ -46,7 +35,7 @@ router.put("/:productId/favorite", async (req, res) => {
     res.send();
 });
 
-
+// הורדה ממועדפים
 router.put("/:productId/unfavorite", async (req, res) => {
     const { id } = req.body;
     const ProductFind = await ProductModel.findOne({ _id: req.params.productId });
@@ -67,7 +56,7 @@ router.put("/:productId/unfavorite", async (req, res) => {
     res.send({ UserIndex });
 });
 
-// לסיים - פונציה שמורידה את המלאי של הפריטים שנקנו
+//  פונציה שמורידה אחד מהמלאי של הפריטים שנקנו
 router.put("/update-stock/:productId", async (req, res) => {
 
     const productFind = await ProductModel.findOne({ _id: req.params.productId });

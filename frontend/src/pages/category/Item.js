@@ -7,7 +7,6 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import ButtonModalAddItem from "./ButtonModalAddItem";
 import { GeneralContext } from '../../App';
 import { IoMdHeart } from "react-icons/io";
-import Button from 'react-bootstrap/esm/Button';
 
 // דף מבנה של מוצר
 
@@ -15,67 +14,28 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
     const [userSize, setUserSize] = useState("");
     const navigate = useNavigate();
     const [favorite, setFavorite] = useState(false);
-
     const { user, setLoader, snackbarOn } = useContext(GeneralContext);
     const [u, setU] = useState({});
 
 
-    const myRef = useRef();
-    // let u = {};
-
     useEffect(() => {
-        // if (itemLikesUsers.length && user && !cat) {
-        //     const array = itemLikesUsers.filter(x => x === user._id);
-        //     console.log(array)
-        //     if (array.length && array[0] == user._id) {
-        //         setFavorite(true);
-        //     } else {
-        //         setFavorite(false);
-        //     }
-        // } else if (user && cat) {
-        //     if (itemLikesUsers.includes(user._id)) {
-        //         console.log(itemLikesUsers)
-        //         setFavorite(true);
-        //     } else {
-        //         setFavorite(false);
-        //     }
-        // }
         if (user) {
             if (itemLikesUsers.includes(user._id)) {
-                console.log(itemLikesUsers)
                 setFavorite(true);
             } else {
                 setFavorite(false);
             }
         }
 
-        console.log(favorite);
-
-        // if (user) {
-        //     u = {
-        //         id: user._id
-        //     };
-        // }
         if (user) {
             setU({
                 id: user._id,
             })
         }
-
-        // console.log(u)
     }, [itemLikesUsers, cat])
 
 
     const changeFavorite = (itemId) => {
-        // const u = {
-        //     id: user._id
-        // };
-
-        // console.log(u)
-        // console.log(favorite)
-        // console.log(itemId)
-
-
         if (!favorite) {
             setLoader(true);
             setFavorite(true);
@@ -84,7 +44,6 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json',
-                    // 'Authorization': localStorage.token
                 },
                 body: JSON.stringify(u),
             })
@@ -101,12 +60,10 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json',
-                    // 'Authorization': localStorage.token
                 },
                 body: JSON.stringify(u),
             })
                 .then(data => {
-                    // console.log(data)
                     snackbarOn("Removed from favorites");
                 })
                 .finally(() => setLoader(false));
@@ -145,7 +102,6 @@ export default function Item({ itemImage, itemName, itemDescription, itemColor, 
                                 <div className="divColor" key={index} >
                                     <div className="color" style={{ backgroundColor: c }}></div>
                                     {itemColor.length >= 5 ? "" : <span>{c}</span>}
-                                    {/* <span>{c}</span> */}
                                 </div>
                             ))
                         }

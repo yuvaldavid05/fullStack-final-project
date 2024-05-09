@@ -6,10 +6,6 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET, getUser } = require("../config");
 const authGuard = require('../auth-guard');
 
-// לחבר את הגראד לכל הפונקציות - בדיקה אם הוא מורשה
-// לייבא את מומנט לבדוק אם עובד - זמן שבוא היוזר נוצר
-// לסיים את השיעורים של אלישיב
-
 
 // Authorization
 
@@ -68,18 +64,11 @@ router.post("/signup", async (req, res) => {
         zip,
         admin: false,
         orders: []
-        // createdTime: moment().format('DD/MM/YYYY HH:mm:ss')
-        // לא עובד הזמן
     });
 
     const newUser = await user.save();
     delete newUser.password;
     res.send(newUser);
-});
-
-// Logout - אלישיב סיים דרך הצד לקוח
-router.get("/logout", async (req, res) => {
-
 });
 
 module.exports = router;

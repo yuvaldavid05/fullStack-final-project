@@ -13,14 +13,13 @@ import { GeneralContext } from '../../App';
 
 
 export default function ContactUs() {
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, comment, setComment, snackbarOn, accColorBackground, setAccColorBackground } = useContext(GeneralContext);
+    const { user, comment, setComment, snackbarOn, accColorBackground, setAccColorBackground } = useContext(GeneralContext);
     const [commentData, setCommentData] = useState({
         firstName: "",
         lastName: "",
         email: "",
         text: "",
     });
-    const [clients, setClients] = useState([]);
     const [isValid, setIsValid] = useState(false);
 
 
@@ -60,10 +59,7 @@ export default function ContactUs() {
                 [id]: value,
             };
         }
-        // obj = {
-        //     ...commentData,
-        //     [id]: value,
-        // };
+
 
         const schema = contactSchema.validate(obj, { abortEarly: false });
         const err = { ...errors, [id]: undefined };
@@ -84,16 +80,12 @@ export default function ContactUs() {
 
         setCommentData(obj);
         setErrors(err);
-        console.log(obj)
     };
 
 
-    // אפשר למחוק
-    // לנסות בסוף לחבדוק גם אם יוזר לא מחובר אם הוא שולח אפשר לסווג
+    // בניתי פונקציה שמכניסה את נתוני השולח והמידע- אבל לא אכסנתי  
     const sendComment = ev => {
         ev.preventDefault();
-
-
         let objComment = {};
 
         if (commentData.firstName != "  " && commentData.lastName != "  " && commentData.email != "  " && commentData.text != "  ") {
@@ -107,12 +99,9 @@ export default function ContactUs() {
                 }
 
                 setCommentData(objComment);
-                // setSubmit(true);
                 setComment(objComment);
                 snackbarOn("This form has been successfully submitted")
-                console.log(commentData)
-                console.log(comment)
-                // console.log(comments)
+
 
 
             } else {
@@ -122,11 +111,8 @@ export default function ContactUs() {
                     user: false
                 }
                 setCommentData(objComment);
-                // setSubmit(true);
-                // לזכור להוריד את היוזר
                 snackbarOn("This form has been successfully submitted")
                 setComment(objComment);
-                console.log(comment)
             }
         } else {
             alert("All fields must be filled in")

@@ -1,6 +1,5 @@
 import './Home.css';
 import Image from 'react-bootstrap/Image';
-import { MdPlace } from "react-icons/md";
 import { IoShirt } from "react-icons/io5";
 import { GiSkirt } from "react-icons/gi";
 import { PiPantsFill } from "react-icons/pi";
@@ -10,11 +9,9 @@ import { PiCoatHanger } from "react-icons/pi";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { TiPhoneOutline } from "react-icons/ti";
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { FaRegHandPointRight } from "react-icons/fa";
-import Card from 'react-bootstrap/Card';
 import { FaRegHandPointLeft } from "react-icons/fa";
 
 export default function Home() {
@@ -48,7 +45,6 @@ export default function Home() {
                             <Link to="/products">Click here for all categories <span><FaRegHandPointRight /></span></Link>
                         </Button>
                     </Col>
-                    {/* <Col></Col> */}
 
                 </Row>
                 <Row className='homePageSaleCol'>

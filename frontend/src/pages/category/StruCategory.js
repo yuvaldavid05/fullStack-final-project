@@ -13,6 +13,7 @@ import Image from 'react-bootstrap/Image';
 import ButtonModalAddItem from './ButtonModalAddItem';
 import { IoMdHeart } from "react-icons/io";
 import { IoMdHeartEmpty } from "react-icons/io";
+
 // דף של מבנה קטגוריה
 
 export default function StruCategory() {
@@ -20,62 +21,39 @@ export default function StruCategory() {
     const { productCat, setProductCat, loader, setLoader, searchWord } = useContext(GeneralContext);
     const myRef = useRef();
     const [changeView, setChangeView] = useState(false);
-    // let col = "";
+
     const [col, setCol] = useState("");
 
     const genderStr = ["men", "women", "all"];
     const colorsStr = ["red", "gray", "pink", "brown", "green", "blue", "orange", "white", "black"];
 
     useEffect(() => {
-        // setLoader(true);
+        setLoader(true);
         fetch(`http://localhost:2222/products/` + (cat ? `category/${cat}` : ""), {
             credentials: 'include',
         })
             .then(res => res.json())
             .then(data => {
-                // myRef.current = data;
                 setProductCat(data);
-                console.log(data)
-            }).then(() => {
-                productCat.map(x => console.log(x.likes))
             })
-        // .finally(() => setLoader(false));
+            .finally(() => setLoader(false));
     }, [cat, col]);
 
-    // const array = [];
+
     const handleInputChange = (ev) => {
         const { value } = ev.target;
 
         if (ev.target.checked) {
-            // array.push(value);
-            // console.log(array)
-            // col = value;
-            // console.log(col)
             if (value == "all") {
                 setCol("");
             } else {
-
                 setCol(value);
             }
-
-            // } else if (!ev.target.checked) {
-            //     // const i = array.findIndex(x => x === value);
-            //     // array.splice(i, 1);
-            //     // console.log(array)
-            //     // console.log(i)
-            //     col = "";
-            //     console.log(col)
-
-            // }
         }
     }
 
-    // const checku = (array1 , array2 ) = {
-    //     array2.map(x => array1.includes(x) ?   )
-    // }
 
     const handleInputChangeView = (ev) => {
-        console.log(ev.target.value)
         if (ev.target.value) {
             setChangeView(!changeView);
         }
@@ -130,27 +108,12 @@ export default function StruCategory() {
                             />
                         ))}
 
-                        {/* {colorsStr.map((g, i) => (
-
-                            <Form.Check
-                                inline
-                                label={g}
-                                name="color"
-                                value={g}
-                                type='radio'
-                                id={`inline-'radio'-${i}`}
-                                onChange={handleInputChange}
-                            />
-                        ))} */}
                     </div>
                 </div>
                 {!changeView ?
 
 
                     <Row xs={2} md={5}>
-                        {/* filter((y, i) => y.color.find(x => x == c)) */}
-                        {/* filter((y, i) => array.filter(a => y.color.includes("red"))) */}
-                        {/* x === "red" || "gray" */}
                         {
                             productCat.filter(c => search(searchWord, c.productName, c.description)).filter(x => col ? x.gender.includes(col) : x.gender.length).map((p, i) =>
 
@@ -160,8 +123,6 @@ export default function StruCategory() {
                                         <Item itemImage={p.img} itemName={p.productName} itemDescription={p.description} itemPrice={p.price} itemSizes={p.sizes} itemColor={p.color} itemId={p._id} itemLikesUsers={p.likes} cat={cat ? cat : ""} itemStock={p.stock} />
 
                                     </div>
-
-
                                 </Col>
                             ))
                         }

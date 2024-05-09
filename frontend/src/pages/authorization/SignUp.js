@@ -78,11 +78,8 @@ export default function SignUp() {
             if (error) {
                 err[id] = error.message;
             }
-            console.log(err)
             setIsValid(false);
-            console.log(isValid)
         } else {
-            console.log(isValid)
             setIsValid(true);
         }
 
@@ -114,7 +111,6 @@ export default function SignUp() {
                 snackbarOn('User has successfully registered')
                 const u = formData;
                 delete u.password;
-                console.log(u);
             })
             .catch(err => {
                 alert(err.message);
@@ -141,7 +137,7 @@ export default function SignUp() {
                                     className={s.required ? (errors[s.name] ? 'fieldError' : '') : ''}
                                     onChange={handleInputChange}
                                 />
-                                {/* {s.required ? (errors[s.name] ? <div className='fieldErrorSignup'>{errors[s.name]}</div> : '') : ''} */}
+
                                 {s.name === "password"
 
                                     ?
@@ -161,11 +157,6 @@ export default function SignUp() {
                                             {errors[s.name]}
                                         </Form.Text> : "") : "")
                                 }
-                                {/* {s.required ? (errors[s.name] ?
-                                    <Form.Text className='fieldErrorSignup' muted>
-                                        {errors[s.name]}
-                                    </Form.Text> : "") : ""
-                                } */}
 
                             </Col>
                         )

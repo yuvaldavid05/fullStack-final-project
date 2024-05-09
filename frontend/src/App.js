@@ -19,12 +19,6 @@ function App() {
   const [basket, setBasket] = useState([]);
   const [productCat, setProductCat] = useState([]);
   const [comment, setComment] = useState([]);
-  // const [commentData, setCommentData] = useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   email: "",
-  //   text: "",
-  // });;
   const [loader, setLoader] = useState(true);
   const [snackbar, setSnackbar] = useState('');
   const [admin, setAdmin] = useState(false);
@@ -72,7 +66,6 @@ function App() {
         .catch(err => {
           setRoleType(RoleTypes.none);
           snackbarOn("User not logged in");
-          // sessionStorage.removeItem("basketData")
           navigate('/');
         })
         .finally(() => setLoader(false));
@@ -89,9 +82,6 @@ function App() {
     setRoleType(RoleTypes.none);
     navigate('/');
     snackbarOn('User logged out successfully');
-    // sessionStorage.removeItem("basketData")
-
-
   }
 
   return (

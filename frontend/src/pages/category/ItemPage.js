@@ -5,11 +5,9 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
-import { IoHeartOutline } from "react-icons/io5";
-import { IoMdHeartEmpty } from "react-icons/io";
 import Accordion from 'react-bootstrap/Accordion';
 import { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate, useParams, useResolvedPath } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { GeneralContext } from '../../App';
 
 
@@ -19,7 +17,7 @@ export default function ItemPage() {
     const [oneCard, setOneCard] = useState([]);
     const [colorChosenItemPage, setColorChosenItemPage] = useState("");
     const [sizeChosenItemPage, setSizeChosenItemPage] = useState("");
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, snackbarOn } = useContext(GeneralContext);
+    const { basket, setBasket, loader, setLoader, snackbarOn } = useContext(GeneralContext);
     const navigate = useNavigate();
 
 
@@ -32,21 +30,13 @@ export default function ItemPage() {
             .then(res => res.json())
             .then(data => {
                 setOneCard(data);
-                console.log(oneCard);
             })
             .finally(() => setLoader(false))
     }, [])
 
     function addProduct() {
-        if ((colorChosenItemPage == "choose color") || (sizeChosenItemPage == "choose size") || (colorChosenItemPage == "choose color" && sizeChosenItemPage == "choose size")) {
 
-            alert("have to pick size and color");
-        } else {
-            // alert(colorChosenItemPage + sizeChosenItemPage);
-            snackbarOn(`The product has been added to the shopping cart, size: ${sizeChosenItemPage} color: ${colorChosenItemPage}`);
-        }
-
-        // const item = productCat.filter(x => x._id == itemId);
+        snackbarOn(`The product has been added to the shopping cart, size: ${sizeChosenItemPage} color: ${colorChosenItemPage}`);
 
         const selectedProduct = {
             item: oneCard.pop(),
@@ -54,44 +44,10 @@ export default function ItemPage() {
             color: colorChosenItemPage
         }
 
-        console.log(colorChosenItemPage + sizeChosenItemPage);
-        console.log(selectedProduct);
-
         setBasket([...basket, selectedProduct]);
-        console.log(basket);
         navigate("/products")
     }
 
-    // function sendToBasket(id) {
-
-    //     // בדיקה שכל התאים מלאים (מידה וצבע) והשמה של המידה מהדף קטגוריה
-    //     if (userChoiceSize == "" && size != "" && userChoiceColor != "") {
-    //         // להוסיף בסנאקבר הדפסה למידה והצבע
-    //         alert(userChoiceColor + size)
-    //     } else if (userChoiceSize != "" && size == "" && userChoiceColor != "") {
-    //         // להוסיף בסנאקבר הדפסה למידה והצבע
-    //         alert(userChoiceColor + userChoiceSize)
-    //     } else {
-    //         alert("have to pick size and color");
-    //     }
-
-
-    //     const item = productCat.filter(x => x._id == id);
-
-    //     const selectedProduct = {
-    //         item: item.pop(),
-    //         size: size ? size : userChoiceSize,
-    //         color: userChoiceColor
-    //     }
-
-    //     console.log(userChoiceColor + userChoiceSize);
-    //     console.log(size);
-    //     console.log(selectedProduct);
-
-    //     setBasket([...basket, selectedProduct]);
-    //     console.log(basket);
-    //     handleClose();
-    // }
 
 
     return (
@@ -114,7 +70,7 @@ export default function ItemPage() {
                                     <h3>{oneC.productName}</h3>
                                     <div className='item-price'>{oneC.price} nis</div>
                                     <div className='item-color-div'>
-                                        <Form.Select aria-label="select-sizes" onChange={(choice) => setColorChosenItemPage(choice.target.value)}>
+                                        <Form.Select aria-label="select-sizes" onChange={(choice) => setColorChosenItemPage(choice.target.value == "choose color" ? "" : choice.target.value)}>
                                             <option>choose color</option>
                                             {
                                                 oneC.color.map((c, i) => (
@@ -128,7 +84,7 @@ export default function ItemPage() {
 
 
                                     <div className='item-size-div'>
-                                        <Form.Select aria-label="select-sizes" onChange={(choice) => setSizeChosenItemPage(choice.target.value)}>
+                                        <Form.Select aria-label="select-sizes" onChange={(choice) => setSizeChosenItemPage(choice.target.value == "choose size" ? "" : choice.target.value)}>
                                             <option>choose size</option>
                                             {
                                                 oneC.sizes.map(s => (
@@ -141,7 +97,7 @@ export default function ItemPage() {
                                     </div>
 
                                     <div className='add-item-to' >
-                                        <Button onClick={addProduct} disabled={oneC.stock == 0 ? true : false}>
+                                        <Button onClick={addProduct} disabled={oneC.stock == 0 ? true : false || ((sizeChosenItemPage == "") || (colorChosenItemPage == "")) || (sizeChosenItemPage == "" && colorChosenItemPage == "")}>
                                             {oneC.stock == 0 ? "Out Of Stock " : " + add item"}
                                         </Button>
                                     </div>

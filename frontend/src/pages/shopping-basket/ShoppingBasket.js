@@ -5,7 +5,6 @@ import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
 import { useContext, useEffect, useRef, useState } from 'react';
-
 import { GeneralContext } from '../../App';
 import Button from 'react-bootstrap/esm/Button';
 import { BsTrash3 } from "react-icons/bs";
@@ -14,8 +13,6 @@ import Form from 'react-bootstrap/Form';
 
 export default function ShoppingBasket() {
     const [sum, setSum] = useState();
-    // const [paymentUser, setPaymentUser] = useState("");
-    // const [deliveryUser, setDeliveryUser] = useState("");
     const [userOrder, setUserOrder] = useState({
         payment: "",
         delivery: ""
@@ -24,7 +21,7 @@ export default function ShoppingBasket() {
     const [next, setNext] = useState(false);
     const navigate = useNavigate();
 
-    const { user, roleType, setUser, setRoleType, basket, setBasket, productCat, setProductCat, loader, setLoader, snackbarOn } = useContext(GeneralContext);
+    const { user, basket, setBasket, loader, setLoader, snackbarOn } = useContext(GeneralContext);
 
     let myRef = useRef(null);
 
@@ -44,18 +41,14 @@ export default function ShoppingBasket() {
     ]
 
     useEffect(() => {
-        // if (basket) {
-        const s = basket.reduce((res, y) => res += y.item.price, 0);
-        setSum(s)
-        // }
+        if (basket) {
+            const s = basket.reduce((res, y) => res += y.item.price, 0);
+            setSum(s)
+        }
 
         let objBasket = JSON.parse(sessionStorage.getItem('basketDate'));
-        console.log(objBasket)
-
         myRef.current = basket;
         setBasket(objBasket);
-        console.log(s)
-        console.log(basket)
 
     }, [myRef, setBasket])
 
@@ -72,13 +65,11 @@ export default function ShoppingBasket() {
         tmp.splice(itemDeleteIndex, 1)
         if (tmp.length) {
             sessionStorage.setItem('basketDate', JSON.stringify(tmp))
-            // לבדוק לגבי הרינדור - הוספתי לפה במקום רינדור של יוז אפקט
             setSum(basket.reduce((res, y) => res += y.item.price, 0))
         } else {
             sessionStorage.removeItem('basketDate');
         }
         setBasket([...basket]);
-        console.log(basket)
     }
 
     const nextPage = () => {
@@ -91,8 +82,6 @@ export default function ShoppingBasket() {
             ...userOrder,
             [name]: value
         })
-
-        console.log(userOrder)
     }
 
     function sendOrder() {
@@ -106,12 +95,11 @@ export default function ShoppingBasket() {
 
     const sendRequste = () => {
         // מטרות - להוסיף להזמנות של להיוזר
-        // להוריד מהמלאי של המוצרים אחד או יותר
+        // להוריד מהמלאי של המוצרים אחד
         const o = {
             ...userOrder,
             basket: basket
         }
-        console.log(o)
 
         fetch(`http://localhost:2222/users/update-order/${user._id}`, {
             credentials: 'include',
@@ -123,21 +111,16 @@ export default function ShoppingBasket() {
             body: JSON.stringify(o),
         })
             .then(data => {
-                console.log(data)
-                console.log(user.orders)
-                console.log(user);
                 stockChanged();
                 snackbarOn("Order received! Thank U");
                 sessionStorage.removeItem('basketDate');
                 navigate("/succeeded");
-                // setBasket([]);
             });
     }
 
     const stockChanged = () => {
         let arrayIdItem = [];
         basket.map(b => arrayIdItem.push(b.item._id))
-        console.log(arrayIdItem);
         arrayIdItem.map(a => {
             fetch(`http://localhost:2222/products/update-stock/${a}`, {
                 credentials: 'include',
@@ -150,13 +133,11 @@ export default function ShoppingBasket() {
                 .then(() => {
                     // הסרה מההתחלה
                     arrayIdItem.shift();
-                    console.log(arrayIdItem)
-                    setBasket([]);
                 });
         })
 
-        // const indexItem = basket.filter(b => b == basket.item._id);
-        // console.log(indexItem);
+        setBasket([]);
+
     }
     return (
         <section id="basket" className='basket-page'>

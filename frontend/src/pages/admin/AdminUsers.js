@@ -1,11 +1,9 @@
 import "./AdminUsers.css";
 import Table from 'react-bootstrap/Table';
 import { useContext, useEffect, useState } from 'react';
-
 import { AiFillDelete } from "react-icons/ai";
 import { GeneralContext } from '../../App';
 
-// לסדר שירנדר בכל שינוי 
 
 function AdminUsers() {
     const [clients, setClients] = useState([]);
@@ -35,7 +33,6 @@ function AdminUsers() {
             .then(res => res.json())
             .then(data => {
                 setClients(data);
-                console.log(data)
             })
             .finally(() => setLoader(false));
     }, [setClients]);

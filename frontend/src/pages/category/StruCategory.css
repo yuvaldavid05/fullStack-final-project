@@ -2,21 +2,15 @@
     padding: 10px 0 0 0 ;
 }
 
-.body-category .container-fluid .row{
-    /* padding: 5px; */
-}
+
 .body-category .change-view{
     float: left;
-    /* display: inline-block; */
     margin:10px 15px;
     position: static;
     right:100px;
 }
 
 .body-category .table-pro .color{
-    /* display: flex; */
-    /* justify-content: center;
-    align-items: center; */
     margin: auto;
 }
 .body-category .table-pro .color-div{
@@ -33,7 +27,5 @@
 }
 
 @media (max-width : 768px) {
-    .holder .card{
-       
-    }
+    
 }

@@ -14,7 +14,6 @@ const productSchema = new mongoose.Schema({
     gender: Array,
     fabricType: String,
     collectionP: String,
-    // publishDate: String,
 });
 
 const ProductModel = mongoose.model("products", productSchema);

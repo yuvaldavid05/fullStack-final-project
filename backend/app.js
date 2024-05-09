@@ -7,7 +7,6 @@ require("./db/mongoConnect");
 const { routeInit } = require("./routers/confing_route")
 const app = express();
 
-// לזכור להחזיר  -עוקב אחרי פעולות HTTP
 app.use(morgan("dev"));
 
 app.use(express.json());

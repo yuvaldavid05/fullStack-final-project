@@ -1,5 +1,5 @@
 import "./WishList.css";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Item from '../category/Item';
 import Col from "react-bootstrap/esm/Col";
 import Row from 'react-bootstrap/Row';
@@ -9,14 +9,8 @@ import { search } from "../../components/searchbar/Searchbar";
 
 export default function WishList() {
     const [cards, setCards] = useState([])
-    const [likeArray, setlikeArray] = useState(false)
-    const { user, productCat, setProductCat, loader, setLoader, searchWord } = useContext(GeneralContext);
+    const { user, loader, setLoader, searchWord } = useContext(GeneralContext);
 
-    let myRef = useRef(null);
-
-    // const func = useCallback(() => {
-    //     return myRef.current;
-    // }, [myRef])
 
     useEffect(() => {
         if (user) {
@@ -26,7 +20,6 @@ export default function WishList() {
                 .then(res => res.json())
                 .then(data => {
                     setCards(data);
-                    console.log(myRef)
                 }).then(() => {
 
                 })
