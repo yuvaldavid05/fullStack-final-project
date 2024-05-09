@@ -87,9 +87,9 @@ function ButtonModalAddItem({ itemImage, itemName, itemDescription, itemColor, i
                                         <option>choose color</option>
                                         {
                                             itemColor.map((cItem, i) => (
-                                                <>
-                                                    <option value={cItem} key={i}>{cItem}</option>
-                                                </>
+                                                <React.Fragment key={i}>
+                                                    <option value={cItem}>{cItem}</option>
+                                                </React.Fragment>
                                             ))
                                         }
                                     </Form.Select>

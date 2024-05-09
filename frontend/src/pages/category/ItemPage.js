@@ -6,7 +6,7 @@ import Image from 'react-bootstrap/Image';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import Accordion from 'react-bootstrap/Accordion';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { GeneralContext } from '../../App';
 
@@ -74,9 +74,9 @@ export default function ItemPage() {
                                             <option>choose color</option>
                                             {
                                                 oneC.color.map((c, i) => (
-                                                    <>
+                                                    <React.Fragment key={i}>
                                                         <option key={i} value={c}>{c}</option>
-                                                    </>
+                                                    </React.Fragment>
                                                 ))
                                             }
                                         </Form.Select>
@@ -87,10 +87,10 @@ export default function ItemPage() {
                                         <Form.Select aria-label="select-sizes" onChange={(choice) => setSizeChosenItemPage(choice.target.value == "choose size" ? "" : choice.target.value)}>
                                             <option>choose size</option>
                                             {
-                                                oneC.sizes.map(s => (
-                                                    <>
+                                                oneC.sizes.map((s, i) => (
+                                                    <React.Fragment key={i}>
                                                         <option value={s}>{s}</option>
-                                                    </>
+                                                    </React.Fragment>
                                                 ))
                                             }
                                         </Form.Select>

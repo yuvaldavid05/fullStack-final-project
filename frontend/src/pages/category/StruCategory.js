@@ -97,7 +97,7 @@ export default function StruCategory() {
 
                         {genderStr.map((g, i) => (
 
-                            <Form.Check
+                            <Form.Check key={i}
                                 inline
                                 label={g}
                                 name="gender"
