@@ -35,30 +35,33 @@ export default function Home() {
                 </Row>
 
                 <Row className='homePageNewCol'>
-                    <Col xs={4}>
+                    <Col>
                         <Image src="https://i.pinimg.com/564x/a3/a4/41/a3a441cfcb766953430410527e6edf12.jpg" />
                     </Col>
-                    <Col xs={8}>
+                    <Col>
                         You Can Start Now!
-                        <div>Just sign-in, Pick Your Clothes And Order!</div>
+                        <h2>Just sign-in, Pick Your Clothes And Order!</h2>
                         <Button variant="secondary">
                             <Link to="/products">Click here for all categories <span><FaRegHandPointRight /></span></Link>
                         </Button>
                     </Col>
+                    <Col></Col>
 
                 </Row>
                 <Row className='homePageSaleCol'>
+                    <Col></Col>
+                    <Col >
 
-                    <Col xs={8}>
-
-                        <div>For our Basic collection you can click...</div>
+                        <h3>For our Basic collection you can click...</h3>
                         <Button variant="secondary">
                             <Link to="/products/category/basic">Click here  <span><FaRegHandPointLeft /></span></Link>
                         </Button>
                     </Col>
-                    <Col xs={4}>
+                    <Col >
                         <Image src="https://i.pinimg.com/564x/5b/3a/12/5b3a12fe0a34f9123c6b85b1a8ac3143.jpg" />
                     </Col>
+                    <Col></Col>
+
                 </Row>
             </Container>
         </section >

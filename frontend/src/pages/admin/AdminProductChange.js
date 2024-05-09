@@ -81,7 +81,7 @@ export default function AdminProductChange() {
     const sizesStr = ["S", "M", "L", "XL"];
     const colorsStr = ["red", "gray", "pink", "brown", "green", "blue", "orange", "white", "black"];
     const genderStr = ["men", "women"];
-    const fabricTypeStr = ["Linen", "silk", "wool", "leather", "cotton", "denim"];
+    const fabricTypeStr = ["Linen", "satin", "wool", "leather", "cotton", "denim"];
     const collectionStr = ["New", "Sale", "Best Sellers", "Current", "Previous Season"];
 
 
