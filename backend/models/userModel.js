@@ -32,7 +32,7 @@ exports.validUser = (_bodyData) => {
         city: Joi.string().min(1).required(),
         street: Joi.string().min(1).required(),
         houseNumber: Joi.number().min(1).required(),
-        zip: Joi.number().min(0).required(),
+        zip: Joi.number().min(1).required(),
         admin: Joi.boolean().default(false),
         orders: Joi.array().items(Joi.string()),
 

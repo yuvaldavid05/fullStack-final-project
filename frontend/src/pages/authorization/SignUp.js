@@ -43,7 +43,7 @@ export default function SignUp() {
         city: Joi.string().min(2).max(32).required(),
         street: Joi.string().min(2).required(),
         houseNumber: Joi.number().min(1).required(),
-        zip: Joi.number().min(0).required(),
+        zip: Joi.number().min(1).required(),
     });
 
     const structureForm = [

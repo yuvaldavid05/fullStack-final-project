@@ -73,7 +73,7 @@ function AdminUsers() {
             },
         })
             .then(() => {
-                setClients();
+                // setClients(clients.filter(c => c._id !== ""));
             })
             .finally(() => {
                 setLoader(false)
